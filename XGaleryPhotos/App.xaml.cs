@@ -1,16 +1,22 @@
-﻿using System;
+﻿using DLToolkit.Forms.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XGaleryPhotos.Interfaces;
+using XGaleryPhotos.ViewModels;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XGaleryPhotos
 {
     public partial class App : Application
     {
-        public App()
+        public App(IMultiMediaPickerService multiMediaPickerService)
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            FlowListView.Init();
+            MainPage = new MainPage()
+            {
+                BindingContext = new MainViewModel(multiMediaPickerService)
+            };
         }
 
         protected override void OnStart()

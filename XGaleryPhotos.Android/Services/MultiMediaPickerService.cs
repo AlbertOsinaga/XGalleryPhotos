@@ -124,6 +124,7 @@ namespace XGaleryPhotos.Droid.Services
                 {
                     mediaFile = new MediaFile()
                     {
+                        Id = System.Guid.NewGuid().ToString(),
                         Path = fullPath,
                         Type = mediaFileType,
                         PreviewPath = thumbnailImagePath
