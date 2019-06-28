@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
+using XGaleryPhotos.Interfaces;
+using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos
 {
@@ -13,9 +13,25 @@ namespace XGaleryPhotos
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainViewModel _mainViewModel;
+
+        public MainPage(IMultiMediaPickerService multiMediaPickerService)
         {
             InitializeComponent();
+            _mainViewModel = new MainViewModel(multiMediaPickerService);
+            BindingContext = _mainViewModel; 
+        }
+
+        private async void btnTomarFoto_Clicked(object sender, EventArgs e)
+        {
+            var opciones_almacenamiento = new StoreCameraMediaOptions()
+            {
+                SaveToAlbum = true,
+                Name = "MyPhoto"
+            };
+
+            var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
+            _mainViewModel.AddPhotoCommand.Execute(photo);
         }
     }
 }

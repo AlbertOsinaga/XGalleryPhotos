@@ -4,10 +4,19 @@
              x:Class="XGaleryPhotos.Views.PhotoDisplayPage">
 
     <StackLayout Orientation="Vertical" Padding="10" >
-         <Button TextColor="White" BackgroundColor="Blue" Text="Regresar" Command="{Binding DisplayPhotoCommand}"/>
-         <Button TextColor="White" BackgroundColor="Blue" Text="Eliminar esta foto" Command="{Binding DisplayPhotoCommand}"/>
-         <Image x:Name="Photo" Aspect="AspectFill" Source="Deportivo_rojo.png" />
-        
+        <StackLayout Orientation="Horizontal" Padding="10" >
+                <Button TextColor="White" BackgroundColor="Blue" Text="Regresar" 
+                    Command="{Binding RegresarCommand}"/>
+                <Button TextColor="White" BackgroundColor="Blue" Text="Eliminar foto" 
+                    Clicked="btnEliminarFoto_Clicked"/>
+        </StackLayout>
+        <Grid VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <BoxView BackgroundColor="Silver" />
+            <Image x:Name="Photo" Aspect="AspectFill" Margin="5"/>
+        </Grid>
     </StackLayout>      
 
 </ContentPage>
