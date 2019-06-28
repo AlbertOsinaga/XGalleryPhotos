@@ -13,10 +13,10 @@ namespace XGaleryPhotos
         {
             InitializeComponent();
             FlowListView.Init();
-            MainPage = new MainPage()
+            MainPage = new NavigationPage (new MainPage()
             {
                 BindingContext = new MainViewModel(multiMediaPickerService)
-            };
+            });
         }
 
         protected override void OnStart()

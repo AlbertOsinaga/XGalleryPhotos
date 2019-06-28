@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XGaleryPhotos.Interfaces;
+using XGaleryPhotos.Views;
 
 namespace XGaleryPhotos.ViewModels
 {
@@ -18,7 +19,7 @@ namespace XGaleryPhotos.ViewModels
 
         public ObservableCollection<XGaleryPhotos.Models.MediaFile> Media { get; set; }
         public ICommand SelectImagesCommand { get; set; }
-        public ICommand SelectVideosCommand { get; set; }
+        public ICommand DisplayPhotoCommand { get; set; }
         public ICommand PhotoTappedCommand { get; set; }
 
         public MainViewModel(IMultiMediaPickerService multiMediaPickerService)
@@ -34,18 +35,23 @@ namespace XGaleryPhotos.ViewModels
                 }
             });
 
-            SelectVideosCommand = new Command(async (obj) =>
+            DisplayPhotoCommand = new Command(() =>
             {
-                var hasPermission = await CheckPermissionsAsync();
-                if (hasPermission)
-                {
-
-                    Media = new ObservableCollection<XGaleryPhotos.Models.MediaFile>();
-
-                    await _multiMediaPickerService.PickVideosAsync();
-
-                }
+                (App.Current.MainPage as NavigationPage).PushAsync(new PhotoDisplayPage());
             });
+
+            //SelectVideosCommand = new Command(async (obj) =>
+            //{
+            //    var hasPermission = await CheckPermissionsAsync();
+            //    if (hasPermission)
+            //    {
+
+            //        Media = new ObservableCollection<XGaleryPhotos.Models.MediaFile>();
+
+            //        await _multiMediaPickerService.PickVideosAsync();
+
+            //    }
+            //});
 
             PhotoTappedCommand = new Command((obj) =>
             {

@@ -8,11 +8,11 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-         <StackLayout Padding="20">
+         <StackLayout Padding="10">
 
-         <Button TextColor="White" BackgroundColor="Blue" Text="Select images from gallery" Command="{Binding SelectImagesCommand}"/>
-<!--         <Button TextColor="White" BackgroundColor="Blue" Text="Select videos from gallery" Command="{Binding SelectVideosCommand}"/>
--->        
+         <Button TextColor="White" BackgroundColor="Blue" Text="Images from gallery" Command="{Binding SelectImagesCommand}"/>
+         <Button TextColor="White" BackgroundColor="Blue" Text="Display photo" Command="{Binding DisplayPhotoCommand}"/>
+        
          <flv:FlowListView FlowColumnCount="3" x:Name="listItems" FlowItemsSource="{Binding Media}"
                         SeparatorVisibility="Default"
                         HasUnevenRows="false" RowHeight="120"
