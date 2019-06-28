@@ -19,7 +19,9 @@ namespace XGaleryPhotos
         {
             InitializeComponent();
             _mainViewModel = new MainViewModel(multiMediaPickerService);
-            BindingContext = _mainViewModel; 
+            BindingContext = _mainViewModel;
+            pckTipoDocumental.ItemsSource = _mainViewModel.TiposDocumental;
+            pckTipoDocumental.SelectedIndex = 0;
         }
 
         private async void btnTomarFoto_Clicked(object sender, EventArgs e)
@@ -32,6 +34,20 @@ namespace XGaleryPhotos
 
             var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
             _mainViewModel.AddPhotoCommand.Execute(photo);
+        }
+
+        void pckTipoDocumental_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (pckTipoDocumental.SelectedIndex == 1)
+            {
+                lblNumero.IsVisible = true;
+                txtNumero.IsVisible = true;
+            }
+            else
+            {
+                lblNumero.IsVisible = false;
+                txtNumero.IsVisible = false;
+            }
         }
     }
 }

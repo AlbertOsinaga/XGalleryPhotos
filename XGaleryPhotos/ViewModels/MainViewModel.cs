@@ -15,6 +15,7 @@ namespace XGaleryPhotos.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         IMultiMediaPickerService _multiMediaPickerService;
+        public string[] TiposDocumental = { "RE - Inspección", "RE - RC Atención", "RE - Seguimiento" }; 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
