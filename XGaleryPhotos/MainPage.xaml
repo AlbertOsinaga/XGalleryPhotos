@@ -16,11 +16,13 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Nro. Flujo" FontSize="Small" VerticalOptions="Center" />
-                    <Entry Text="24324R" FontSize="Small" Grid.Column="1" VerticalOptions="Center"  />
+                    <Label Grid.Column="0" Text="Nro. Flujo:" FontSize="Small" VerticalOptions="Center" />
+                    <Entry Grid.Column="1" x:Name="txtNroFlujo" Text="24324R" FontSize="Small" VerticalOptions="Center"  />
+                    <Button Grid.Column="2" HorizontalOptions="End" Text="Buscar Flujo" TextColor="White" BackgroundColor="Blue"  
+                        Command="{Binding BuscarFlujoCommand}"/> 
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions >
@@ -30,47 +32,38 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Cliente" FontSize="Small" />
-                    <Label Text="Juan Perez" FontSize="Small" Grid.Column="1"/>
+                    <Label Text="Cliente:" FontSize="Small" Grid.Column="0" />
+                    <Label Text="Juan Perez" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
+                    <Label Text="Placa:" FontSize="Small" Grid.Column="2" />
+                    <Label Text="122KTR" FontSize="Small" Grid.Column="3" FontAttributes = "Bold"/>
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions >
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="30" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Placa" FontSize="Small" />
-                    <Label Text="122KTR" FontSize="Small" Grid.Column="1"/>
-                </Grid>
-                <Grid>
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Tipo Documental" FontSize="Small" />
-                    <Picker x:Name="pckTipoDocumental" FontSize="Small" Grid.Column="1"
+                    <Label Grid.Column="0" Text="Tipo Documental:" FontSize="Small" VerticalOptions="Center" />
+                    <Picker Grid.Column="1" x:Name="pckTipoDocumental" FontSize="Small"
                             SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"/>
-                    <Label x:Name="lblNumero" Text="Número" FontSize="Small" Grid.Row="1" Grid.Column="0" IsVisible="false" />
-<!--                    <Stepper x:Name="stpNumero" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" IsVisible="false"
-                             Increment="1" Minimum="1" Maximum="20" Value="1" />
--->                
-                    <Entry x:Name="txtNumero" Text="1" FontSize="Small" Grid.Row="1" Grid.Column="1" IsVisible="false" />
-
+                    <Label Grid.Column="2" x:Name="lblNumero" Text="Nro:" FontSize="Small" IsVisible="false"
+                           VerticalOptions="Center"/>
+                    <Entry Grid.Column="3" x:Name="txtNumero" FontSize="Small" IsVisible="false" />
                 </Grid>
         </StackLayout>
             
             <StackLayout Orientation="Horizontal" >
-                <Button TextColor="White" BackgroundColor="Blue" Text="Elegir Fotos de la galería" 
+                <Button TextColor="White" BackgroundColor="Blue" Text="Fotos Galería" 
                         Command="{Binding SelectImagesCommand}"/>
                 <Button TextColor="White" BackgroundColor="Blue" Text="Tomar Foto" 
+                        Clicked="btnTomarFoto_Clicked"/>
+                <Button TextColor="White" BackgroundColor="Blue" Text="Enviar" 
                         Clicked="btnTomarFoto_Clicked"/>
             </StackLayout>     
             
