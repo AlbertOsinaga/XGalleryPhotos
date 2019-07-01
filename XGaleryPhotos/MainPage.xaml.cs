@@ -42,11 +42,13 @@ namespace XGaleryPhotos
             {
                 lblNumero.IsVisible = true;
                 txtNumero.IsVisible = true;
+                lblNumeroLimites.IsVisible = true;
             }
             else
             {
                 lblNumero.IsVisible = false;
                 txtNumero.IsVisible = false;
+                lblNumeroLimites.IsVisible = false;
             }
         }
     }

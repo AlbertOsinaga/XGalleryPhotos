@@ -6,7 +6,9 @@
              xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:local="clr-namespace:XGaleryPhotos.Behaviors"
              ios:Page.UseSafeArea="true">
+
     <ContentPage.Content>
          <StackLayout Padding="10">
             <StackLayout Orientation="Vertical" VerticalOptions="Center" Padding="5">
@@ -48,13 +50,19 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="Tipo Documental:" FontSize="Small" VerticalOptions="Center" />
                     <Picker Grid.Column="1" x:Name="pckTipoDocumental" FontSize="Small"
                             SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"/>
                     <Label Grid.Column="2" x:Name="lblNumero" Text="Nro:" FontSize="Small" IsVisible="false"
                            VerticalOptions="Center"/>
-                    <Entry Grid.Column="3" x:Name="txtNumero" FontSize="Small" IsVisible="false" />
+                    <Entry Grid.Column="3" x:Name="txtNumero" Text="1" FontSize="Small" IsVisible="false" >
+                            <Entry.Behaviors>
+                                <local:NumericValidationBehavior />
+                            </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Column="4" x:Name="lblNumeroLimites" Text="(1 a 20)" FontSize="Micro" VerticalOptions="Center" IsVisible="false" />
                 </Grid>
         </StackLayout>
             
