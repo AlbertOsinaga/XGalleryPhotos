@@ -95,6 +95,7 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\Deportivo_rojo.png" />
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -104,6 +105,7 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XGaleryPhotos\XGaleryPhotos.csproj">
