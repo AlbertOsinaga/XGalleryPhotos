@@ -21,19 +21,6 @@ namespace XGaleryPhotos
             _mainViewModel = new MainViewModel(multiMediaPickerService);
             BindingContext = _mainViewModel;
             pckTipoDocumental.ItemsSource = _mainViewModel.TiposDocumental;
-            pckTipoDocumental.SelectedIndex = 0;
-        }
-
-        private async void btnTomarFoto_Clicked(object sender, EventArgs e)
-        {
-            var opciones_almacenamiento = new StoreCameraMediaOptions()
-            {
-                SaveToAlbum = true,
-                Name = "MyPhoto"
-            };
-
-            var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
-            _mainViewModel.AddPhotoCommand.Execute(photo);
         }
 
         void pckTipoDocumental_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -50,6 +37,69 @@ namespace XGaleryPhotos
                 txtNumero.IsVisible = false;
                 lblNumeroLimites.IsVisible = false;
             }
+        }
+
+        void btnBuscarFlujo_Clicked(object sender, System.EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Text.Contains("Nuevo"))
+            {
+                _mainViewModel.Flujo = null;
+                _mainViewModel.Media = null;
+
+                button.Text = "Buscar Flujo";
+                btnFotosGaleria.IsEnabled = false;
+                btnTomarFoto.IsEnabled = false;
+                btnEnviarOnBase.IsEnabled = false;
+                pckTipoDocumental.SelectedIndex = -1;
+                txtNumero.Text = "1";
+                txtNroFlujo.IsEnabled = true;
+                txtNroFlujo.Focus();
+
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtNroFlujo.Text))
+            {
+                DisplayAlert("", "Introduzca el Nro. de Flujo!", "OK");
+                return;
+            }
+
+            _mainViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
+            if (_mainViewModel.Flujo == null)
+            {
+                DisplayAlert("", "Nro. de Flujo no encontrado!", "OK");
+                return;
+            }
+            else
+            {
+                btnBuscarFlujo.Text = "Nuevo Flujo";
+                btnFotosGaleria.IsEnabled = true;
+                btnTomarFoto.IsEnabled = true;
+                btnEnviarOnBase.IsEnabled = true;
+                txtNroFlujo.IsEnabled = false;
+            }
+        }
+
+        void btnFotosGaleria_Clicked(object sender, System.EventArgs e)
+        {
+            _mainViewModel.SelectImagesCommand.Execute(null);
+        }
+
+        async void btnTomarFoto_Clicked(object sender, EventArgs e)
+        {
+            var opciones_almacenamiento = new StoreCameraMediaOptions()
+            {
+                SaveToAlbum = true,
+                Name = "MyPhoto"
+            };
+
+            var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
+            _mainViewModel.AddPhotoCommand.Execute(photo);
+        }
+
+        void btnEnviarOnBase_Clicked(object sender, System.EventArgs e)
+        {
         }
     }
 }

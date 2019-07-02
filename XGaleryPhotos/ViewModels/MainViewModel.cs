@@ -3,32 +3,63 @@ using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
+using XGaleryPhotos.Repositories;
+
 using XGaleryPhotos.Views;
 
 namespace XGaleryPhotos.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+
+        private Flujo _flujo;
+        public Flujo Flujo
+        {
+            get { return _flujo; }
+            set
+            {
+                _flujo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         IMultiMediaPickerService _multiMediaPickerService;
+
+        public IRepository Repository;
         public string[] TiposDocumental = { "RE - Inspección", "RE - RC Atención", "RE - Seguimiento" }; 
 
         public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public ObservableCollection<XGaleryPhotos.Models.MediaFile> Media { get; set; }
+        public ICommand BuscarFlujoCommand { get; set; }
         public ICommand SelectImagesCommand { get; set; }
         public ICommand PhotoTappedCommand { get; set; }
         public ICommand AddPhotoCommand { get; set; }
 
         public MainViewModel(IMultiMediaPickerService multiMediaPickerService)
         {
-            if(PropertyChanged == null) { }
+            //if(PropertyChanged == null) { }
 
             _multiMediaPickerService = multiMediaPickerService;
+            Repository = new MockRepository();
+
+
+            BuscarFlujoCommand = new Command((obj) =>
+            {
+                string flujoNro = obj as string;
+                Flujo = Repository.GetFlujoByNro(flujoNro);
+            });
+
             SelectImagesCommand = new Command(async (obj) =>
             {
                 var hasPermission = await CheckPermissionsAsync();

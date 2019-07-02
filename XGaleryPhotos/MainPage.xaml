@@ -21,10 +21,13 @@
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="Nro. Flujo:" FontSize="Small" VerticalOptions="Center" />
-                    <Entry Grid.Column="1" x:Name="txtNroFlujo" Text="24324R" FontSize="Small" VerticalOptions="Center"  />
-                    <Button Grid.Column="2" HorizontalOptions="End" Text="Buscar Flujo" TextColor="White" BackgroundColor="Blue"  
-                        Command="{Binding BuscarFlujoCommand}"/> 
+                    <Label Grid.Column="0" Text="Nro. de Flujo:" FontSize="Small" VerticalOptions="Center" />
+                    <Entry x:Name="txtNroFlujo" Grid.Column="1" FontSize="Small" VerticalOptions="Center"
+                           IsEnabled="false"/>
+                    <Button x:Name="btnBuscarFlujo" Grid.Column="2" HorizontalOptions="End" 
+                            Text="Nuevo Flujo" TextColor="White" 
+                            BackgroundColor="Blue"  
+                            Clicked="btnBuscarFlujo_Clicked"/> 
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions >
@@ -37,9 +40,9 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Text="Cliente:" FontSize="Small" Grid.Column="0" />
-                    <Label Text="Juan Perez" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
+                    <Label Text = "{Binding Flujo.Cliente}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
                     <Label Text="Placa:" FontSize="Small" Grid.Column="2" />
-                    <Label Text="122KTR" FontSize="Small" Grid.Column="3" FontAttributes = "Bold"/>
+                    <Label Text = "{Binding Flujo.Placa}" FontSize="Small" Grid.Column="3" FontAttributes = "Bold"/>
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions >
@@ -49,13 +52,13 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="24" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="Tipo Documental:" FontSize="Small" VerticalOptions="Center" />
                     <Picker Grid.Column="1" x:Name="pckTipoDocumental" FontSize="Small"
                             SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"/>
-                    <Label Grid.Column="2" x:Name="lblNumero" Text="Nro:" FontSize="Small" IsVisible="false"
+                    <Label Grid.Column="2" x:Name="lblNumero" Text="Nro" FontSize="Small" IsVisible="false"
                            VerticalOptions="Center"/>
                     <Entry Grid.Column="3" x:Name="txtNumero" Text="1" FontSize="Small" IsVisible="false" >
                             <Entry.Behaviors>
@@ -67,12 +70,12 @@
         </StackLayout>
             
             <StackLayout Orientation="Horizontal" >
-                <Button TextColor="White" BackgroundColor="Blue" Text="Fotos Galería" 
-                        Command="{Binding SelectImagesCommand}"/>
-                <Button TextColor="White" BackgroundColor="Blue" Text="Tomar Foto" 
-                        Clicked="btnTomarFoto_Clicked"/>
-                <Button TextColor="White" BackgroundColor="Blue" Text="Enviar" 
-                        Clicked="btnTomarFoto_Clicked"/>
+                <Button x:Name="btnFotosGaleria" TextColor="White" BackgroundColor="Blue" Text="Fotos Galería" 
+                        Clicked="btnFotosGaleria_Clicked" IsEnabled="false"/>
+                <Button x:Name="btnTomarFoto" TextColor="White" BackgroundColor="Blue" Text="Tomar Foto" 
+                        Clicked="btnTomarFoto_Clicked" IsEnabled="false"/>
+                <Button x:Name="btnEnviarOnBase" TextColor="White" BackgroundColor="Blue" Text="Enviar" 
+                        Clicked="btnEnviarOnBase_Clicked" IsEnabled="false"/>
             </StackLayout>     
             
             <flv:FlowListView FlowColumnCount="3" x:Name="listItems" FlowItemsSource="{Binding Media}"
