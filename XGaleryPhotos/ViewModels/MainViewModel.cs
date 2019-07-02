@@ -41,10 +41,12 @@ namespace XGaleryPhotos.ViewModels
         }
 
         public ObservableCollection<XGaleryPhotos.Models.MediaFile> Media { get; set; }
-        public ICommand BuscarFlujoCommand { get; set; }
-        public ICommand SelectImagesCommand { get; set; }
-        public ICommand PhotoTappedCommand { get; set; }
+
         public ICommand AddPhotoCommand { get; set; }
+        public ICommand BuscarFlujoCommand { get; set; }
+        public ICommand EnviarOnBaseCommand { get; set; }
+        public ICommand PhotoTappedCommand { get; set; }
+        public ICommand SelectImagesCommand { get; set; }
 
         public MainViewModel(IMultiMediaPickerService multiMediaPickerService)
         {
@@ -52,24 +54,6 @@ namespace XGaleryPhotos.ViewModels
 
             _multiMediaPickerService = multiMediaPickerService;
             Repository = new MockRepository();
-
-
-            BuscarFlujoCommand = new Command((obj) =>
-            {
-                string flujoNro = obj as string;
-                Flujo = Repository.GetFlujoByNro(flujoNro);
-            });
-
-            SelectImagesCommand = new Command(async (obj) =>
-            {
-                var hasPermission = await CheckPermissionsAsync();
-                if (hasPermission)
-                {
-                    if(Media == null)
-                        Media = new ObservableCollection<XGaleryPhotos.Models.MediaFile>();
-                    await _multiMediaPickerService.PickPhotosAsync();
-                }
-            });
 
             AddPhotoCommand = new Command((obj) =>
             {
@@ -91,19 +75,32 @@ namespace XGaleryPhotos.ViewModels
                 );
             });
 
+            BuscarFlujoCommand = new Command((obj) =>
+            {
+                string flujoNro = obj as string;
+                Flujo = Repository.GetFlujoByNro(flujoNro);
+            });
+
+            EnviarOnBaseCommand = new Command((obj) =>
+            {
+                throw new NotImplementedException();
+            });
+
             PhotoTappedCommand = new Command((obj) =>
             {
                 var mediaSelected = obj as XGaleryPhotos.Models.MediaFile ;
                 (App.Current.MainPage as NavigationPage).PushAsync(new PhotoDisplayPage(mediaSelected));
+            });
 
-                //var mediaSelected = obj as XGaleryPhotos.Models.MediaFile ;
-                //int i;
-                //for (i = 0; i < Media.Count; i++)
-                //{
-                //    if (mediaSelected.Id == Media[i].Id)
-                //        break;
-                //}
-                //Media.RemoveAt(i);
+            SelectImagesCommand = new Command(async (obj) =>
+            {
+                var hasPermission = await CheckPermissionsAsync();
+                if (hasPermission)
+                {
+                    if (Media == null)
+                        Media = new ObservableCollection<XGaleryPhotos.Models.MediaFile>();
+                    await _multiMediaPickerService.PickPhotosAsync();
+                }
             });
 
             _multiMediaPickerService.OnMediaPicked += (s, a) =>
@@ -113,7 +110,6 @@ namespace XGaleryPhotos.ViewModels
                     Media.Add(a);
 
                 });
-
             };
         }
 
@@ -152,6 +148,52 @@ namespace XGaleryPhotos.ViewModels
 
             return retVal;
 
+        }
+
+        public string ValidaDatosEnvio()
+        {
+            string respuesta = "OK";
+
+            if (string.IsNullOrWhiteSpace(Flujo.FlujoNro))
+            {
+                respuesta = "Nro. de Flujo en blanco no es válido!";
+                return respuesta;
+            }
+            if (string.IsNullOrWhiteSpace(Flujo.Cliente))
+            {
+                respuesta = "Cliente en blanco no es válido!";
+                return respuesta;
+            }
+            if (string.IsNullOrWhiteSpace(Flujo.Placa))
+            {
+                respuesta = "Placa en blanco no es válida!";
+                return respuesta;
+            }
+            if (string.IsNullOrWhiteSpace(Flujo.TipoDocumental))
+            {
+                respuesta = "Tipo Documental en blanco no es válido!";
+                return respuesta;
+            }
+            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumental) < 0)
+            {
+                respuesta = "Tipo Documental no es válido!";
+                return respuesta;
+            }
+            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumental) == 1)
+            {
+                if (Flujo.TipoDocumentalNumero < 1 || Flujo.TipoDocumentalNumero > 20)
+                {
+                    respuesta = "Número de Tipo Documental no está en rango 1 a 20!";
+                    return respuesta;
+                }
+            }
+            if(Media == null || Media.Count == 0)
+            {
+                respuesta = "No hay fotos para enviar!";
+                return respuesta;
+            }
+
+            return respuesta;
         }
     }
 }

@@ -98,8 +98,34 @@ namespace XGaleryPhotos
             _mainViewModel.AddPhotoCommand.Execute(photo);
         }
 
-        void btnEnviarOnBase_Clicked(object sender, System.EventArgs e)
+        async void btnEnviarOnBase_Clicked(object sender, System.EventArgs e)
         {
+            string respuesta = _mainViewModel.ValidaDatosEnvio();
+            if ( respuesta != "OK")
+            {
+                await DisplayAlert("VALIDACION", respuesta, "OK");
+                return;
+            }
+
+            bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
+            if (Ok)
+            {
+                await DisplayAlert("", "Fotos enviadas exitosamente!", "OK");
+                Resetear();
+            }
+        }
+
+        private void Resetear()
+        {
+            _mainViewModel.Flujo = null;
+            _mainViewModel.Media = null;
+
+            btnBuscarFlujo.Text = "Nuevo Flujo";
+            btnFotosGaleria.IsEnabled = false;
+            btnTomarFoto.IsEnabled = false;
+            btnEnviarOnBase.IsEnabled = false;
+            txtNroFlujo.IsEnabled = true;
+            txtNroFlujo.Text = string.Empty;
         }
     }
 }

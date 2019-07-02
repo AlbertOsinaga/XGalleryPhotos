@@ -57,10 +57,12 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="Tipo Documental:" FontSize="Small" VerticalOptions="Center" />
                     <Picker Grid.Column="1" x:Name="pckTipoDocumental" FontSize="Small"
-                            SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"/>
+                            SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"
+                            SelectedItem="{Binding Flujo.TipoDocumental}"
+                            />
                     <Label Grid.Column="2" x:Name="lblNumero" Text="Nro" FontSize="Small" IsVisible="false"
                            VerticalOptions="Center"/>
-                    <Entry Grid.Column="3" x:Name="txtNumero" Text="1" FontSize="Small" IsVisible="false" >
+                    <Entry Grid.Column="3" x:Name="txtNumero" Text="{Binding Flujo.TipoDocumentalNumero}" FontSize="Small" IsVisible="false" >
                             <Entry.Behaviors>
                                 <local:NumericValidationBehavior />
                             </Entry.Behaviors>
