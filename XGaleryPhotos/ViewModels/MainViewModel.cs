@@ -1,12 +1,14 @@
 ﻿using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XGaleryPhotos.Helpers;
 using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 using XGaleryPhotos.Repositories;
@@ -148,6 +150,28 @@ namespace XGaleryPhotos.ViewModels
 
             return retVal;
 
+        }
+
+        public void SavePhotos()
+        {
+            Flujo.Fotos = new List<Foto>();
+            int i = 0;
+            foreach (var mediaFile in Media)
+            {
+                if(mediaFile.Path != null)
+                {
+                    var foto = new Foto
+                    {
+                        Flujo = this.Flujo,
+                        FlujoId = Flujo.FlujoId,
+                        FotoId = ++i,
+                        Path = mediaFile.Path,
+                        ImgString = Base64Helper.MediaPathToCode64(mediaFile.Path)
+                    };
+
+                    Flujo.Fotos.Add(foto);
+                }
+            }
         }
 
         public string ValidaDatosEnvio()

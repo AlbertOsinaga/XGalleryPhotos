@@ -110,6 +110,7 @@ namespace XGaleryPhotos
             bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
             if (Ok)
             {
+                _mainViewModel.SavePhotos();
                 await DisplayAlert("", "Fotos enviadas exitosamente!", "OK");
                 Resetear();
             }
