@@ -11,13 +11,12 @@ using Xamarin.Forms;
 using XGaleryPhotos.Helpers;
 using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
-using XGaleryPhotos.Repositories;
 
 using XGaleryPhotos.Views;
 
 namespace XGaleryPhotos.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class FlujoViewModel : INotifyPropertyChanged
     {
 
         private Flujo _flujo;
@@ -31,9 +30,8 @@ namespace XGaleryPhotos.ViewModels
             }
         }
 
-        IMultiMediaPickerService _multiMediaPickerService;
-
-        public IRepository Repository;
+        private IMultiMediaPickerService MultiMediaPickerService { get; set; }
+        private IRepositoryService RepositoryService { get; set; }
         public string[] TiposDocumental = { "RE - Inspección", "RE - RC Atención", "RE - Seguimiento" }; 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,16 +48,13 @@ namespace XGaleryPhotos.ViewModels
         public ICommand PhotoTappedCommand { get; set; }
         public ICommand SelectImagesCommand { get; set; }
 
-        public MainViewModel(IMultiMediaPickerService multiMediaPickerService)
+        public FlujoViewModel()
         {
-            //if(PropertyChanged == null) { }
-
-            _multiMediaPickerService = multiMediaPickerService;
-            Repository = new MockRepository();
+            MultiMediaPickerService = App.MultiMediaPickerService;
+            RepositoryService = App.RepositoryService;
 
             AddPhotoCommand = new Command((obj) =>
             {
-                Type tipo = obj.GetType();
                 Plugin.Media.Abstractions.MediaFile mediaFile = obj as Plugin.Media.Abstractions.MediaFile;
                 if (mediaFile == null)
                     return;
@@ -80,7 +75,7 @@ namespace XGaleryPhotos.ViewModels
             BuscarFlujoCommand = new Command((obj) =>
             {
                 string flujoNro = obj as string;
-                Flujo = Repository.GetFlujoByNro(flujoNro);
+                Flujo = RepositoryService.GetFlujoByNro(flujoNro);
             });
 
             EnviarOnBaseCommand = new Command((obj) =>
@@ -91,7 +86,9 @@ namespace XGaleryPhotos.ViewModels
             PhotoTappedCommand = new Command((obj) =>
             {
                 var mediaSelected = obj as XGaleryPhotos.Models.MediaFile ;
-                (App.Current.MainPage as NavigationPage).PushAsync(new PhotoDisplayPage(mediaSelected));
+                App.RepositoryService.AddMediaFile(mediaSelected);
+                App.PhotoDisplayPage.ResetSource();
+                App.NavegacionPage.PushAsync(App.PhotoDisplayPage);
             });
 
             SelectImagesCommand = new Command(async (obj) =>
@@ -101,11 +98,11 @@ namespace XGaleryPhotos.ViewModels
                 {
                     if (Media == null)
                         Media = new ObservableCollection<XGaleryPhotos.Models.MediaFile>();
-                    await _multiMediaPickerService.PickPhotosAsync();
+                    await MultiMediaPickerService.PickPhotosAsync();
                 }
             });
 
-            _multiMediaPickerService.OnMediaPicked += (s, a) =>
+            MultiMediaPickerService.OnMediaPicked += (s, a) =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {

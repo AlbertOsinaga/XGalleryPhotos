@@ -8,23 +8,20 @@ namespace XGaleryPhotos.ViewModels
     {
         public ICommand RegresarCommand { get; set; }
         public ICommand EliminarFotoCommand { get; set; }
-        public MediaFile MediaFile { get; set; }
+        public MediaFile MediaFile { get ; set; }
 
-        public PhotoDisplayViewModel(MediaFile mediaFile)
+        public PhotoDisplayViewModel()
         {
-            MediaFile = mediaFile;
-
             RegresarCommand = new Command(() =>
             {
-                (App.Current.MainPage as NavigationPage).PopAsync();
+                App.NavegacionPage.PopAsync();
             });
 
             EliminarFotoCommand = new Command(() =>
             {
-                var navigationPage = App.Current.MainPage as NavigationPage;
-                var mainPage = navigationPage.RootPage as XGaleryPhotos.MainPage;
+                MediaFile = App.RepositoryService.GetMediaFile();
 
-                var media = (mainPage.BindingContext as XGaleryPhotos.ViewModels.MainViewModel).Media;
+                var media = App.FlujoViewModel.Media;
                 int i;
                 for (i = 0; i < media.Count; i++)
                 {
@@ -33,7 +30,7 @@ namespace XGaleryPhotos.ViewModels
                 }
                 media.RemoveAt(i);
 
-                navigationPage.PopAsync();
+                App.NavegacionPage.PopAsync();
             });
 
         }

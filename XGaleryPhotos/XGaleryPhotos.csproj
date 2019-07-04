@@ -21,10 +21,20 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
     <Folder Include="Behaviors\" />
-    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="XGaleryPhotos.projitems" />
     <None Remove="FodyWeavers.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">
+      <DependentUpon>FlujoPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\FlujoPage.xaml.cs">
+      <DependentUpon>FlujoPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

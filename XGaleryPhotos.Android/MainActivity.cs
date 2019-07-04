@@ -25,7 +25,8 @@ namespace XGaleryPhotos.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            LoadApplication(new App(MultiMediaPickerService.SharedInstance));
+            App.MultiMediaPickerService = MultiMediaPickerService.SharedInstance;
+            LoadApplication(new App());
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

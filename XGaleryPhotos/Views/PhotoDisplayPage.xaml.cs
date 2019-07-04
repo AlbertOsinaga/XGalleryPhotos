@@ -7,15 +7,17 @@ namespace XGaleryPhotos.Views
 {
     public partial class PhotoDisplayPage : ContentPage
     {
-        private PhotoDisplayViewModel _viewModel;
-
-        public PhotoDisplayPage(MediaFile mediaFile)
+        public PhotoDisplayPage()
         {
             InitializeComponent();
 
-            _viewModel = new PhotoDisplayViewModel(mediaFile);
-            BindingContext = _viewModel; 
-            Photo.Source = mediaFile.Path;
+            BindingContext = App.PhotoDisplayViewModel;
+            ResetSource();
+        }
+
+        public void ResetSource()
+        {
+            Photo.Source = App.RepositoryService.GetMediaFile().Path;
         }
 
         public async void btnEliminarFoto_Clicked(object sender, EventArgs args)
@@ -23,7 +25,7 @@ namespace XGaleryPhotos.Views
             var ok = await DisplayAlert("Confirmación!", "Quiere eliminar esta foto?", "Si", "No");
             if (ok)
             {
-                _viewModel.EliminarFotoCommand.Execute(null);   
+                App.PhotoDisplayViewModel.EliminarFotoCommand.Execute(null);   
             }
         }
     }
