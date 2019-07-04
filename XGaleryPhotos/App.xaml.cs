@@ -26,6 +26,7 @@ namespace XGaleryPhotos
         public static PhotoDisplayPage PhotoDisplayPage { get; set; }
 
         // ViewModels
+        public static AuthenticationViewModel AuthenticationViewModel { get; set; }
         public static FlujoViewModel FlujoViewModel { get; set; }
         public static PhotoDisplayViewModel PhotoDisplayViewModel { get; set; }
 
@@ -45,6 +46,7 @@ namespace XGaleryPhotos
             InitializeComponent();
 
             // ViewModels
+            AuthenticationViewModel = new AuthenticationViewModel();
             FlujoViewModel = new FlujoViewModel();
             PhotoDisplayViewModel = new PhotoDisplayViewModel();
 
@@ -55,7 +57,10 @@ namespace XGaleryPhotos
             PhotoDisplayPage = new PhotoDisplayPage();
 
             FlowListView.Init();
-            App.NavegacionPage.PushAsync(FlujoPage);
+            if(AuthenticateService.IsUserAuthenticated())
+                App.NavegacionPage.PushAsync(FlujoPage);
+            else
+                App.NavegacionPage.PushAsync(AuthenticationPage);
             this.MainPage = NavegacionPage;
         }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace XGaleryPhotos.Views
 {
@@ -10,6 +7,14 @@ namespace XGaleryPhotos.Views
         public AuthenticationPage()
         {
             InitializeComponent();
+
+            BindingContext = App.AuthenticationViewModel;
         }
+
+        void btnLogin_Clicked(object sender, System.EventArgs e)
+        {
+            App.AuthenticationViewModel.LoginCommand.Execute(null); 
+        }
+
     }
 }
