@@ -1,61 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="XGaleryPhotos.Views.AuthenticationPage">
+             x:Class="XGaleryPhotos.Views.AuthenticationPage"
+             BackgroundImage="LBC_FONDO.jpg">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-        <AbsoluteLayout HorizontalOptions="FillAndExpand" HeightRequest="300" WidthRequest="200" 
-                        Grid.Row="1" Grid.Column="1">
-            
-<!--            <Frame AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" 
-                       BackgroundColor="White" HasShadow="true"
-                       CornerRadius="10" Margin="0, 25, 0, 25"
-                       >
--->                <StackLayout Margin="0, 30">
-                    <Label Text="LBC FOTOS" FontSize="Default" HorizontalOptions="Center" />
-                    <BoxView HeightRequest="2" BackgroundColor="Blue" HorizontalOptions="CenterAndExpand" /> 
-
-<!--                    <Label Text="Sign in" Style="{StaticResource PageHeaderStyle}"></Label>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Not a member? " Style="{StaticResource RegularStyle}"></Label>
-                        <Label Text="Register today!" Style="{StaticResource LinkStyle}">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer            
-                                        Command="{Binding RegisterCommand}"  
-                                        NumberOfTapsRequired="1" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
--->                    <Entry Placeholder="User name" WidthRequest="100" 
-                                           Style="{StaticResource RoundedEntryStyle}" 
-                                           Text="{Binding UserName, Mode=TwoWay}"/>
-                    <Entry IsPassword="True" Placeholder="Password" WidthRequest="100" 
-                                           Style="{StaticResource RoundedEntryStyle}" 
-                                           Text="{Binding Password, Mode=TwoWay}"/>
-                    <Button x:Name="btnLogin" Style="{StaticResource RegularButton}" Text="Sign in" 
-                            Clicked="btnLogin_Clicked" />
-                </StackLayout>
-<!--            </Frame>
--->    
-<!--            <Frame  AbsoluteLayout.LayoutFlags="PositionProportional" Padding="0,0,0,0" 
-                    BackgroundColor="Transparent" BorderColor="Transparent"
-                    AbsoluteLayout.LayoutBounds="0.5,0,50,50" VerticalOptions="Fill" HorizontalOptions="Fill">
-                        <Image Source="bethanylogowithborder.png" VerticalOptions="Start" 
-                               Grid.Row="0" Grid.RowSpan="2" />
-            </Frame>
--->        
-        </AbsoluteLayout>
-    </Grid>
+    <StackLayout Orientation="Vertical" Padding="30" Spacing="40">  
+        <Image Source="LBC_LOGO.jpg"/>
+        <Label Text="APP CAPTURA FOTOS" FontSize="Large" HorizontalOptions="Center" />
+        <Frame BackgroundColor="#BF043055" HasShadow="False">  
+            <StackLayout Orientation="Vertical" Spacing="10">  
+                <Entry x:Name="txtUsuario" Placeholder="Usuario"   
+                           PlaceholderColor="White" HeightRequest="40"   
+                           TextColor="White"/>  
+                <Entry x:Name="txtClave" Placeholder="Clave"   
+                           PlaceholderColor="White" HeightRequest="40"   
+                           IsPassword="True"  
+                           TextColor="White"/>  
+            </StackLayout>  
+        </Frame>  
+        <Button x:Name="btnLogin" Text="Login" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="Blue"
+                    Clicked="btnLogin_Clicked"
+                    />  
+     </StackLayout> 
 
 </ContentPage>

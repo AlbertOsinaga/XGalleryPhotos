@@ -71,6 +71,7 @@
     <Compile Include="Services\MultiMediaPickerService.cs" />
     <Compile Include="Helpers\ImageHelpers.cs" />
     <Compile Include="MainApplication.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -94,8 +95,12 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\Deportivo_rojo.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidResource Include="Resources\drawable\LBC_FONDO.jpg" />
+    <AndroidResource Include="Resources\drawable\LBC_LOGO.jpg" />
+    <AndroidResource Include="Resources\drawable\LBC_Fondo_Splash.png" />
+    <AndroidResource Include="Resources\drawable\LBC_Fondo_Splash_2.png" />
+    <AndroidResource Include="Resources\drawable\LBC_Fondo_Splash_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

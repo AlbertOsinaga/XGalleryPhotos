@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="MainTheme" parent="MainTheme.Base">
     </style>
@@ -24,4 +24,9 @@
     <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">#FF4081</item>
     </style>
+    
+    <style name="SplashTheme" parent="MainTheme.Base">
+        <item name="android:background">@drawable/LBC_Fondo_Splash_logo</item>
+    </style>
+    
 </resources>
