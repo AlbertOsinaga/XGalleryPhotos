@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using XGaleryPhotos.Models;
+using Xamarin.Forms;
 
 namespace XGaleryPhotos.Views
 {
@@ -13,7 +14,18 @@ namespace XGaleryPhotos.Views
 
         void btnLogin_Clicked(object sender, System.EventArgs e)
         {
-            App.AuthenticationViewModel.LoginCommand.Execute(null); 
+            //  App.AuthenticationViewModel.LoginCommand.Execute(null);
+            AuthenticationResponse authenticationResponse =
+                App.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
+            if(!authenticationResponse.IsAuthenticated)
+            {
+                DisplayAlert("ERROR", "Usuario o Clave inválida!", "OK");
+                return;
+            }
+
+            App.NavegacionPage.PopAsync();
+            App.NavegacionPage.PushAsync(App.FlujoPage);
+
         }
 
     }

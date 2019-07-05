@@ -5,9 +5,9 @@ namespace XGaleryPhotos.Interfaces
     {
         Flujo GetFlujoByNro(string flujoNro);
 
-        void AddUser(string username);
-        void DeleteUser();
-        User GetUser();
+        void AddUser(string username, string password);
+        void DeleteUser(int userId);
+        User GetUser(string username, string password);
 
         void AddMediaFile(MediaFile mediaFile);
         void DeleteMediaFile();
