@@ -4,7 +4,7 @@
              x:Class="XGaleryPhotos.Views.AuthenticationPage"
              BackgroundImage="LBC_FONDO.jpg">
 
-    <StackLayout Orientation="Vertical" Padding="30" Spacing="40">  
+    <StackLayout Orientation="Vertical" Padding="30" Spacing="10">  
         <Image Source="LBC_LOGO.jpg"/>
         <Label Text="APP CAPTURA FOTOS" FontSize="Large" HorizontalOptions="Center" />
         <Frame BackgroundColor="#BF043055" HasShadow="False">  
@@ -22,6 +22,11 @@
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="Blue"
                     Clicked="btnLogin_Clicked"
+                    />  
+        <Button x:Name="btnCerrarApp" Text="Cerrar Aplicación" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="Blue"
+                    Clicked="btnCerrarApp_Clicked"
                     />  
      </StackLayout> 
 

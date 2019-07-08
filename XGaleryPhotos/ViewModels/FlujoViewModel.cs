@@ -30,6 +30,17 @@ namespace XGaleryPhotos.ViewModels
             }
         }
 
+        private string _usuario;
+        public string Usuario
+        {
+            get { return _usuario; }
+            set
+            {
+                _usuario = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private IMultiMediaPickerService MultiMediaPickerService { get; set; }
         private IRepositoryService RepositoryService { get; set; }
         public string[] TiposDocumental = { "RE - Inspección", "RE - RC Atención", "RE - Seguimiento" }; 
