@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Xml;
+using LbcAuthentication.Models;
 
 namespace LbcAuthentication
 {
@@ -22,7 +23,7 @@ namespace LbcAuthentication
             return Req;
         }
 
-        public void InvokeService(string usuario, string sistema, string password)
+        public LbcUsuarioSistema InvokeService(string usuario, string sistema, string password)
         {
             //Calling CreateSOAPWebRequest method    
             HttpWebRequest request = CreateSOAPWebRequest();
@@ -62,9 +63,31 @@ namespace LbcAuthentication
                 {
                     //reading stream    
                     var ServiceResult = rd.ReadToEnd();
-                    //writting stream result on console    
-                    Console.WriteLine(ServiceResult);
-                    Console.ReadLine();
+
+                    // Response Entity
+                    LbcUsuarioSistema usuarioSistema = new LbcUsuarioSistema();
+                    usuarioSistema.CodigoEstado = 0;
+
+                    XmlDocument soap = new XmlDocument();
+                    soap.LoadXml(ServiceResult);
+                    var nodos = soap.GetElementsByTagName("ConsultarUsuarioSistemaResponse");
+                    if (nodos.Count == 0)
+                        return usuarioSistema;
+
+                    var objeto = nodos[0].FirstChild;
+
+                    var field = objeto?.FirstChild;
+                    usuarioSistema.CodigoEstado = field != null && int.TryParse(field.InnerText, out _) ?
+                                                                    int.Parse(field.InnerText) : 0;
+                    field = field?.NextSibling;
+                    usuarioSistema.Estado = field != null && Enum.TryParse<LbcEstado>(field.InnerText, out _) ?
+                                                                (LbcEstado)Enum.Parse(typeof(LbcEstado), field.InnerText) :
+                                                                LbcEstado.NoEncontrado;
+
+                    field = field?.NextSibling;
+                    usuarioSistema.Usuario = field?.InnerText;
+
+                    return usuarioSistema;
                 }
             }
         }
