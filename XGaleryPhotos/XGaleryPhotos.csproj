@@ -37,4 +37,7 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LbcAuthentication\LbcAuthentication.csproj" />
+  </ItemGroup>
 </Project>

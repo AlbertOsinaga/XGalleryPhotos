@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XGaleryPhotos.Android", "XG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XGaleryPhotos", "XGaleryPhotos\XGaleryPhotos.csproj", "{A69B2673-43EB-4BB2-8356-AC0D3AF3EFDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LbcAuthentication", "LbcAuthentication\LbcAuthentication.csproj", "{A9B51A91-A3C4-4A21-9D13-92787C3057C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,5 +41,17 @@ Global
 		{A69B2673-43EB-4BB2-8356-AC0D3AF3EFDB}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{A69B2673-43EB-4BB2-8356-AC0D3AF3EFDB}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{A69B2673-43EB-4BB2-8356-AC0D3AF3EFDB}.Release|iPhone.Build.0 = Release|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
