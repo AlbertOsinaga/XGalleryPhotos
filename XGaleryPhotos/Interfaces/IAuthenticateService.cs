@@ -1,9 +1,8 @@
-﻿using XGaleryPhotos.Models;
-namespace XGaleryPhotos.Interfaces
+﻿namespace XGaleryPhotos.Interfaces
 {
     public interface IAuthenticateService
     {
-        AuthenticationResponse Authenticate(string userName, string password);
+        bool Authenticate(string usuario, string password);
         bool IsUserAuthenticated();
     }
 }

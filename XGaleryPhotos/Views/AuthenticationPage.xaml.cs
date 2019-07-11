@@ -16,15 +16,14 @@ namespace XGaleryPhotos.Views
         void btnLogin_Clicked(object sender, System.EventArgs e)
         {
             //  App.AuthenticationViewModel.LoginCommand.Execute(null);
-            AuthenticationResponse authenticationResponse =
-                App.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
-            if (!authenticationResponse.IsAuthenticated)
+            bool IsAuthenticated = App.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
+            if (!IsAuthenticated)
             {
                 DisplayAlert("ERROR", "Usuario o Clave inválida!", "OK");
                 return;
             }
 
-            App.FlujoViewModel.Usuario = authenticationResponse.User.UserName;
+            App.FlujoViewModel.Usuario = txtUsuario.Text;
             App.NavegacionPage.PopAsync();
             App.NavegacionPage.PushAsync(App.FlujoPage);
         }

@@ -38,6 +38,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LbcAuthentication\LbcAuthentication.csproj" />
+    <ProjectReference Include="..\XWebServices\XWebServices.csproj" />
   </ItemGroup>
 </Project>

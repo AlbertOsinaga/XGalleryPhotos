@@ -52,13 +52,6 @@ namespace LbcAuthentication
             //Geting response from request    
             using (WebResponse response = request.GetResponse())
             {
-                WebHeaderCollection headers = response.Headers;
-                foreach(object header in headers)
-                {
-                    string key = header as string;
-                    string head = headers[key];
-                }
-
                 using (StreamReader rd = new StreamReader(response.GetResponseStream()))
                 {
                     //reading stream    

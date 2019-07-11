@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XGaleryPhotos", "XGaleryPho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LbcAuthentication", "LbcAuthentication\LbcAuthentication.csproj", "{A9B51A91-A3C4-4A21-9D13-92787C3057C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XWebServices", "XWebServices\XWebServices.csproj", "{41D063EB-8459-4327-8081-451606C81421}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,17 @@ Global
 		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{A9B51A91-A3C4-4A21-9D13-92787C3057C3}.Release|iPhone.Build.0 = Release|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
