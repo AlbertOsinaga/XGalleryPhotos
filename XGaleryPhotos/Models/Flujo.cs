@@ -11,6 +11,11 @@ namespace XGaleryPhotos.Models
         public string TipoDocumental { get; set; }
         public int TipoDocumentalNumero { get; set; }
 
+        public string Mensaje { get; set; }
+        public bool EsValido { get; set; }
+        public string DatosAdicionales { get; set; }
+        public string ListaMensajes { get; set; }
+
         public List<Foto> Fotos { get; set; } 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using XGaleryPhotos.Models;
+
 namespace XGaleryPhotos.Interfaces
 {
     public interface IRepositoryService

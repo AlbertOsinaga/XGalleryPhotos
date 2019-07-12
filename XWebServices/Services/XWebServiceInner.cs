@@ -6,7 +6,7 @@ using XWebServices.Interfaces;
 
 namespace XWebServices.Services
 {
-    public class XWebService : IXWebService
+    public class XWebServiceInner : IXWebService
     {
         #region IXWebService
 
@@ -22,7 +22,7 @@ namespace XWebServices.Services
         {
             Dictionary<string, object> dicResult = new Dictionary<string, object>();
 
-            using(WebResponse response = InvokeWebService(args))
+            using (WebResponse response = InvokeWebService(args))
             {
                 using (StreamReader rd = new StreamReader(response.GetResponseStream()))
                 {
@@ -37,9 +37,24 @@ namespace XWebServices.Services
                     XmlNode resultRoot = resultados[0].FirstChild;
 
                     XmlNode result = resultRoot?.FirstChild;
-                    while(result != null)
+                    while (result != null)
                     {
-                        dicResult.Add(result.Name, result.InnerText);
+                        if(result.NodeType == XmlNodeType.Element)
+                            AddItemDictionary(dicResult, result.Name, result.InnerText);
+                        XmlNode childResult = result.FirstChild;
+                        while(childResult != null)
+                        {
+                            if (result.NodeType == XmlNodeType.Element)
+                                AddItemDictionary(dicResult, childResult.Name, childResult.InnerText);
+                            XmlNode childChildResult = result.FirstChild;
+                            while (childChildResult != null)
+                            {
+                                if (result.NodeType == XmlNodeType.Element)
+                                    AddItemDictionary(dicResult, childChildResult.Name, childChildResult.InnerText);
+                                childChildResult = childChildResult.NextSibling;
+                            }
+                            childResult = childResult.NextSibling;
+                        }
                         result = result.NextSibling;
                     }
                 }
@@ -50,7 +65,7 @@ namespace XWebServices.Services
 
         #endregion
 
-        public XWebService()
+        public XWebServiceInner()
         {
             XmlnsXsi = "http://www.w3.org/2001/XMLSchema-instance";
             XmlnsXsd = "http://www.w3.org/2001/XMLSchema";
@@ -71,6 +86,18 @@ namespace XWebServices.Services
             //return HttpWebRequest    
             return Req;
         }
+        private void AddItemDictionary(Dictionary<string, object> dic, string key, object value)
+        {
+            try
+            {
+                dic.Add(key, value);
+            }
+            catch (System.Exception)
+            {
+                key += "-" + System.Guid.NewGuid().ToString();
+                dic.Add(key, value);
+            }
+        }
         private string CreateSoapEnvelope(params string[] args)
         {
             string soapEnvelope =
@@ -79,9 +106,9 @@ namespace XWebServices.Services
             foreach (var arg in args)
             {
                 string[] partes = arg.Split('=', ':');
-                if(partes.Length == 1)
+                if (partes.Length == 1)
                     soapEnvelope += $"<{arg}></{arg}>";
-                else if(partes.Length == 2)
+                else if (partes.Length == 2)
                     soapEnvelope += $"<{partes[0]}>{partes[1]}</{partes[0]}>";
             }
 

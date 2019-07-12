@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 
 namespace XGaleryPhotos.Interfaces
 {
-    public class RepositoryService : IRepositoryService
+    public class MockRepositoryService : IRepositoryService
     {
         public static List<Flujo> Flujos { get; set; }
         public static User User { get; set; }
         public static MediaFile MediaFile { get; set; }
         public static List<User> Users { get; set; }
 
-        public RepositoryService()
+        public MockRepositoryService()
         {
             Flujos = new List<Flujo>();
             Flujos.Add(new Flujo { FlujoId = 1, FlujoNro = "123456R", Cliente = "Mario Bross", Placa = "3456DFG" });
@@ -64,18 +62,18 @@ namespace XGaleryPhotos.Interfaces
         public void AddMediaFile(MediaFile mediaFile)
         {
             DeleteMediaFile();
-            RepositoryService.MediaFile = mediaFile;
+            MockRepositoryService.MediaFile = mediaFile;
         }
 
         public void DeleteMediaFile()
         {
-            RepositoryService.MediaFile = null;
+            MockRepositoryService.MediaFile = null;
             GC.Collect();
         }
 
         public MediaFile GetMediaFile()
         {
-            return RepositoryService.MediaFile;
+            return MockRepositoryService.MediaFile;
         }
     }
 }

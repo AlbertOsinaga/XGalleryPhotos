@@ -6,7 +6,7 @@ using XWebServices.Interfaces;
 
 namespace XWebServices.Services
 {
-    public class XWebService : IXWebService
+    public class XWebServiceKeywords : IXWebService
     {
         #region IXWebService
 
@@ -22,7 +22,7 @@ namespace XWebServices.Services
         {
             Dictionary<string, object> dicResult = new Dictionary<string, object>();
 
-            using(WebResponse response = InvokeWebService(args))
+            using (WebResponse response = InvokeWebService(args))
             {
                 using (StreamReader rd = new StreamReader(response.GetResponseStream()))
                 {
@@ -30,17 +30,32 @@ namespace XWebServices.Services
 
                     XmlDocument soapEnvelope = new XmlDocument();
                     soapEnvelope.LoadXml(ServiceResult);
-                    XmlNodeList resultados = soapEnvelope.GetElementsByTagName($"{WebMethod}Response");
-                    if (resultados.Count == 0)
-                        return dicResult;
-
-                    XmlNode resultRoot = resultados[0].FirstChild;
-
-                    XmlNode result = resultRoot?.FirstChild;
-                    while(result != null)
+                    XmlNodeList nroSolicitud = soapEnvelope.GetElementsByTagName("nroSolicitud");
+                    if (nroSolicitud != null && nroSolicitud.Count > 0)
+                        dicResult.Add(nroSolicitud[0].Name, nroSolicitud[0].InnerText);
+                    XmlNodeList idKeywords = soapEnvelope.GetElementsByTagName("idKeyword");
+                    foreach (XmlNode idkeyword in idKeywords)
                     {
-                        dicResult.Add(result.Name, result.InnerText);
-                        result = result.NextSibling;
+                        if(idkeyword.InnerText == "103")
+                        {
+                            XmlNode nombre = idkeyword.NextSibling;
+                            if (nombre != null && nombre.Name == "nombre" && nombre.InnerText == "Nombre/Razon Social")
+                            {
+                                XmlNode valor = nombre.NextSibling;
+                                if (valor != null && valor.Name == "valor")
+                                    dicResult.Add("Nombre", valor.InnerText);
+                            }
+                        }
+                        if (idkeyword.InnerText == "263")
+                        {
+                            XmlNode nombre = idkeyword.NextSibling;
+                            if (nombre != null && nombre.Name == "nombre" && nombre.InnerText == "Nro. de Placa")
+                            {
+                                XmlNode valor = nombre.NextSibling;
+                                if (valor != null && valor.Name == "valor")
+                                    dicResult.Add("Placa", valor.InnerText);
+                            }
+                        }
                     }
                 }
             }
@@ -50,7 +65,7 @@ namespace XWebServices.Services
 
         #endregion
 
-        public XWebService()
+        public XWebServiceKeywords()
         {
             XmlnsXsi = "http://www.w3.org/2001/XMLSchema-instance";
             XmlnsXsd = "http://www.w3.org/2001/XMLSchema";
@@ -79,9 +94,9 @@ namespace XWebServices.Services
             foreach (var arg in args)
             {
                 string[] partes = arg.Split('=', ':');
-                if(partes.Length == 1)
+                if (partes.Length == 1)
                     soapEnvelope += $"<{arg}></{arg}>";
-                else if(partes.Length == 2)
+                else if (partes.Length == 2)
                     soapEnvelope += $"<{partes[0]}>{partes[1]}</{partes[0]}>";
             }
 

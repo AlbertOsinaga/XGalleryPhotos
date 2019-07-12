@@ -12,6 +12,7 @@ namespace XGaleryPhotos.Services
 
         public AuthenticateService()
         {
+            Sistema = "EXT101";
             wbsSeguridad = new WbsSeguridad(new XWebService());
         }
 
