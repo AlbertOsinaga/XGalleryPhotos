@@ -35,7 +35,7 @@ namespace XGaleryPhotos
             // Services
             AuthenticateService = new AuthenticateService();
             NavigationService = new NavigationService();
-            RepositoryService = new MockRepositoryService();
+            RepositoryService = new RepositoryService();
 
         }
 

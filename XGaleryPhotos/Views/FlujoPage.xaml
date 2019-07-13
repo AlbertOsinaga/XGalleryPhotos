@@ -51,14 +51,21 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Text="Cliente:" FontSize="Small" Grid.Column="0" />
                     <Label Text = "{Binding Flujo.Cliente}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
-                    <Label Text="Placa:" FontSize="Small" Grid.Column="2" />
-                    <Label Text = "{Binding Flujo.Placa}" FontSize="Small" Grid.Column="3" FontAttributes = "Bold"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Placa:" FontSize="Small" Grid.Column="0" />
+                    <Label Text = "{Binding Flujo.Placa}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
                 </Grid>
                 <Grid>
                     <Grid.RowDefinitions >
