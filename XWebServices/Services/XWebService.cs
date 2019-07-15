@@ -71,7 +71,7 @@ namespace XWebServices.Services
             //return HttpWebRequest    
             return Req;
         }
-        private string CreateSoapEnvelope(params string[] args)
+        protected virtual string CreateSoapEnvelope(params string[] args)
         {
             string soapEnvelope =
                 $@"<soap:Envelope xmlns:xsi = ""{XmlnsXsi}"" xmlns:xsd = ""{XmlnsXsd}"" xmlns:soap = ""{XmlnsSoap}""><soap:Body><{WebMethod} xmlns = ""{WebNamespace}"">";

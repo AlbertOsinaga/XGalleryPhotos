@@ -30,16 +30,22 @@ namespace XWebServices.Services
 
                     XmlDocument soapEnvelope = new XmlDocument();
                     soapEnvelope.LoadXml(ServiceResult);
+                    XmlNodeList esValido = soapEnvelope.GetElementsByTagName("EsValido");
+                    if (esValido != null && esValido.Count > 0)
+                        dicResult.Add(esValido[0].Name, esValido[0].InnerText);
                     XmlNodeList nroSolicitud = soapEnvelope.GetElementsByTagName("nroSolicitud");
                     if (nroSolicitud != null && nroSolicitud.Count > 0)
                         dicResult.Add(nroSolicitud[0].Name, nroSolicitud[0].InnerText);
+                    XmlNodeList mensaje = soapEnvelope.GetElementsByTagName("Mensaje");
+                    if (mensaje != null && mensaje.Count > 0)
+                        dicResult.Add(mensaje[0].Name, mensaje[0].InnerText);
                     XmlNodeList idKeywords = soapEnvelope.GetElementsByTagName("idKeyword");
                     foreach (XmlNode idkeyword in idKeywords)
                     {
                         if(idkeyword.InnerText == "103")
                         {
                             XmlNode nombre = idkeyword.NextSibling;
-                            if (nombre != null && nombre.Name == "nombre" && nombre.InnerText == "Nombre/Razon Social")
+                            if (nombre != null && nombre.Name == "nombre" && nombre.InnerText == "Nombres/Razon Social")
                             {
                                 XmlNode valor = nombre.NextSibling;
                                 if (valor != null && valor.Name == "valor")
@@ -49,7 +55,7 @@ namespace XWebServices.Services
                         if (idkeyword.InnerText == "263")
                         {
                             XmlNode nombre = idkeyword.NextSibling;
-                            if (nombre != null && nombre.Name == "nombre" && nombre.InnerText == "Nro. de Placa")
+                            if (nombre != null && nombre.Name == "nombre" && nombre.InnerText == "No. de Placa")
                             {
                                 XmlNode valor = nombre.NextSibling;
                                 if (valor != null && valor.Name == "valor")

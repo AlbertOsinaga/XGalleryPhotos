@@ -36,10 +36,12 @@ namespace XWebServices
                     solicitud.EsValido = field.Value != null && ((string)field.Value).ToLower() == "true";
                 if (field.Key == "Mensaje" && field.Value != null)
                     solicitud.Mensaje = (string)field.Value;
-                if (field.Key == "DatosAdicionales" && field.Value != null)
-                    solicitud.DatosAdicionales = (string)field.Value;
-                if (field.Key == "ListaMensajes" && field.Value != null)
-                    solicitud.Mensaje = (string)field.Value;
+                if (field.Key == "nroSolicitud" && field.Value != null)
+                    solicitud.NroSolicitud = (string)field.Value;
+                if (field.Key == "Nombre" && field.Value != null)
+                    solicitud.Nombre = (string)field.Value;
+                if (field.Key == "Placa" && field.Value != null)
+                    solicitud.Placa = (string)field.Value;
             }
 
             return solicitud;
