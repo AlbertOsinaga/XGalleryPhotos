@@ -201,19 +201,19 @@ namespace XGaleryPhotos.ViewModels
                 respuesta = "Placa en blanco no es válida!";
                 return respuesta;
             }
-            if (string.IsNullOrWhiteSpace(Flujo.TipoDocumental))
+            if (string.IsNullOrWhiteSpace(Flujo.TipoDocumento))
             {
                 respuesta = "Tipo Documental en blanco no es válido!";
                 return respuesta;
             }
-            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumental) < 0)
+            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumento) < 0)
             {
                 respuesta = "Tipo Documental no es válido!";
                 return respuesta;
             }
-            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumental) == 1)
+            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumento) == 1)
             {
-                if (Flujo.TipoDocumentalNumero < 1 || Flujo.TipoDocumentalNumero > 20)
+                if (Flujo.DocumentoNro < 1 || Flujo.DocumentoNro > 20)
                 {
                     respuesta = "Número de Tipo Documental no está en rango 1 a 20!";
                     return respuesta;

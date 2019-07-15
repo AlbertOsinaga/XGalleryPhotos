@@ -8,8 +8,8 @@ namespace XGaleryPhotos.Models
         public string FlujoNro { get; set; }
         public string Cliente { get; set; }
         public string Placa { get; set; }
-        public string TipoDocumental { get; set; }
-        public int TipoDocumentalNumero { get; set; }
+        public string TipoDocumento { get; set; }
+        public int DocumentoNro { get; set; }
 
         public string Mensaje { get; set; }
         public bool EsValido { get; set; }

@@ -20,7 +20,8 @@
                             continue;
                         }
                     }
-                    soapEnvelope += $"<{arg}></{arg}>";
+                    if(!string.IsNullOrEmpty(arg))
+                        soapEnvelope += $"<{arg}></{arg}>";
                 }
                 else if (partes.Length == 2)
                     soapEnvelope += $"<{partes[0]}>{partes[1]}</{partes[0]}>";

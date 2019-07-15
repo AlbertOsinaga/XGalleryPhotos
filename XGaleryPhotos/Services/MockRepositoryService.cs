@@ -75,5 +75,10 @@ namespace XGaleryPhotos.Interfaces
         {
             return MockRepositoryService.MediaFile;
         }
+
+        public bool UpdateFotos(Flujo flujo, string usuarioSistema)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace XGaleryPhotos.Interfaces
         void AddMediaFile(MediaFile mediaFile);
         void DeleteMediaFile();
         MediaFile GetMediaFile();
+
+        bool UpdateFotos(Flujo flujo, string usuarioSistema);
     }
 }
