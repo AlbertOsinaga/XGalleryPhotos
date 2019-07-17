@@ -9,7 +9,7 @@
 
             foreach (var arg in args)
             {
-                string[] partes = arg.Split('=', ':');
+                string[] partes = arg.Split(':');
                 if (partes.Length == 1)
                 {
                     if(arg.Length > 1)

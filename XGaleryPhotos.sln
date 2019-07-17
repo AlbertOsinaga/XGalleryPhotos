@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XGaleryPhotos", "XGaleryPho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XWebServices", "XWebServices\XWebServices.csproj", "{41D063EB-8459-4327-8081-451606C81421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZTests", "XTests\ZTests.csproj", "{F4CB002D-7A3A-4E20-BCD4-68A11148D616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZTests", "ZTests\ZTests.csproj", "{F4CB002D-7A3A-4E20-BCD4-68A11148D616}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,7 +14,7 @@ namespace XWebServices
 
         public bool UpdateFotos(string flujoNro, string tipoDocumento, int nroRC,
                                     string usuarioSistema, string extensionArchivo, string sistemaOrigen,
-                                    params string[] fotos)
+                                    params string[] images64)
         {
             if (WebService == null)
                 return false;
@@ -24,17 +24,18 @@ namespace XWebServices
             WebService.WebMethod = "ImportarDocumento";
             WebService.WebNamespace = "http://tempuri.org/";
 
-            string stringFotos = string.Empty;
-            if (fotos != null && fotos.Length > 0)
-            {
-                foreach (string foto in fotos)
-                    stringFotos += $"<string>{foto}</string>";
-            }
-            else
-                stringFotos = $"string:{string.Empty}";
+            //string stringFotos = string.Empty;
+            //if (images64 != null && images64.Length > 0)
+            //{
+            //    foreach (string foto in images64)
+            //        stringFotos += $"<string>{foto}</string>";
+            //}
+            //else
+            //    stringFotos = $"string:{string.Empty}";
 
-            Dictionary<string, object> fields =
-                WebService.Invoke(  "<documento>",
+            List<string> parametros = new List<string>()
+            {
+                "<documento>",
                                         $"nroSolicitud:{flujoNro}",
                                         $"tipoDocumento:{tipoDocumento}",
                                         $"extensionArchivo:{extensionArchivo}",
@@ -51,10 +52,45 @@ namespace XWebServices
                                             "</KeywordOnBaseEntity>",
                                         "</keywords>",
                                     "</documento>",
-                                    "<archivosBase64>",
-                                        stringFotos,
-                                    "</archivosBase64>",
-                                    $"SistemaOrigen:{sistemaOrigen}");
+                                    "<archivosBase64>"
+            };
+            if (images64 != null && images64.Length > 0)
+            {
+                foreach (string image in images64)
+                    parametros.Add($"string:{image}");
+            }
+            else
+            {
+                parametros.Add($"string:{string.Empty}");
+            }
+
+            parametros.Add("</archivosBase64>");
+            parametros.Add($"SistemaOrigen:{sistemaOrigen}");
+
+            //Dictionary<string, object> fields =
+            //WebService.Invoke(  "<documento>",
+            //                        $"nroSolicitud:{flujoNro}",
+            //                        $"tipoDocumento:{tipoDocumento}",
+            //                        $"extensionArchivo:{extensionArchivo}",
+            //                        "<keywords>",
+            //                            "<KeywordOnBaseEntity>",
+            //                                //$"idKeywords:{string.Empty}",
+            //                                $"nombre:LBC UserName WS",
+            //                                $"valor:{usuarioSistema}",
+            //                            "</KeywordOnBaseEntity>",
+            //                            "<KeywordOnBaseEntity>",
+            //                                //$"idKeywords:{string.Empty}",
+            //                                $"nombre:No. de RC",
+            //                                $"valor:{nroRC}",
+            //                            "</KeywordOnBaseEntity>",
+            //                        "</keywords>",
+            //                    "</documento>",
+            //                    "<archivosBase64>",
+            //                        stringFotos,
+            //                    "</archivosBase64>",
+            //                    $"SistemaOrigen:{sistemaOrigen}");
+
+            Dictionary<string, object> fields = WebService.Invoke(parametros.ToArray());
 
             if (fields == null || fields.Count == 0)
                 return false;

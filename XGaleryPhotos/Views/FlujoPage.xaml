@@ -81,7 +81,7 @@
                     <Label Grid.Column="0" Text="Tipo Documental:" FontSize="Small" VerticalOptions="Center" />
                     <Picker Grid.Column="1" x:Name="pckTipoDocumental" FontSize="Small"
                             SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"
-                            SelectedItem="{Binding Flujo.TipoDocumental}"
+                            SelectedItem="{Binding Flujo.TipoDocumento, Mode=TwoWay}"
                             />
                     <Label Grid.Column="2" x:Name="lblNumero" Text="Nro" FontSize="Small" IsVisible="false"
                            VerticalOptions="Center"/>
