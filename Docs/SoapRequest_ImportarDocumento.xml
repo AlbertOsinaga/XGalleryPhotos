@@ -1,0 +1,25 @@
+<soap:Envelope xmlns:xsi = \"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd = \"http://www.w3.org/2001/XMLSchema\" xmlns:soap = \"http://schemas.xmlsoap.org/soap/envelope/\">
+	<soap:Body>
+		<ImportarDocumento xmlns = \"http://tempuri.org/\">
+			<documento>
+				<nroSolicitud>280R</nroSolicitud>
+				<tipoDocumento>RE RC - Atencion</tipoDocumento>
+				<extensionArchivo>jpg</extensionArchivo>
+				<keywords>
+					<KeywordOnBaseEntity>
+						<nombre>LBC UserName WS</nombre>
+						<valor>LeVargas</valor>
+					</KeywordOnBaseEntity>
+					<KeywordOnBaseEntity>
+						<nombre>No. de RC</nombre>
+						<valor>4</valor>
+					</KeywordOnBaseEntity>
+				</keywords>
+			</documento>
+			<archivosBase64>
+				<string></string>
+			</archivosBase64>
+			<SistemaOrigen>ICRL</SistemaOrigen>
+		</ImportarDocumento>
+	</soap:Body>
+</soap:Envelope>
