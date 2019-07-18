@@ -15,7 +15,7 @@ namespace XGaleryPhotos
         {
             InitializeComponent();
             BindingContext = App.FlujoViewModel;
-            pckTipoDocumental.ItemsSource = App.FlujoViewModel.TiposDocumental;
+            pckTipoDocumental.ItemsSource = App.FlujoViewModel.TiposDocumento;
         }
 
         void pckTipoDocumental_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -61,7 +61,7 @@ namespace XGaleryPhotos
             }
 
             App.FlujoViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
-            if (App.FlujoViewModel.Flujo == null)
+            if (App.FlujoViewModel.Flujo == null || !App.FlujoViewModel.Flujo.EsValido)
             {
                 DisplayAlert("", "Nro. de Flujo no encontrado!", "OK");
                 return;
@@ -106,7 +106,12 @@ namespace XGaleryPhotos
             if (Ok)
             {
                 App.FlujoViewModel.SavePhotos();
-                await DisplayAlert("", "Fotos enviadas exitosamente!", "OK");
+                App.FlujoViewModel.EnviarOnBaseCommand.Execute(null);
+                if(App.FlujoViewModel.Flujo.EsValido)
+                    await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
+                else
+                    await DisplayAlert("ONBASE", "Fotos no fueron recepcionadas!", "OK");
+
                 Resetear();
             }
         }

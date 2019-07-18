@@ -30,8 +30,8 @@ namespace XGaleryPhotos.ViewModels
             }
         }
 
-        private string _usuario;
-        public string Usuario
+        private User _usuario;
+        public User Usuario
         {
             get { return _usuario; }
             set
@@ -43,7 +43,7 @@ namespace XGaleryPhotos.ViewModels
 
         private IMultiMediaPickerService MultiMediaPickerService { get; set; }
         private IRepositoryService RepositoryService { get; set; }
-        public string[] TiposDocumental = { "RE - Inspección", "RE - RC Atención", "RE - Seguimiento" }; 
+        public string[] TiposDocumento = { "RE - Inspeccion", "RE - RC Atencion", "RE - Seguimiento" }; 
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -61,6 +61,7 @@ namespace XGaleryPhotos.ViewModels
 
         public FlujoViewModel()
         {
+            Usuario = App.AuthenticateService.AuthenticatedUser;
             MultiMediaPickerService = App.MultiMediaPickerService;
             RepositoryService = App.RepositoryService;
 
@@ -91,7 +92,9 @@ namespace XGaleryPhotos.ViewModels
 
             EnviarOnBaseCommand = new Command((obj) =>
             {
-                throw new NotImplementedException();
+                Flujo.EsValido = false;
+                bool Ok = App.RepositoryService.UpdateFotos(Flujo, Usuario.UserName);
+                Flujo.EsValido = Ok;
             });
 
             PhotoTappedCommand = new Command((obj) =>
@@ -173,8 +176,8 @@ namespace XGaleryPhotos.ViewModels
                         Flujo = this.Flujo,
                         FlujoId = Flujo.FlujoId,
                         FotoId = ++i,
-                        Path = mediaFile.Path,
-                        ImgString = Base64Helper.MediaPathToCode64(mediaFile.Path)
+                        Path = mediaFile.PreviewPath,
+                        ImgString = Base64Helper.MediaPathToCode64(mediaFile.PreviewPath)
                     };
 
                     Flujo.Fotos.Add(foto);
@@ -203,19 +206,19 @@ namespace XGaleryPhotos.ViewModels
             }
             if (string.IsNullOrWhiteSpace(Flujo.TipoDocumento))
             {
-                respuesta = "Tipo Documental en blanco no es válido!";
+                respuesta = "Tipo Documento en blanco no es válido!";
                 return respuesta;
             }
-            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumento) < 0)
+            if (Array.IndexOf<string>(TiposDocumento, Flujo.TipoDocumento) < 0)
             {
-                respuesta = "Tipo Documental no es válido!";
+                respuesta = "Tipo Documento no es válido!";
                 return respuesta;
             }
-            if (Array.IndexOf<string>(TiposDocumental, Flujo.TipoDocumento) == 1)
+            if (Array.IndexOf<string>(TiposDocumento, Flujo.TipoDocumento) == 1)
             {
                 if (Flujo.DocumentoNro < 1 || Flujo.DocumentoNro > 20)
                 {
-                    respuesta = "Número de Tipo Documental no está en rango 1 a 20!";
+                    respuesta = "Número de Documento RC no está en el rango de 1 a 20!";
                     return respuesta;
                 }
             }

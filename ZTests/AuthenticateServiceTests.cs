@@ -1,6 +1,7 @@
 ﻿using System;
 using Xunit;
 using XGaleryPhotos.Interfaces;
+using XGaleryPhotos.Models;
 using XGaleryPhotos.Services;
 
 namespace ZTests
@@ -14,10 +15,10 @@ namespace ZTests
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = true;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("nnn", "Mensaje1");
+                user = service.Authenticate("nnn", "Mensaje1");
             }
             catch (Exception ex)
             {
@@ -25,7 +26,8 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.False(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("0", user.CodigoEstado);
         }
 
         [Fact]
@@ -35,10 +37,10 @@ namespace ZTests
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = true;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("siles", "Mensaje1");
+                user = service.Authenticate("siles", "Mensaje1");
             }
             catch (Exception ex)
             {
@@ -46,7 +48,8 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.False(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("0", user.CodigoEstado);
         }
 
         [Fact]
@@ -56,10 +59,10 @@ namespace ZTests
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = true;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("WSiles", "");
+                user = service.Authenticate("WSiles", "");
             }
             catch (Exception ex)
             {
@@ -67,20 +70,21 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.False(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("0", user.CodigoEstado);
         }
 
         [Fact]
-        public void TestAuthenticate_Ok1()
+        public void TestAuthenticate_user1()
         {
             // Prepara
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = false;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("WSiles", "Mensaje1");
+                user = service.Authenticate("WSiles", "Mensaje1");
             }
             catch (Exception ex)
             {
@@ -88,20 +92,21 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.True(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("1", user.CodigoEstado);
         }
 
         [Fact]
-        public void TestAuthenticate_Ok2()
+        public void TestAuthenticate_user2()
         {
             // Prepara
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = false;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("wsiles", "Mensaje1");
+                user = service.Authenticate("wsiles", "Mensaje1");
             }
             catch (Exception ex)
             {
@@ -109,20 +114,21 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.True(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("1", user.CodigoEstado);
         }
 
         [Fact]
-        public void TestAuthenticate_Ok3()
+        public void TestAuthenticate_user3()
         {
             // Prepara
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = false;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("CPalenque", "Mensaje1");
+                user = service.Authenticate("CPalenque", "Mensaje1");
             }
             catch (Exception ex)
             {
@@ -130,20 +136,21 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.True(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("1", user.CodigoEstado);
         }
 
         [Fact]
-        public void TestAuthenticate_Ok4()
+        public void TestAuthenticate_user4()
         {
             // Prepara
             IAuthenticateService service = new AuthenticateService();
 
             // Ejecuta
-            bool Ok = false;
+            User user = null;
             try
             {
-                Ok = service.Authenticate("cpalenque", "Mensaje1");
+                user = service.Authenticate("cpalenque", "Mensaje1");
             }
             catch (Exception ex)
             {
@@ -151,7 +158,8 @@ namespace ZTests
             }
 
             // Prueba
-            Assert.True(Ok);
+            Assert.NotNull(user);
+            Assert.Equal("1", user.CodigoEstado);
         }
     }
 }

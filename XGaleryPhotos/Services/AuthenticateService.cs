@@ -1,30 +1,52 @@
 ﻿using XGaleryPhotos.Interfaces;
+using XGaleryPhotos.Models;
 using XWebServices;
+using XWebServices.Models;
 using XWebServices.Services;
 
 namespace XGaleryPhotos.Services
 {
     public class AuthenticateService : IAuthenticateService
     {
-        private bool UserAuthenticated { get; set; }
+        private User UserAuthenticated { get; set; }
         private string Sistema { get; set; }
         private WbsSeguridad wbsSeguridad { get; set; }
 
         public AuthenticateService()
         {
+            UserAuthenticated = null;
             Sistema = "EXT101";
-            wbsSeguridad = new WbsSeguridad(new XWebService());
+            wbsSeguridad = new WbsSeguridad(new XWebServiceSpecial());
         }
 
-        public bool Authenticate(string usuario, string password)
+        public User Authenticate(string userName, string password)
         {
-            UserAuthenticated = wbsSeguridad.ConsultarUsuarioSistema(usuario, Sistema, password);
+            UserAuthenticated = new User();
+            UserAuthenticated.CodigoEstado = "0";
+            UserAuthenticated.Estado = "CONSULTA USUARIO NO RESPONDE";
+
+            UsuarioSistema UsuarioAuthenticated = wbsSeguridad.ConsultarUsuarioSistema(userName, Sistema, password);
+            if (UsuarioAuthenticated == null)
+            {
+                UserAuthenticated.Estado = "CONSULTA USUARIO DEVUELVE UsuarioSistema null";
+                return UserAuthenticated;
+            }
+
+            UserAuthenticated.CodigoEstado = UsuarioAuthenticated.CodigoEstado;
+            UserAuthenticated.Estado = UsuarioAuthenticated.Estado;
+            UserAuthenticated.UserName = UsuarioAuthenticated.Usuario;
+            UserAuthenticated.FirstName = UsuarioAuthenticated.Nombres;
+            UserAuthenticated.LastName = UsuarioAuthenticated.Apellidos;
+            UserAuthenticated.Email = UsuarioAuthenticated.Correo;
+
             return UserAuthenticated;
         }
 
         public bool IsUserAuthenticated()
         {
-            return UserAuthenticated;
+            return UserAuthenticated != null && UserAuthenticated.CodigoEstado == "1";
         }
+
+        public User AuthenticatedUser => UserAuthenticated;
     }
 }
