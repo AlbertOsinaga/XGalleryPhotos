@@ -1,5 +1,4 @@
 ﻿using Android.App;
-using Java.Lang;
 using Xamarin.Forms;
 using XGaleryPhotos.Droid.Services;
 using XGaleryPhotos.Interfaces;

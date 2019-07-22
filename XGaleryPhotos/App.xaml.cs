@@ -12,6 +12,8 @@ namespace XGaleryPhotos
     public partial class App : Application
     {
         #region Static Members
+        // Constants
+        public const int PorcentajeCompresion = 30;
 
         // Services
         public static IAuthenticateService AuthenticateService { get; set; }

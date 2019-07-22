@@ -99,7 +99,7 @@ namespace XGaleryPhotos.Droid.Services
                 {
                     var fullImage = ImageHelpers.RotateImage(path, 1);
                     var thumbImage = ImageHelpers.RotateImage(path, 0.25f);
-                    var onbaseImage = ImageHelpers.RotateImage(path, 1, 50);
+                    var onbaseImage = ImageHelpers.RotateImage(path, 1, App.PorcentajeCompresion);
 
                     fullPath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}{ext}");
                     File.WriteAllBytes(fullPath, fullImage);

@@ -79,8 +79,7 @@ namespace XGaleryPhotos.ViewModels
                     Id = Guid.NewGuid().ToString(),
                     Type = MediaFileType.Image,
                     Path = mediaFile.Path,
-                    PreviewPath = mediaFile.Path,
-                    OnBasePath = mediaFile.Path
+                    PreviewPath = mediaFile.Path
                 }
                 );
             });
@@ -172,6 +171,11 @@ namespace XGaleryPhotos.ViewModels
             {
                 if(mediaFile.Path != null)
                 {
+                    if (mediaFile.OnBasePath == null)
+                    {
+                        var helperImageService = DependencyService.Get<IHelperImageService>();
+                        mediaFile.OnBasePath = helperImageService.StretchImage(mediaFile.Path, 1, App.PorcentajeCompresion);
+                    }
                     var foto = new Foto
                     {
                         Flujo = this.Flujo,

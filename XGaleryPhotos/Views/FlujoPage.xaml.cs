@@ -36,83 +36,111 @@ namespace XGaleryPhotos
 
         void btnBuscarFlujo_Clicked(object sender, System.EventArgs e)
         {
-            Button button = sender as Button;
-            if (button.Text.Contains("Nuevo"))
+            try
             {
-                App.FlujoViewModel.Flujo = null;
-                App.FlujoViewModel.Media = null;
+                Button button = sender as Button;
+                if (button.Text.Contains("Nuevo"))
+                {
+                    App.FlujoViewModel.Flujo = null;
+                    App.FlujoViewModel.Media = null;
 
-                button.Text = "Buscar Flujo";
-                btnFotosGaleria.IsEnabled = false;
-                btnTomarFoto.IsEnabled = false;
-                btnEnviarOnBase.IsEnabled = false;
-                pckTipoDocumental.SelectedIndex = -1;
-                txtNumero.Text = "1";
-                txtNroFlujo.IsEnabled = true;
-                txtNroFlujo.Focus();
+                    button.Text = "Buscar Flujo";
+                    btnFotosGaleria.IsEnabled = false;
+                    btnTomarFoto.IsEnabled = false;
+                    btnEnviarOnBase.IsEnabled = false;
+                    pckTipoDocumental.SelectedIndex = -1;
+                    txtNumero.Text = "1";
+                    txtNroFlujo.IsEnabled = true;
+                    txtNroFlujo.Focus();
 
-                return;
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtNroFlujo.Text))
+                {
+                    DisplayAlert("", "Introduzca el Nro. de Flujo!", "OK");
+                    return;
+                }
+
+                App.FlujoViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
+                if (App.FlujoViewModel.Flujo == null || !App.FlujoViewModel.Flujo.EsValido)
+                {
+                    DisplayAlert("", "Nro. de Flujo no encontrado!", "OK");
+                    return;
+                }
+                else
+                {
+                    btnBuscarFlujo.Text = "Nuevo Flujo";
+                    btnFotosGaleria.IsEnabled = true;
+                    btnTomarFoto.IsEnabled = true;
+                    btnEnviarOnBase.IsEnabled = true;
+                    txtNroFlujo.IsEnabled = false;
+                }
             }
-
-            if (string.IsNullOrWhiteSpace(txtNroFlujo.Text))
+            catch (Exception ex)
             {
-                DisplayAlert("", "Introduzca el Nro. de Flujo!", "OK");
-                return;
-            }
-
-            App.FlujoViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
-            if (App.FlujoViewModel.Flujo == null || !App.FlujoViewModel.Flujo.EsValido)
-            {
-                DisplayAlert("", "Nro. de Flujo no encontrado!", "OK");
-                return;
-            }
-            else
-            {
-                btnBuscarFlujo.Text = "Nuevo Flujo";
-                btnFotosGaleria.IsEnabled = true;
-                btnTomarFoto.IsEnabled = true;
-                btnEnviarOnBase.IsEnabled = true;
-                txtNroFlujo.IsEnabled = false;
+                DisplayAlert("EXCEPCION", $"Excepción en 'Buscar Flujo'!\nEx({ex.GetType()}-{ex.Message})", "OK");
             }
         }
 
         void btnFotosGaleria_Clicked(object sender, System.EventArgs e)
         {
-            App.FlujoViewModel.SelectImagesCommand.Execute(null);
+            try
+            {
+                App.FlujoViewModel.SelectImagesCommand.Execute(null);
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("EXCEPCION", $"Excepción en 'Fotos de Galería'!\nEx({ex.GetType()}-{ex.Message})", "OK");
+            }
         }
 
         async void btnTomarFoto_Clicked(object sender, EventArgs e)
         {
-            var opciones_almacenamiento = new StoreCameraMediaOptions()
+            try
             {
-                SaveToAlbum = true,
-                Name = "MyPhoto"
-            };
+                var opciones_almacenamiento = new StoreCameraMediaOptions()
+                {
+                    SaveToAlbum = true,
+                    Name = "MyPhoto"
+                };
 
-            var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
-            App.FlujoViewModel.AddPhotoCommand.Execute(photo);
+                var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
+                App.FlujoViewModel.AddPhotoCommand.Execute(photo);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("EXCEPCION", $"Excepción en 'Tomar Foto'!\nEx({ex.GetType()}-{ex.Message})", "OK");
+            }
         }
 
         async void btnEnviarOnBase_Clicked(object sender, System.EventArgs e)
         {
-            string respuesta = App.FlujoViewModel.ValidaDatosEnvio();
-            if ( respuesta != "OK")
+            try
             {
-                await DisplayAlert("VALIDACION", respuesta, "OK");
-                return;
+                string respuesta = App.FlujoViewModel.ValidaDatosEnvio();
+                if (respuesta != "OK")
+                {
+                    await DisplayAlert("VALIDACION", respuesta, "OK");
+                    return;
+                }
+
+                bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
+                if (Ok)
+                {
+                    App.FlujoViewModel.SavePhotos();
+                    App.FlujoViewModel.EnviarOnBaseCommand.Execute(null);
+                    if (App.FlujoViewModel.Flujo.EsValido)
+                        await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
+                    else
+                        await DisplayAlert("ONBASE", "Fotos no fueron recepcionadas!", "OK");
+
+                    Resetear();
+                }
             }
-
-            bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
-            if (Ok)
+            catch (Exception ex)
             {
-                App.FlujoViewModel.SavePhotos();
-                App.FlujoViewModel.EnviarOnBaseCommand.Execute(null);
-                if(App.FlujoViewModel.Flujo.EsValido)
-                    await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
-                else
-                    await DisplayAlert("ONBASE", "Fotos no fueron recepcionadas!", "OK");
-
-                Resetear();
+                await DisplayAlert("EXCEPCION", $"Excepción en 'Enviar Fotos'!\nEx({ex.GetType()}-{ex.Message})", "OK");
             }
         }
 
@@ -125,7 +153,7 @@ namespace XGaleryPhotos
             btnFotosGaleria.IsEnabled = false;
             btnTomarFoto.IsEnabled = false;
             btnEnviarOnBase.IsEnabled = false;
-            txtNroFlujo.IsEnabled = true;
+            txtNroFlujo.IsEnabled = false;
             txtNroFlujo.Text = string.Empty;
         }
     }

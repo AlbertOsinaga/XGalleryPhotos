@@ -15,24 +15,31 @@ namespace XGaleryPhotos.Views
 
         void btnLogin_Clicked(object sender, System.EventArgs e)
         {
-            //  App.AuthenticationViewModel.LoginCommand.Execute(null);
-            App.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
-            User userAuth = App.AuthenticateService.AuthenticatedUser;
-
-            if (!App.AuthenticateService.IsUserAuthenticated())
+            try
             {
-                if(userAuth == null)
-                    DisplayAlert("ERROR EN AUTENTICACION", "(userAuth null)", "OK");
-                else if (userAuth.CodigoEstado == "99")
-                    DisplayAlert("ERROR EN AUTENTICACION", userAuth.Estado, "OK");
-                else
-                    DisplayAlert("USUARIO NO AUTENTICADO", "Usuario o Clave inválida!", "OK");
-                return;
-            }
+                //  App.AuthenticationViewModel.LoginCommand.Execute(null);
+                App.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
+                User userAuth = App.AuthenticateService.AuthenticatedUser;
 
-            App.FlujoViewModel.Usuario = userAuth;
-            App.NavegacionPage.PopAsync();
-            App.NavegacionPage.PushAsync(App.FlujoPage);
+                if (!App.AuthenticateService.IsUserAuthenticated())
+                {
+                    if (userAuth == null)
+                        DisplayAlert("ERROR EN AUTENTICACION", "(userAuth null)", "OK");
+                    else if (userAuth.CodigoEstado == "99")
+                        DisplayAlert("ERROR EN AUTENTICACION", userAuth.Estado, "OK");
+                    else
+                        DisplayAlert("USUARIO NO AUTENTICADO", "Usuario o Clave inválida!", "OK");
+                    return;
+                }
+
+                App.FlujoViewModel.Usuario = userAuth;
+                App.NavegacionPage.PopAsync();
+                App.NavegacionPage.PushAsync(App.FlujoPage);
+            }
+            catch (System.Exception ex)
+            {
+                DisplayAlert("USUARIO NO AUTENTICADO", $"Usuario no pudo ser autenticado!\nEx({ex.GetType()}-{ex.Message})", "OK");
+            }
         }
 
         void btnCerrarApp_Clicked(object sender, System.EventArgs e)

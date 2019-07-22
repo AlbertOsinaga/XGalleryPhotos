@@ -73,6 +73,7 @@
     <Compile Include="MainApplication.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Services\CloseApplication.cs" />
+    <Compile Include="Services\HelperImageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

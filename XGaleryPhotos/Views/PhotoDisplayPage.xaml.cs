@@ -22,10 +22,17 @@ namespace XGaleryPhotos.Views
 
         public async void btnEliminarFoto_Clicked(object sender, EventArgs args)
         {
-            var ok = await DisplayAlert("Confirmación!", "Quiere eliminar esta foto?", "Si", "No");
-            if (ok)
+            try
             {
-                App.PhotoDisplayViewModel.EliminarFotoCommand.Execute(null);   
+                var ok = await DisplayAlert("Confirmación!", "Quiere eliminar esta foto?", "Si", "No");
+                if (ok)
+                {
+                    App.PhotoDisplayViewModel.EliminarFotoCommand.Execute(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("EXCEPCION", $"Excepción en 'Eliminar Foto'!\nEx({ex.GetType()}-{ex.Message})", "OK");
             }
         }
     }
