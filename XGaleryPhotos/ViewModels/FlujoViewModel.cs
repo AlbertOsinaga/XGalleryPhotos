@@ -79,7 +79,8 @@ namespace XGaleryPhotos.ViewModels
                     Id = Guid.NewGuid().ToString(),
                     Type = MediaFileType.Image,
                     Path = mediaFile.Path,
-                    PreviewPath = mediaFile.Path
+                    PreviewPath = mediaFile.Path,
+                    OnBasePath = mediaFile.Path
                 }
                 );
             });
@@ -176,8 +177,8 @@ namespace XGaleryPhotos.ViewModels
                         Flujo = this.Flujo,
                         FlujoId = Flujo.FlujoId,
                         FotoId = ++i,
-                        Path = mediaFile.PreviewPath,
-                        ImgString = Base64Helper.MediaPathToCode64(mediaFile.PreviewPath)
+                        Path = mediaFile.OnBasePath,
+                        ImgString = Base64Helper.MediaPathToCode64(mediaFile.OnBasePath)
                     };
 
                     Flujo.Fotos.Add(foto);

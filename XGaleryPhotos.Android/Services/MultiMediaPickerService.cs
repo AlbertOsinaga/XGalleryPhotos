@@ -90,6 +90,7 @@ namespace XGaleryPhotos.Droid.Services
             {
                 string fullPath = string.Empty;
                 string thumbnailImagePath = string.Empty;
+                string onbaseImagePath = string.Empty;
                 var fileName = System.IO.Path.GetFileNameWithoutExtension(path);
                 var ext = System.IO.Path.GetExtension(path) ?? string.Empty;
                 MediaFileType mediaFileType = MediaFileType.Image;
@@ -98,7 +99,7 @@ namespace XGaleryPhotos.Droid.Services
                 {
                     var fullImage = ImageHelpers.RotateImage(path, 1);
                     var thumbImage = ImageHelpers.RotateImage(path, 0.25f);
-
+                    var onbaseImage = ImageHelpers.RotateImage(path, 1, 50);
 
                     fullPath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}{ext}");
                     File.WriteAllBytes(fullPath, fullImage);
@@ -106,6 +107,8 @@ namespace XGaleryPhotos.Droid.Services
                     thumbnailImagePath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}-THUMBNAIL{ext}");
                     File.WriteAllBytes(thumbnailImagePath, thumbImage);
 
+                    onbaseImagePath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}-ONBASE{ext}");
+                    File.WriteAllBytes(onbaseImagePath, onbaseImage);
                 }
                 else if (type.StartsWith(Enum.GetName(typeof(MediaFileType), MediaFileType.Video), StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -120,14 +123,17 @@ namespace XGaleryPhotos.Droid.Services
                     mediaFileType = MediaFileType.Video;
                 }
 
-                if (!string.IsNullOrEmpty(fullPath) && !string.IsNullOrEmpty(thumbnailImagePath))
+                if (!string.IsNullOrEmpty(fullPath) &&
+                    !string.IsNullOrEmpty(thumbnailImagePath) &&
+                    !string.IsNullOrEmpty(onbaseImagePath))
                 {
                     mediaFile = new MediaFile()
                     {
                         Id = System.Guid.NewGuid().ToString(),
                         Path = fullPath,
                         Type = mediaFileType,
-                        PreviewPath = thumbnailImagePath
+                        PreviewPath = thumbnailImagePath,
+                        OnBasePath = onbaseImagePath
                     };
                 }
 
