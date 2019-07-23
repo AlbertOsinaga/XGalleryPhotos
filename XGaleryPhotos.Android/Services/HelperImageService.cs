@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using Xamarin.Forms;
+using XGaleryPhotos.Droid.Helpers;
 using XGaleryPhotos.Droid.Services;
 using XGaleryPhotos.Helpers;
 using XGaleryPhotos.Interfaces;
@@ -14,7 +15,7 @@ namespace XGaleryPhotos.Droid.Services
     {
         const string TemporalDirectoryName = "TmpMedia";
 
-        public string StretchImage(string path, float scaleFactor, int quality)
+        public string StretchImage(string path, float scaleFactor, int quality, string fileNameAdded, string watermark = null)
         {
             byte[] imageBytes;
 
@@ -23,20 +24,27 @@ namespace XGaleryPhotos.Droid.Services
             var height = (originalImage.Height * scaleFactor);
             var scaledImage = Bitmap.CreateScaledBitmap(originalImage, (int)width, (int)height, true);
 
+            Bitmap watermarkedImage = scaledImage;
+            if (watermark != null)
+                watermarkedImage = ImageHelpers.Watermark(scaledImage, watermark);
+
             using (var ms = new MemoryStream())
             {
-                scaledImage.Compress(Bitmap.CompressFormat.Jpeg, quality, ms);
+                watermarkedImage.Compress(Bitmap.CompressFormat.Jpeg, quality, ms);
                 imageBytes = ms.ToArray();
             }
 
 
             originalImage?.Dispose();
+            scaledImage?.Dispose();
+            watermarkedImage?.Dispose();
             GC.Collect();
 
             var fileName = System.IO.Path.GetFileNameWithoutExtension(path);
             var ext = System.IO.Path.GetExtension(path) ?? string.Empty;
 
-            var strechedPath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}-ONBASE{ext}");
+            var strechedPath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName,
+                                                            $"{fileName}-{fileNameAdded}{ext}");
             File.WriteAllBytes(strechedPath, imageBytes);
 
             return strechedPath;

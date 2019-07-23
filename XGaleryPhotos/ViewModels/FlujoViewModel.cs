@@ -174,7 +174,9 @@ namespace XGaleryPhotos.ViewModels
                     if (mediaFile.OnBasePath == null)
                     {
                         var helperImageService = DependencyService.Get<IHelperImageService>();
-                        mediaFile.OnBasePath = helperImageService.StretchImage(mediaFile.Path, 1, App.PorcentajeCompresion);
+                        mediaFile.OnBasePath = helperImageService.StretchImage(mediaFile.Path, 1,
+                                                                        App.PorcentajeCompresion,
+                                                                        "-ONBASE", $"LBC: {DateTime.Now.ToShortDateString()}");
                     }
                     var foto = new Foto
                     {

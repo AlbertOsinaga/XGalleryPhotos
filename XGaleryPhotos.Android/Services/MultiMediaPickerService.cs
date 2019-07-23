@@ -97,9 +97,9 @@ namespace XGaleryPhotos.Droid.Services
 
                 if (type.StartsWith(Enum.GetName(typeof(MediaFileType), MediaFileType.Image), StringComparison.CurrentCultureIgnoreCase))
                 {
-                    var fullImage = ImageHelpers.RotateImage(path, 1);
-                    var thumbImage = ImageHelpers.RotateImage(path, 0.25f);
-                    var onbaseImage = ImageHelpers.RotateImage(path, 1, App.PorcentajeCompresion);
+                    var fullImage = ImageHelpers.RotateImage(path, 1, 90, "LBC:"+DateTime.Now.ToShortDateString());
+                    var thumbImage = ImageHelpers.RotateImage(path, 0.25f, 90);
+                    var onbaseImage = ImageHelpers.RotateImage(path, 1, App.PorcentajeCompresion, "LBC:" + DateTime.Now.ToShortDateString());
 
                     fullPath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}{ext}");
                     File.WriteAllBytes(fullPath, fullImage);

@@ -10,13 +10,14 @@
                 <Button TextColor="White" BackgroundColor="Blue" Text="Eliminar foto" 
                     Clicked="btnEliminarFoto_Clicked"/>
         </StackLayout>
-        <Grid VerticalOptions="FillAndExpand">
+        <Image x:Name="Photo" VerticalOptions="FillAndExpand" />
+<!--        <Grid x:Name="gridPhoto" VerticalOptions="StartAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <BoxView BackgroundColor="Silver" />
-            <Image x:Name="Photo" Aspect="AspectFill" Margin="5"/>
+            <Image x:Name="Photo"  />
         </Grid>
-    </StackLayout>      
+-->    </StackLayout>      
 
 </ContentPage>

@@ -1,5 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Xamarin.Forms;
+using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 
 namespace XGaleryPhotos.ViewModels

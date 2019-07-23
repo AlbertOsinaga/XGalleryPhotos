@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
+using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
-using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos.Views
 {
@@ -17,7 +17,16 @@ namespace XGaleryPhotos.Views
 
         public void ResetSource()
         {
-            Photo.Source = App.RepositoryService.GetMediaFile().Path;
+            MediaFile mediaFile = App.RepositoryService.GetMediaFile();
+            if (mediaFile != null && mediaFile.Path != null)
+            {
+                IHelperImageService helperImageService = DependencyService.Get<IHelperImageService>();
+                mediaFile.Path = helperImageService.StretchImage(mediaFile.Path, 1, 90, string.Empty,
+                                            $"LBC: {DateTime.Now.ToShortDateString()}");
+            }
+
+
+            Photo.Source = mediaFile.Path;
         }
 
         public async void btnEliminarFoto_Clicked(object sender, EventArgs args)
