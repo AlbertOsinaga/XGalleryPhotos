@@ -11,7 +11,7 @@ namespace XGaleryPhotos.Helpers
             if (App.IncluirFechaEnWatermark)
                 watermark += DateTime.Now.ToShortDateString();
             if (App.IncluirHoraEnWatermark)
-                watermark += $" {DateTime.Now.ToShortTimeString()}";
+                watermark += $" {DateTime.Now.ToString("HH:mm:ss")}";
             return watermark;
         }
     }
