@@ -109,7 +109,7 @@
                         FlowItemTappedCommand="{Binding PhotoTappedCommand}" >
                     <flv:FlowListView.FlowColumnTemplate>
                         <DataTemplate >
-                            <Grid>
+                            <Grid Margin="2">
                                <ffimageloading:CachedImage  DownsampleToViewSize="true" HeightRequest="100"  
                                                             Source="{Binding PreviewPath}"  
                                                             Aspect="AspectFill" 
