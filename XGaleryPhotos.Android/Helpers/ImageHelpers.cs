@@ -7,6 +7,7 @@ namespace XGaleryPhotos.Droid.Helpers
 {
     public static class ImageHelpers
     {
+        public static Color ColorWatermark = Color.Purple; 
 
         public static byte[] RotateImage(string path,float scaleFactor,int quality = 90, string watermark = null)
         {
@@ -67,15 +68,14 @@ namespace XGaleryPhotos.Droid.Helpers
             }
         }
 
-        public static Bitmap Watermark(Bitmap image, String watermark)
+        public static Bitmap Watermark(Bitmap image, string watermark)
         {
             Bitmap bmpresult = Bitmap.CreateBitmap(image.Width, image.Height, image.GetConfig());
             Canvas canvas = new Canvas(bmpresult);
             canvas.DrawBitmap(image, 0, 0, null);
             Paint paintText = new Paint(PaintFlags.AntiAlias);
-            paintText.Color = Color.Purple;
+            paintText.Color = ColorWatermark;
             paintText.TextSize = Math.Max(32, image.Height/32);
-            paintText.SetStyle(Paint.Style.FillAndStroke);
             paintText.SetTypeface(Typeface.Monospace);
             canvas.DrawText(watermark, Math.Max(40, image.Width / 32 + 40),
                                         Math.Max(40, image.Height / 32 + 40),

@@ -173,10 +173,11 @@ namespace XGaleryPhotos.ViewModels
                 {
                     if (mediaFile.OnBasePath == null)
                     {
+                        string watermark = App.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;
                         var helperImageService = DependencyService.Get<IHelperImageService>();
                         mediaFile.OnBasePath = helperImageService.StretchImage(mediaFile.Path, 1,
                                                                         App.PorcentajeCompresion,
-                                                                        "-ONBASE", $"LBC: {DateTime.Now.ToShortDateString()}");
+                                                                        "-ONBASE", watermark);
                     }
                     var foto = new Foto
                     {

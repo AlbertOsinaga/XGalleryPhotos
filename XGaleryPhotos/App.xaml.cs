@@ -12,8 +12,15 @@ namespace XGaleryPhotos
     public partial class App : Application
     {
         #region Static Members
+
         // Constants
         public const int PorcentajeCompresion = 30;
+        public const string PrefijoWatermark = "LBC ";
+        public const bool IncluirWatermarkEnFotosGalería = false;
+        public const bool IncluirWatermarkEnFotosTomadas = true;
+        public const bool IncluirFechaEnWatermark = true;
+        public const bool IncluirHoraEnWatermark = true;
+        public const bool IncluirPrefijoEnWatermark = true;
 
         // Services
         public static IAuthenticateService AuthenticateService { get; set; }

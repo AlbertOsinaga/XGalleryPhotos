@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using XGaleryPhotos.Helpers;
 using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 
@@ -18,11 +19,11 @@ namespace XGaleryPhotos.Views
         public void ResetSource()
         {
             MediaFile mediaFile = App.RepositoryService.GetMediaFile();
-            if (mediaFile != null && mediaFile.Path != null)
+            if (mediaFile != null && mediaFile.Path != null && mediaFile.OnBasePath == null)
             {
+                string watermark = App.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;
                 IHelperImageService helperImageService = DependencyService.Get<IHelperImageService>();
-                mediaFile.Path = helperImageService.StretchImage(mediaFile.Path, 1, 90, string.Empty,
-                                            $"LBC: {DateTime.Now.ToShortDateString()}");
+                mediaFile.Path = helperImageService.StretchImage(mediaFile.Path, 1, 90, string.Empty, watermark);
             }
 
 
