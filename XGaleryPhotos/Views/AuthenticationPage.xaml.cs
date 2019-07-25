@@ -15,6 +15,18 @@ namespace XGaleryPhotos.Views
 
         void btnLogin_Clicked(object sender, System.EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                DisplayAlert("AUTENTICACION", "Por favor ingrese su usuario", "OK");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtClave.Text))
+            {
+                DisplayAlert("AUTENTICACION", "Por favor ingrese su clave", "OK");
+                return;
+            }
+
             try
             {
                 //  App.AuthenticationViewModel.LoginCommand.Execute(null);
@@ -25,8 +37,8 @@ namespace XGaleryPhotos.Views
                 {
                     if (userAuth == null)
                         DisplayAlert("ERROR EN AUTENTICACION", "(userAuth null)", "OK");
-                    else if (userAuth.CodigoEstado == "99")
-                        DisplayAlert("ERROR EN AUTENTICACION", userAuth.Estado, "OK");
+                    else if (int.TryParse(userAuth.CodigoEstado, out int codigo) && codigo >= 90)
+                        DisplayAlert("AUTENTICACION NO FUE POSIBLE", $"{userAuth.Estado} ({userAuth.CodigoEstado})", "OK");
                     else
                         DisplayAlert("USUARIO NO AUTENTICADO", "Usuario o Clave inválida!", "OK");
                     return;

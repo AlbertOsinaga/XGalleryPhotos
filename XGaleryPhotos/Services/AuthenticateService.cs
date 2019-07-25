@@ -1,4 +1,4 @@
-﻿using Xamarin.Essentials;
+﻿using XGaleryPhotos.Helpers;
 using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 using XWebServices;
@@ -26,12 +26,12 @@ namespace XGaleryPhotos.Services
             UserAuthenticated.CodigoEstado = "0";
             UserAuthenticated.Estado = "CONSULTA USUARIO NO RESPONDE";
 
-            if(!(Connectivity.NetworkAccess == NetworkAccess.Internet ))
-            {
-                UserAuthenticated.CodigoEstado = "98";
-                UserAuthenticated.Estado = "NO HAY CONEXION DE INTERNET";
-                return UserAuthenticated;
-            }
+            //if(!ConnectivityHelper.IsConnectedToInternet)
+            //{
+            //    UserAuthenticated.CodigoEstado = "98";
+            //    UserAuthenticated.Estado = "NO HAY CONEXION DE INTERNET";
+            //    return UserAuthenticated;
+            //}
 
             UsuarioSistema UsuarioAuthenticated = wbsSeguridad.ConsultarUsuarioSistema(userName, Sistema, password);
             if (UsuarioAuthenticated == null)
