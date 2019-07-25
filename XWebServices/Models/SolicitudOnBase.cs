@@ -7,5 +7,6 @@
         public string Mensaje { get; set; }
         public string Nombre { get; set; }
         public string Placa { get; set; }
+        public string CodigoEstado { get; set; }
     }
 }
