@@ -14,6 +14,6 @@ namespace XGaleryPhotos.Interfaces
         void DeleteMediaFile();
         MediaFile GetMediaFile();
 
-        Respuesta UpdateFotos(Flujo flujo, string usuarioSistema);
+        void UpdateFotos(Flujo flujo, string usuarioSistema);
     }
 }

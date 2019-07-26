@@ -84,7 +84,7 @@ namespace XGaleryPhotos.Services
             return MockRepositoryService.MediaFile;
         }
 
-        public Respuesta UpdateFotos(Flujo flujo, string usuarioSistema)
+        public void UpdateFotos(Flujo flujo, string usuarioSistema)
         {
             IXWebService wbs = new XWebServiceSpecial();
             WbsFotosUpdate webFotosUpdate = new WbsFotosUpdate(wbs);
@@ -93,12 +93,9 @@ namespace XGaleryPhotos.Services
                 fotos = (from f in flujo.Fotos select f.ImgString).ToArray();
             RespuestaUpdate respuestaUpdate = webFotosUpdate.UpdateFotos(flujo.FlujoNro, flujo.TipoDocumento, flujo.DocumentoNro,
                                                     usuarioSistema, "jpg", "ICRL", fotos);
-            Respuesta respuesta = new Respuesta();
-            respuesta.EsValido = respuestaUpdate.EsValido;
-            respuesta.Mensaje = respuestaUpdate.Mensaje;
-            respuesta.CodigoEstado = respuestaUpdate.CodigoEstado;
-
-            return respuesta;
+            flujo.EsValido = respuestaUpdate.EsValido;
+            flujo.Mensaje = respuestaUpdate.Mensaje;
+            flujo.CodigoEstado = respuestaUpdate.CodigoEstado;
         }
     }
 }

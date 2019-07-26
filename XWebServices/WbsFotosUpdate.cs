@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using XWebServices.Interfaces;
 using XWebServices.Models;
 
@@ -39,12 +41,10 @@ namespace XWebServices
                                         $"extensionArchivo:{extensionArchivo}",
                                         "<keywords>",
                                             "<KeywordOnBaseEntity>",
-                                                //$"idKeywords:{string.Empty}",
                                                 $"nombre:LBC UserName WS",
                                                 $"valor:{usuarioSistema}",
                                             "</KeywordOnBaseEntity>",
                                             "<KeywordOnBaseEntity>",
-                                                //$"idKeywords:{string.Empty}",
                                                 $"nombre:No. de RC",
                                                 $"valor:{nroRC}",
                                             "</KeywordOnBaseEntity>",
@@ -65,28 +65,44 @@ namespace XWebServices
             parametros.Add("</archivosBase64>");
             parametros.Add($"SistemaOrigen:{sistemaOrigen}");
 
-            Dictionary<string, object> fields = WebService.Invoke(parametros.ToArray());
+            try
+            {
+                Dictionary<string, object> fields = WebService.Invoke(parametros.ToArray());
 
-            if (fields == null || fields.Count == 0)
+                if (fields == null || fields.Count == 0)
+                {
+                    respuestaUpdate.EsValido = false;
+                    respuestaUpdate.Mensaje = "ERROR EN WEBSERVICE";
+                    respuestaUpdate.CodigoEstado = 98;
+                    return respuestaUpdate;
+                }
+
+                respuestaUpdate.CodigoEstado = 1;
+                foreach (var field in fields)
+                {
+                    if (field.Key == "Mensaje" && field.Value != null)
+                    {
+                        respuestaUpdate.Mensaje = (string)field.Value;
+                    }
+                    if (field.Key == "EsValido")
+                    {
+                        respuestaUpdate.EsValido = field.Value != null && ((string)field.Value).ToLower() == "true";
+                    }
+                }
+            }
+            catch (XmlException)
             {
                 respuestaUpdate.EsValido = false;
-                respuestaUpdate.Mensaje = "ERROR EN WEBSERVICE";
-                respuestaUpdate.CodigoEstado = 98;
-                return respuestaUpdate;
+                respuestaUpdate.Mensaje = "NO HAY CONEXION A INTERNET";
+                respuestaUpdate.CodigoEstado = 90;
+            }
+            catch (Exception)
+            {
+                respuestaUpdate.EsValido = false;
+                respuestaUpdate.Mensaje = "SERVIDOR NO RESPONDE";
+                respuestaUpdate.CodigoEstado = 99;
             }
 
-            respuestaUpdate.CodigoEstado = 1;
-            foreach (var field in fields)
-            {
-                if (field.Key == "Mensaje" && field.Value != null)
-                {
-                    respuestaUpdate.Mensaje = (string)field.Value;
-                }
-                if (field.Key == "EsValido")
-                {
-                    respuestaUpdate.EsValido = field.Value != null && ((string)field.Value).ToLower() == "true";
-                }
-            }
             return respuestaUpdate;
         }
     }

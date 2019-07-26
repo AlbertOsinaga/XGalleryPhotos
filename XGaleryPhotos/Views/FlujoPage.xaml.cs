@@ -137,10 +137,25 @@ namespace XGaleryPhotos
                 {
                     App.FlujoViewModel.SavePhotos();
                     App.FlujoViewModel.EnviarOnBaseCommand.Execute(null);
-                    if (App.FlujoViewModel.Flujo.EsValido)
-                        await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
-                    else
-                        await DisplayAlert("ONBASE", "Fotos no fueron recepcionadas!", "OK");
+                    if (App.FlujoViewModel.Flujo == null)
+                    {
+                        await DisplayAlert("ONBASE", "FLUJO NULO!", "OK");
+                        return;
+                    }
+
+                    if (App.FlujoViewModel.Flujo.CodigoEstado >= 90)
+                    {
+                        await DisplayAlert("ONBASE",
+                            $"{App.FlujoViewModel.Flujo.Mensaje} ({App.FlujoViewModel.Flujo.CodigoEstado})", "OK");
+                        return;
+                    }
+                    if (App.FlujoViewModel.Flujo.CodigoEstado == 1)
+                    {
+                        if (App.FlujoViewModel.Flujo.EsValido)
+                            await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
+                        else
+                            await DisplayAlert("ONBASE", "Fotos no fueron enviadas!", "OK");
+                    }
 
                     Resetear();
                 }

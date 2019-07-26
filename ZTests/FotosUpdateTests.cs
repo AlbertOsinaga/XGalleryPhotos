@@ -30,18 +30,8 @@ namespace ZTests
                 }
             };
 
-            Respuesta respuesta = service.UpdateFotos(flujo, "LeVargas");
-            bool estadoValido = respuesta.EsValido;
-
-            // Ejecuta
-            //try
-            //{
-            //    estadoValido = service.UpdateFotos(flujo, "LeVargas");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Assert.Null(ex);
-            //}
+            service.UpdateFotos(flujo, "LeVargas");
+            bool estadoValido = flujo.EsValido;
 
             // Prueba
             Assert.True(estadoValido);

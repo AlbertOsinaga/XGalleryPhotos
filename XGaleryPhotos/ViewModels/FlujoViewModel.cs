@@ -92,8 +92,8 @@ namespace XGaleryPhotos.ViewModels
 
             EnviarOnBaseCommand = new Command((obj) =>
             {
-                Respuesta respuesta = App.RepositoryService.UpdateFotos(Flujo, Usuario.UserName);
-                Flujo.EsValido = respuesta.EsValido;
+                App.RepositoryService.UpdateFotos(Flujo, Usuario.UserName);
+                //Flujo.EsValido = respuesta.EsValido;
             });
 
             PhotoTappedCommand = new Command((obj) =>
