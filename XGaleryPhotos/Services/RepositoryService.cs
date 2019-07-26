@@ -38,6 +38,7 @@ namespace XGaleryPhotos.Services
             flujo.Cliente = solicitud.Nombre;
             flujo.FlujoNro = solicitud.NroSolicitud;
             flujo.Placa = solicitud.Placa;
+            flujo.CodigoEstado = solicitud.CodigoEstado;
 
             return flujo;
         }
@@ -83,16 +84,21 @@ namespace XGaleryPhotos.Services
             return MockRepositoryService.MediaFile;
         }
 
-        public bool UpdateFotos(Flujo flujo, string usuarioSistema)
+        public Respuesta UpdateFotos(Flujo flujo, string usuarioSistema)
         {
             IXWebService wbs = new XWebServiceSpecial();
             WbsFotosUpdate webFotosUpdate = new WbsFotosUpdate(wbs);
             string[] fotos = null;
             if(flujo.Fotos != null)
                 fotos = (from f in flujo.Fotos select f.ImgString).ToArray();
-            bool ok = webFotosUpdate.UpdateFotos(flujo.FlujoNro, flujo.TipoDocumento, flujo.DocumentoNro,
+            RespuestaUpdate respuestaUpdate = webFotosUpdate.UpdateFotos(flujo.FlujoNro, flujo.TipoDocumento, flujo.DocumentoNro,
                                                     usuarioSistema, "jpg", "ICRL", fotos);
-            return ok;
+            Respuesta respuesta = new Respuesta();
+            respuesta.EsValido = respuestaUpdate.EsValido;
+            respuesta.Mensaje = respuestaUpdate.Mensaje;
+            respuesta.CodigoEstado = respuestaUpdate.CodigoEstado;
+
+            return respuesta;
         }
     }
 }

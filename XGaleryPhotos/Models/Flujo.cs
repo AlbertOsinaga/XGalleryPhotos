@@ -13,7 +13,7 @@ namespace XGaleryPhotos.Models
 
         public string Mensaje { get; set; }
         public bool EsValido { get; set; }
-        public string CodigoEstado { get; set; }
+        public int CodigoEstado { get; set; }
 
         public List<Foto> Fotos { get; set; } 
     }

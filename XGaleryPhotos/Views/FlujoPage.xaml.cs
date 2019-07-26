@@ -58,24 +58,31 @@ namespace XGaleryPhotos
 
                 if (string.IsNullOrWhiteSpace(txtNroFlujo.Text))
                 {
-                    DisplayAlert("", "Introduzca el Nro. de Flujo!", "OK");
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Introduzca el Nro. de Flujo!", "OK");
                     return;
                 }
 
                 App.FlujoViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
-                if (App.FlujoViewModel.Flujo == null || !App.FlujoViewModel.Flujo.EsValido)
+                
+                if (App.FlujoViewModel.Flujo == null)
                 {
-                    DisplayAlert("", "Nro. de Flujo no encontrado!", "OK");
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Nro. de Flujo no encontrado!", "OK");
                     return;
                 }
-                else
+
+                if(App.FlujoViewModel.Flujo.CodigoEstado >= 90)
                 {
-                    btnBuscarFlujo.Text = "Nuevo Flujo";
-                    btnFotosGaleria.IsEnabled = true;
-                    btnTomarFoto.IsEnabled = true;
-                    btnEnviarOnBase.IsEnabled = true;
-                    txtNroFlujo.IsEnabled = false;
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS",
+                        $"{App.FlujoViewModel.Flujo.Mensaje} ({App.FlujoViewModel.Flujo.CodigoEstado})", "OK");
+                    return;
                 }
+
+                btnBuscarFlujo.Text = "Nuevo Flujo";
+                btnFotosGaleria.IsEnabled = true;
+                btnTomarFoto.IsEnabled = true;
+                btnEnviarOnBase.IsEnabled = true;
+                txtNroFlujo.IsEnabled = false;
+
             }
             catch (Exception ex)
             {

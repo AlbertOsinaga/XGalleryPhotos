@@ -18,9 +18,10 @@ namespace XWebServices
 
         public SolicitudOnBase ConsultarFlujo(string nroSolicitud, string sistemaOrigen)
         {
-            SolicitudOnBase solicitud = new SolicitudOnBase();
             if (WebService == null)
                 return null;
+
+            SolicitudOnBase solicitud = new SolicitudOnBase();
 
             WebService.RequestUri = @"http://desanilus.lbc.bo/Nilus/WsOnbase/OnBaseWS.asmx";
             WebService.SoapAction = "http://tempuri.org/ObtenerInformacionSolicitudOnBase";
@@ -31,6 +32,9 @@ namespace XWebServices
             {
                 Dictionary<string, object> fields = WebService.Invoke($"NumeroSolicitud:{nroSolicitud}",
                                                                         $"SistemaOrigen:{sistemaOrigen}");
+
+                solicitud.CodigoEstado = 1;
+
                 if (fields == null || fields.Count == 0)
                     return null;
 
@@ -52,11 +56,13 @@ namespace XWebServices
             {
                 solicitud.EsValido = false;
                 solicitud.Mensaje = "NO HAY CONEXION A INTERNET";
+                solicitud.CodigoEstado = 90;
             }
             catch (Exception)
             {
                 solicitud.EsValido = false;
                 solicitud.Mensaje = "SERVIDOR NO RESPONDE";
+                solicitud.CodigoEstado = 99;
             }
 
             return solicitud;
