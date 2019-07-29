@@ -58,7 +58,7 @@ namespace XGaleryPhotos
 
                 if (string.IsNullOrWhiteSpace(txtNroFlujo.Text))
                 {
-                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Introduzca el Nro. de Flujo!", "OK");
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Por favor introduzca No. de Flujo!", "OK");
                     return;
                 }
 
@@ -66,11 +66,17 @@ namespace XGaleryPhotos
                 
                 if (App.FlujoViewModel.Flujo == null)
                 {
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Flujo nulo!", "OK");
+                    return;
+                }
+
+                if(App.FlujoViewModel.Flujo.CodigoEstado == 1 && !App.FlujoViewModel.Flujo.EsValido)
+                {
                     DisplayAlert("PROCESAMIENTO DE FLUJOS", "Nro. de Flujo no encontrado!", "OK");
                     return;
                 }
 
-                if(App.FlujoViewModel.Flujo.CodigoEstado >= 90)
+                if (App.FlujoViewModel.Flujo.CodigoEstado >= 90)
                 {
                     DisplayAlert("PROCESAMIENTO DE FLUJOS",
                         $"{App.FlujoViewModel.Flujo.Mensaje} ({App.FlujoViewModel.Flujo.CodigoEstado})", "OK");

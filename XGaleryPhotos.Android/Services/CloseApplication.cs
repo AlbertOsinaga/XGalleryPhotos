@@ -10,7 +10,8 @@ namespace XGaleryPhotos.Droid.Services
     {
         void ICloseApplicatonService.CloseApplication()
         {
-            var activity = (Activity) Forms.Context;
+            //var activity = (Activity) Forms.Context;
+            var activity = MainActivity.Instance;
             activity.Finish();
             Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
         }
