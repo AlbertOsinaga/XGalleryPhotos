@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace XGaleryPhotos
@@ -16,6 +17,28 @@ namespace XGaleryPhotos
             InitializeComponent();
             BindingContext = App.FlujoViewModel;
             pckTipoDocumental.ItemsSource = App.FlujoViewModel.TiposDocumento;
+
+            // Resizing
+            if (DeviceDisplay.MainDisplayInfo.Width < 800)
+            {
+                lblTitulo.FontSize = App.FontSizeMicro;
+                lblEtiqUsuario.FontSize = App.FontSizeMicro;
+                lblUsuario.FontSize = App.FontSizeMicro;
+                lblNoFlujo.FontSize = App.FontSizeMicro;
+                txtNroFlujo.FontSize = App.FontSizeMicro;
+                btnBuscarFlujo.FontSize = App.FontSizeMicro;
+                lblCliente.FontSize = App.FontSizeMicro;
+                txtCliente.FontSize = App.FontSizeMicro;
+                lblPlaca.FontSize = App.FontSizeMicro;
+                txtPlaca.FontSize = App.FontSizeMicro;
+                lblTipoDocumento.FontSize = App.FontSizeMicro;
+                pckTipoDocumental.FontSize = App.FontSizeMicro;
+                lblNumero.FontSize = App.FontSizeMicro;
+                txtNumero.FontSize = App.FontSizeMicro;
+                btnFotosGaleria.FontSize = App.FontSizeMicro;
+                btnTomarFoto.FontSize = App.FontSizeMicro;
+                btnEnviarOnBase.FontSize = App.FontSizeMicro;
+            }
         }
 
         void pckTipoDocumental_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -160,7 +183,7 @@ namespace XGaleryPhotos
                         if (App.FlujoViewModel.Flujo.EsValido)
                             await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
                         else
-                            await DisplayAlert("ONBASE", "Fotos no fueron enviadas!", "OK");
+                            await DisplayAlert("ONBASE", App.FlujoViewModel.Flujo.Mensaje, "OK");
                     }
 
                     Resetear();

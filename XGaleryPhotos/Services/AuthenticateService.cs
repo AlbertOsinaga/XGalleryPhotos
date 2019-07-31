@@ -15,14 +15,15 @@ namespace XGaleryPhotos.Services
 
         public AuthenticateService()
         {
-            UserAuthenticated = null;
+            UserAuthenticated = new User();
+            UserAuthenticated.CodigoEstado = "0";  // "0" entra a Autenticacion, "1" no entra
             Sistema = "EXT101";
             wbsSeguridad = new WbsSeguridad(new XWebServiceSpecial());
         }
 
         public User Authenticate(string userName, string password)
         {
-            UserAuthenticated = new User();
+            //UserAuthenticated = new User();
             UserAuthenticated.CodigoEstado = "0";
             UserAuthenticated.Estado = "CONSULTA USUARIO NO RESPONDE";
 

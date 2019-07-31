@@ -1,6 +1,8 @@
-﻿using XGaleryPhotos.Interfaces;
+﻿using System.Net;
+using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace XGaleryPhotos.Views
 {
@@ -11,6 +13,9 @@ namespace XGaleryPhotos.Views
             InitializeComponent();
 
             BindingContext = App.AuthenticationViewModel;
+            lblSize.Text = DeviceDisplay.MainDisplayInfo.Width.ToString() +
+                                " X " + DeviceDisplay.MainDisplayInfo.Height.ToString();
+            lblSize.IsVisible = App.DimensionesDeviceVisible;
         }
 
         void btnLogin_Clicked(object sender, System.EventArgs e)
@@ -47,6 +52,10 @@ namespace XGaleryPhotos.Views
                 App.FlujoViewModel.Usuario = userAuth;
                 App.NavegacionPage.PopAsync();
                 App.NavegacionPage.PushAsync(App.FlujoPage);
+            }
+            catch (WebException)
+            {
+                DisplayAlert("USUARIO NO PUDO SER AUTENTICADO", "No hay conexión con el servidor, por favor intente más tarde!", "OK");
             }
             catch (System.Exception ex)
             {

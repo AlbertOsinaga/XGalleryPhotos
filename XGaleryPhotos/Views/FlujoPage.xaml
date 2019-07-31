@@ -11,122 +11,151 @@
              ios:Page.UseSafeArea="true">
 
     <ContentPage.Content>
-         <StackLayout Padding="10">
-            <StackLayout Orientation="Vertical" VerticalOptions="Center" Padding="5">
-                <Grid>
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions >
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Text="LBC APP CAPTURA FOTOS" FontSize="Small" VerticalOptions="Center" />
-                    <Label Grid.Row="0" Grid.Column="1" Text="Usuario:" FontSize="Small" VerticalOptions="Center" />
-                    <Label x:Name="lblUsuario" Text="{Binding Usuario.UserName}" Grid.Row="0" Grid.Column="2" FontSize="Small" VerticalOptions="Center" />
-                    <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" BackgroundColor="Blue" /> 
-                </Grid>
-                <Grid Margin="5">
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions >
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="Nro. de Flujo:" FontSize="Small" VerticalOptions="Center" />
-                    <Entry x:Name="txtNroFlujo" Grid.Column="1" FontSize="Small" VerticalOptions="Center"
-                           IsEnabled="false"/>
-                    <Button x:Name="btnBuscarFlujo" Grid.Column="2" HorizontalOptions="End" 
-                            Text="Nuevo Flujo" TextColor="White" 
-                            BackgroundColor="Blue"  
-                            Clicked="btnBuscarFlujo_Clicked"/> 
-                </Grid>
-                <Grid>
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Cliente:" FontSize="Small" Grid.Column="0" />
-                    <Label Text = "{Binding Flujo.Cliente}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
-                </Grid>
-                <Grid>
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Placa:" FontSize="Small" Grid.Column="0" />
-                    <Label Text = "{Binding Flujo.Placa}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
-                </Grid>
-                <Grid>
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="24" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="Tipo Documento:" FontSize="Small" VerticalOptions="Center" />
-                    <Picker Grid.Column="1" x:Name="pckTipoDocumental" FontSize="Small"
-                            SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"
-                            SelectedItem="{Binding Flujo.TipoDocumento}"
-                            />
-                    <Label Grid.Column="2" x:Name="lblNumero" Text="No." FontSize="Small" IsVisible="false"
-                           VerticalOptions="Center"/>
-                    <Entry Grid.Column="3" x:Name="txtNumero" Text="{Binding Flujo.DocumentoNro}" FontSize="Small" IsVisible="false" >
-                            <Entry.Behaviors>
-                                <local:NumericValidationBehavior />
-                            </Entry.Behaviors>
-                    </Entry>
-                    <Label Grid.Column="4" x:Name="lblNumeroLimites" Text="(1 a 20)" FontSize="Micro" VerticalOptions="Center" IsVisible="false" />
-                </Grid>
-        </StackLayout>
+        <ScrollView>
+             <StackLayout Padding="10">
+
+                 <!--Info Textual-->
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" Padding="5" >
+
+                    <!--Titulo y Usuario-->
+                    <Grid >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblTitulo" Grid.Row="0" Grid.Column="0" Text="LBC APP CAPTURA FOTOS"
+                               FontSize="Small" VerticalOptions="Center" />
+                        <Label x:Name="lblEtiqUsuario" Grid.Row="0" Grid.Column="1"
+                               Text="Usuario:" FontSize="Small" VerticalOptions="Center" />
+                        <Label x:Name="lblUsuario" Text="{Binding Usuario.UserName}" Grid.Row="0" Grid.Column="2"
+                               FontSize="Small" VerticalOptions="Center" />
+                        <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" BackgroundColor="Blue" /> 
+                    </Grid>
+
+                    <!--Nro. de Flujo y boton Nuevo y Buscar Flujo-->
+                    <Grid Margin="5" >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblNoFlujo" Grid.Column="0" Text="No. de Flujo:" FontSize="Small" VerticalOptions="Center" />
+                        <Entry x:Name="txtNroFlujo" Grid.Column="1" FontSize="Small" VerticalOptions="Center"
+                               IsEnabled="false"/>
+                        <Button x:Name="btnBuscarFlujo" Grid.Column="2" HorizontalOptions="End" 
+                                Text="Nuevo Flujo" FontSize="Small" TextColor="White" 
+                                BackgroundColor="Blue" Padding="5"  
+                                Clicked="btnBuscarFlujo_Clicked"/> 
+                    </Grid>
+
+                    <!--Cliente-->
+                    <Grid >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblCliente" Text="Cliente:" FontSize="Small" Grid.Column="0" />
+                        <Label x:Name="txtCliente" Text = "{Binding Flujo.Cliente}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
+                    </Grid>
+
+                    <!--Placa-->
+                    <Grid >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblPlaca" Text="Placa:" FontSize="Small" Grid.Column="0" />
+                        <Label x:Name="txtPlaca" Text = "{Binding Flujo.Placa}" FontSize="Small" Grid.Column="1" FontAttributes = "Bold"/>
+                    </Grid>
+
+                    <!--Tipo Documento-->
+                    <Grid >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="24" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblTipoDocumento" Grid.Column="0" Text="Tipo Documento:" FontSize="Small" VerticalOptions="Center" />
+                        <Picker x:Name="pckTipoDocumental" Grid.Column="1" FontSize="Small"
+                                SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"
+                                SelectedItem="{Binding Flujo.TipoDocumento}"
+                                />
+                        <Label x:Name="lblNumero" Grid.Column="2" Text="No." FontSize="Small" IsVisible="false"
+                               VerticalOptions="Center"/>
+                        <Entry x:Name="txtNumero" Grid.Column="3" Text="{Binding Flujo.DocumentoNro}" FontSize="Small" IsVisible="false" >
+                                <Entry.Behaviors>
+                                    <local:NumericValidationBehavior />
+                                </Entry.Behaviors>
+                        </Entry>
+                        <Label x:Name="lblNumeroLimites" Grid.Column="4" Text="(1 a 20)" FontSize="Micro" VerticalOptions="Center" IsVisible="false" />
+                    </Grid>
+
+                    <!--Botones Fotos-->
+                    <Grid >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnFotosGaleria" Grid.Column="0" TextColor="White" BackgroundColor="Blue" Text="Fotos Galería" 
+                            Clicked="btnFotosGaleria_Clicked" IsEnabled="false" FontSize="Small" Padding="5" />
+                        <Button x:Name="btnTomarFoto" Grid.Column="1" TextColor="White" BackgroundColor="Blue" Text="Tomar Foto" 
+                            Clicked="btnTomarFoto_Clicked" IsEnabled="false" FontSize="Small" Padding="5"  />
+                        <Button x:Name="btnEnviarOnBase" Grid.Column="2" TextColor="White" BackgroundColor="Blue" Text="Enviar" 
+                            Clicked="btnEnviarOnBase_Clicked" IsEnabled="false" FontSize="Small" Padding="5" />
+                    </Grid>
+
+                </StackLayout>
             
-            <StackLayout Orientation="Horizontal" >
-                <Button x:Name="btnFotosGaleria" TextColor="White" BackgroundColor="Blue" Text="Fotos Galería" 
-                        Clicked="btnFotosGaleria_Clicked" IsEnabled="false"/>
-                <Button x:Name="btnTomarFoto" TextColor="White" BackgroundColor="Blue" Text="Tomar Foto" 
-                        Clicked="btnTomarFoto_Clicked" IsEnabled="false"/>
-                <Button x:Name="btnEnviarOnBase" TextColor="White" BackgroundColor="Blue" Text="Enviar" 
-                        Clicked="btnEnviarOnBase_Clicked" IsEnabled="false"/>
-            </StackLayout>     
-            
-            <flv:FlowListView FlowColumnCount="3" x:Name="listItems" FlowItemsSource="{Binding Media}"
-                        SeparatorVisibility="Default"
-                        HasUnevenRows="false" RowHeight="120"
-                        FlowItemTappedCommand="{Binding PhotoTappedCommand}" >
-                    <flv:FlowListView.FlowColumnTemplate>
-                        <DataTemplate >
-                            <Grid Margin="2">
-                               <ffimageloading:CachedImage  DownsampleToViewSize="true" HeightRequest="100"  
-                                                            Source="{Binding PreviewPath}"  
-                                                            Aspect="AspectFill" 
-                                                            HorizontalOptions="FillAndExpand">
-                               </ffimageloading:CachedImage>
-                               <Image Source="play" IsVisible="false" HorizontalOptions="End" VerticalOptions="End">
-                                   <Image.Triggers>
-                                        <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="Video">
-                                             <Setter Property="IsVisible" Value="True" />
-                                        </DataTrigger>
-                                    </Image.Triggers>
-                               </Image>
-                            </Grid>
-                        </DataTemplate>
-                    </flv:FlowListView.FlowColumnTemplate>
-            </flv:FlowListView>
-        </StackLayout>
+                 <!--Grid de Fotos-->
+                 <flv:FlowListView FlowColumnCount="3" x:Name="listItems" FlowItemsSource="{Binding Media}"
+                            SeparatorVisibility="Default"
+                            HasUnevenRows="false" RowHeight="120"
+                            FlowItemTappedCommand="{Binding PhotoTappedCommand}" >
+                        <flv:FlowListView.FlowColumnTemplate>
+                            <DataTemplate >
+                                <Grid Margin="2">
+                                   <ffimageloading:CachedImage  DownsampleToViewSize="true" HeightRequest="100"  
+                                                                Source="{Binding PreviewPath}"  
+                                                                Aspect="AspectFill" 
+                                                                HorizontalOptions="FillAndExpand">
+                                   </ffimageloading:CachedImage>
+                                   <Image Source="play" IsVisible="false" HorizontalOptions="End" VerticalOptions="End">
+                                       <Image.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="Video">
+                                                 <Setter Property="IsVisible" Value="True" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                   </Image>
+                                </Grid>
+                            </DataTemplate>
+                        </flv:FlowListView.FlowColumnTemplate>
+                </flv:FlowListView>
+
+             </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
   
 </ContentPage>

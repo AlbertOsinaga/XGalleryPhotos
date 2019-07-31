@@ -21,6 +21,8 @@ namespace XGaleryPhotos
         public const bool IncluirFechaEnWatermark = true;
         public const bool IncluirHoraEnWatermark = true;
         public const bool IncluirPrefijoEnWatermark = true;
+        public const bool DimensionesDeviceVisible = false;
+        public const int FontSizeMicro = 8;
 
         // Services
         public static IAuthenticateService AuthenticateService { get; set; }

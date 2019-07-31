@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Xml;
 using XWebServices.Interfaces;
 using XWebServices.Models;
@@ -95,6 +96,12 @@ namespace XWebServices
                 respuestaUpdate.EsValido = false;
                 respuestaUpdate.Mensaje = "NO HAY CONEXION A INTERNET";
                 respuestaUpdate.CodigoEstado = 90;
+            }
+            catch (WebException)
+            {
+                respuestaUpdate.EsValido = false;
+                respuestaUpdate.Mensaje = "No hay conexión con el servidor, por favor intente más tarde!";
+                respuestaUpdate.CodigoEstado = 97;
             }
             catch (Exception)
             {
