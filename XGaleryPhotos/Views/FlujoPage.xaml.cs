@@ -19,7 +19,7 @@ namespace XGaleryPhotos
             pckTipoDocumental.ItemsSource = App.FlujoViewModel.TiposDocumento;
 
             // Resizing
-            if (DeviceDisplay.MainDisplayInfo.Width < 800)
+            if (DeviceDisplay.MainDisplayInfo.Width <= 480)
             {
                 lblTitulo.FontSize = App.FontSizeMicro;
                 lblEtiqUsuario.FontSize = App.FontSizeMicro;
