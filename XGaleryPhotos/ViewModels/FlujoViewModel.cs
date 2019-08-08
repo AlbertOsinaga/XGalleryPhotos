@@ -59,9 +59,10 @@ namespace XGaleryPhotos.ViewModels
         public ICommand PhotoTappedCommand { get; set; }
         public ICommand SelectImagesCommand { get; set; }
 
-        public FlujoViewModel()
+        public FlujoViewModel(User usuario)
         {
-            Usuario = App.AuthenticateService.AuthenticatedUser;
+            App.FlujoViewModel = this;
+            Usuario = usuario;
             MultiMediaPickerService = App.MultiMediaPickerService;
             RepositoryService = App.RepositoryService;
 

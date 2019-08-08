@@ -22,7 +22,7 @@ namespace XGaleryPhotos
         public const bool IncluirHoraEnWatermark = true;
         public const bool IncluirPrefijoEnWatermark = true;
         public const bool DimensionesDeviceVisible = false;
-        public const int FontSizeMicro = 8;
+        public const int FontSizeMicro = 10;
 
         // Services
         public static IAuthenticateService AuthenticateService { get; set; }
@@ -32,7 +32,7 @@ namespace XGaleryPhotos
 
         // Views
         public static AuthenticationPage AuthenticationPage { get; set; }
-        public static FlujoPage FlujoPage { get; set; }                 // MainPage
+        //public static FlujoPage FlujoPage { get; set; }                 // MainPage
         public static NavigationPage NavegacionPage { get; set; }       // Navigation
         public static PhotoDisplayPage PhotoDisplayPage { get; set; }
 
@@ -58,20 +58,25 @@ namespace XGaleryPhotos
 
             // ViewModels
             AuthenticationViewModel = new AuthenticationViewModel();
-            FlujoViewModel = new FlujoViewModel();
+            //FlujoViewModel = new FlujoViewModel(AuthenticateService.AuthenticatedUser);
             PhotoDisplayViewModel = new PhotoDisplayViewModel();
 
             // Views
             AuthenticationPage = new AuthenticationPage();
-            FlujoPage = new FlujoPage();
+            //FlujoPage = new FlujoPage();
             NavegacionPage = new NavigationPage();
             PhotoDisplayPage = new PhotoDisplayPage();
 
             FlowListView.Init();
-            if(AuthenticateService.IsUserAuthenticated())
-                App.NavegacionPage.PushAsync(FlujoPage);
+            if (AuthenticateService.IsUserAuthenticated())
+            {
+                App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(AuthenticateService.AuthenticatedUser)));
+            }
             else
+            {
                 App.NavegacionPage.PushAsync(AuthenticationPage);
+            }
+
             this.MainPage = NavegacionPage;
         }
 

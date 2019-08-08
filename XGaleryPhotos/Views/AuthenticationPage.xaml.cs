@@ -3,6 +3,7 @@ using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos.Views
 {
@@ -49,9 +50,8 @@ namespace XGaleryPhotos.Views
                     return;
                 }
 
-                App.FlujoViewModel.Usuario = userAuth;
                 App.NavegacionPage.PopAsync();
-                App.NavegacionPage.PushAsync(App.FlujoPage);
+                App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(App.AuthenticateService.AuthenticatedUser)));
             }
             catch (WebException)
             {

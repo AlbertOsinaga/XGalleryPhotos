@@ -39,11 +39,11 @@ namespace XGaleryPhotos.ViewModels
 
         public AuthenticationViewModel()
         {
-            LoginCommand = new Command((obj) =>
-            {
-                App.NavegacionPage.PopAsync();
-                App.NavegacionPage.PushAsync(App.FlujoPage);
-            });
+            //LoginCommand = new Command((obj) =>
+            //{
+            //    App.NavegacionPage.PopAsync();
+            //    App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel()));
+            //});
         }
     }
 }

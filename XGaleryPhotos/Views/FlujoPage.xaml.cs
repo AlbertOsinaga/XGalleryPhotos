@@ -4,6 +4,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos
 {
@@ -12,29 +13,36 @@ namespace XGaleryPhotos
     [DesignTimeVisible(false)]
     public partial class FlujoPage : ContentPage
     {
-        public FlujoPage()
+        private FlujoViewModel FlujoViewModel { get; set; }
+
+        public FlujoPage(FlujoViewModel flujoViewModel)
         {
             InitializeComponent();
-            BindingContext = App.FlujoViewModel;
-            pckTipoDocumental.ItemsSource = App.FlujoViewModel.TiposDocumento;
+
+            FlujoViewModel = flujoViewModel; 
+            BindingContext = flujoViewModel;
+            pckTipoDocumental.ItemsSource = FlujoViewModel.TiposDocumento;
 
             // Resizing
             if (DeviceDisplay.MainDisplayInfo.Width <= 480)
             {
-                lblTitulo.FontSize = App.FontSizeMicro;
-                lblEtiqUsuario.FontSize = App.FontSizeMicro;
-                lblUsuario.FontSize = App.FontSizeMicro;
-                lblNoFlujo.FontSize = App.FontSizeMicro;
-                txtNroFlujo.FontSize = App.FontSizeMicro;
+                //lblTitulo.FontSize = App.FontSizeMicro;
+                //lblEtiqUsuario.FontSize = App.FontSizeMicro;
+                //lblUsuario.FontSize = App.FontSizeMicro;
+                //lblNoFlujo.FontSize = App.FontSizeMicro;
+                //lblCliente.FontSize = App.FontSizeMicro;
+                //lblPlaca.FontSize = App.FontSizeMicro;
+                //lblTipoDocumento.FontSize = App.FontSizeMicro;
+                //lblNumero.FontSize = App.FontSizeMicro;
+
+                //pckTipoDocumental.FontSize = App.FontSizeMicro;
+
+                //txtNroFlujo.FontSize = App.FontSizeMicro;
+                //txtCliente.FontSize = App.FontSizeMicro;
+                //txtPlaca.FontSize = App.FontSizeMicro;
+                //txtNumero.FontSize = App.FontSizeMicro;
+
                 btnBuscarFlujo.FontSize = App.FontSizeMicro;
-                lblCliente.FontSize = App.FontSizeMicro;
-                txtCliente.FontSize = App.FontSizeMicro;
-                lblPlaca.FontSize = App.FontSizeMicro;
-                txtPlaca.FontSize = App.FontSizeMicro;
-                lblTipoDocumento.FontSize = App.FontSizeMicro;
-                pckTipoDocumental.FontSize = App.FontSizeMicro;
-                lblNumero.FontSize = App.FontSizeMicro;
-                txtNumero.FontSize = App.FontSizeMicro;
                 btnFotosGaleria.FontSize = App.FontSizeMicro;
                 btnTomarFoto.FontSize = App.FontSizeMicro;
                 btnEnviarOnBase.FontSize = App.FontSizeMicro;
@@ -64,8 +72,8 @@ namespace XGaleryPhotos
                 Button button = sender as Button;
                 if (button.Text.Contains("Nuevo"))
                 {
-                    App.FlujoViewModel.Flujo = null;
-                    App.FlujoViewModel.Media = null;
+                    FlujoViewModel.Flujo = null;
+                    FlujoViewModel.Media = null;
 
                     button.Text = "Buscar Flujo";
                     btnFotosGaleria.IsEnabled = false;
@@ -85,24 +93,24 @@ namespace XGaleryPhotos
                     return;
                 }
 
-                App.FlujoViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
+                FlujoViewModel.BuscarFlujoCommand.Execute(txtNroFlujo.Text);
                 
-                if (App.FlujoViewModel.Flujo == null)
+                if (FlujoViewModel.Flujo == null)
                 {
                     DisplayAlert("PROCESAMIENTO DE FLUJOS", "Flujo nulo!", "OK");
                     return;
                 }
 
-                if(App.FlujoViewModel.Flujo.CodigoEstado == 1 && !App.FlujoViewModel.Flujo.EsValido)
+                if(FlujoViewModel.Flujo.CodigoEstado == 1 && !FlujoViewModel.Flujo.EsValido)
                 {
                     DisplayAlert("PROCESAMIENTO DE FLUJOS", "Nro. de Flujo no encontrado!", "OK");
                     return;
                 }
 
-                if (App.FlujoViewModel.Flujo.CodigoEstado >= 90)
+                if (FlujoViewModel.Flujo.CodigoEstado >= 90)
                 {
                     DisplayAlert("PROCESAMIENTO DE FLUJOS",
-                        $"{App.FlujoViewModel.Flujo.Mensaje} ({App.FlujoViewModel.Flujo.CodigoEstado})", "OK");
+                        $"{FlujoViewModel.Flujo.Mensaje} ({FlujoViewModel.Flujo.CodigoEstado})", "OK");
                     return;
                 }
 
@@ -123,7 +131,7 @@ namespace XGaleryPhotos
         {
             try
             {
-                App.FlujoViewModel.SelectImagesCommand.Execute(null);
+                FlujoViewModel.SelectImagesCommand.Execute(null);
             }
             catch (Exception ex)
             {
@@ -142,7 +150,7 @@ namespace XGaleryPhotos
                 };
 
                 var photo = await CrossMedia.Current.TakePhotoAsync(opciones_almacenamiento);
-                App.FlujoViewModel.AddPhotoCommand.Execute(photo);
+                FlujoViewModel.AddPhotoCommand.Execute(photo);
             }
             catch (Exception ex)
             {
@@ -154,7 +162,7 @@ namespace XGaleryPhotos
         {
             try
             {
-                string respuesta = App.FlujoViewModel.ValidaDatosEnvio();
+                string respuesta = FlujoViewModel.ValidaDatosEnvio();
                 if (respuesta != "OK")
                 {
                     await DisplayAlert("VALIDACION", respuesta, "OK");
@@ -164,26 +172,26 @@ namespace XGaleryPhotos
                 bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
                 if (Ok)
                 {
-                    App.FlujoViewModel.SavePhotos();
-                    App.FlujoViewModel.EnviarOnBaseCommand.Execute(null);
-                    if (App.FlujoViewModel.Flujo == null)
+                    FlujoViewModel.SavePhotos();
+                    FlujoViewModel.EnviarOnBaseCommand.Execute(null);
+                    if (FlujoViewModel.Flujo == null)
                     {
                         await DisplayAlert("ONBASE", "FLUJO NULO!", "OK");
                         return;
                     }
 
-                    if (App.FlujoViewModel.Flujo.CodigoEstado >= 90)
+                    if (FlujoViewModel.Flujo.CodigoEstado >= 90)
                     {
                         await DisplayAlert("ONBASE",
-                            $"{App.FlujoViewModel.Flujo.Mensaje} ({App.FlujoViewModel.Flujo.CodigoEstado})", "OK");
+                            $"{FlujoViewModel.Flujo.Mensaje} ({FlujoViewModel.Flujo.CodigoEstado})", "OK");
                         return;
                     }
-                    if (App.FlujoViewModel.Flujo.CodigoEstado == 1)
+                    if (FlujoViewModel.Flujo.CodigoEstado == 1)
                     {
-                        if (App.FlujoViewModel.Flujo.EsValido)
+                        if (FlujoViewModel.Flujo.EsValido)
                             await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
                         else
-                            await DisplayAlert("ONBASE", App.FlujoViewModel.Flujo.Mensaje, "OK");
+                            await DisplayAlert("ONBASE", FlujoViewModel.Flujo.Mensaje, "OK");
                     }
 
                     Resetear();
@@ -197,8 +205,8 @@ namespace XGaleryPhotos
 
         private void Resetear()
         {
-            App.FlujoViewModel.Flujo = null;
-            App.FlujoViewModel.Media = null;
+            FlujoViewModel.Flujo = null;
+            FlujoViewModel.Media = null;
 
             btnBuscarFlujo.Text = "Nuevo Flujo";
             btnFotosGaleria.IsEnabled = false;

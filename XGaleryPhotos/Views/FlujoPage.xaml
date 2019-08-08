@@ -24,17 +24,17 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="2*" />
+                            <!--<ColumnDefinition Width="Auto" />-->
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Label x:Name="lblTitulo" Grid.Row="0" Grid.Column="0" Text="LBC APP CAPTURA FOTOS"
                                FontSize="Small" VerticalOptions="Center" />
-                        <Label x:Name="lblEtiqUsuario" Grid.Row="0" Grid.Column="1"
-                               Text="Usuario:" FontSize="Small" VerticalOptions="Center" />
-                        <Label x:Name="lblUsuario" Text="{Binding Usuario.UserName}" Grid.Row="0" Grid.Column="2"
+                        <!--<Label x:Name="lblEtiqUsuario" Grid.Row="0" Grid.Column="1"
+                               Text="Usuario:" FontSize="Small" VerticalOptions="Center" />-->
+                        <Label x:Name="lblUsuario" Text="{Binding Usuario.UserName}" Grid.Row="0" Grid.Column="1"
                                FontSize="Small" VerticalOptions="Center" />
-                        <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="2" BackgroundColor="Blue" /> 
+                        <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="2" BackgroundColor="Blue" /> 
                     </Grid>
 
                     <!--Nro. de Flujo y boton Nuevo y Buscar Flujo-->
@@ -94,7 +94,7 @@
                             <ColumnDefinition Width="24" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label x:Name="lblTipoDocumento" Grid.Column="0" Text="Tipo Documento:" FontSize="Small" VerticalOptions="Center" />
+                        <Label x:Name="lblTipoDocumento" Grid.Column="0" Text="Tipo Doc:" FontSize="Small" VerticalOptions="Center" />
                         <Picker x:Name="pckTipoDocumental" Grid.Column="1" FontSize="Small"
                                 SelectedIndexChanged="pckTipoDocumental_SelectedIndexChanged"
                                 SelectedItem="{Binding Flujo.TipoDocumento}"
