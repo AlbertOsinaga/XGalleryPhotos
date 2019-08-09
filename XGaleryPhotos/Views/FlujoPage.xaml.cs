@@ -22,6 +22,7 @@ namespace XGaleryPhotos
             FlujoViewModel = flujoViewModel; 
             BindingContext = flujoViewModel;
             pckTipoDocumental.ItemsSource = FlujoViewModel.TiposDocumento;
+            lblEtiqUsuario.Text = "Usuario:";
 
             // Resizing
             if (DeviceDisplay.MainDisplayInfo.Width <= 480)
@@ -46,6 +47,7 @@ namespace XGaleryPhotos
                 btnFotosGaleria.FontSize = App.FontSizeMicro;
                 btnTomarFoto.FontSize = App.FontSizeMicro;
                 btnEnviarOnBase.FontSize = App.FontSizeMicro;
+                lblEtiqUsuario.Text = string.Empty;
             }
         }
 
