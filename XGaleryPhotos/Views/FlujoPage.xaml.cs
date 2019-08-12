@@ -27,22 +27,6 @@ namespace XGaleryPhotos
             // Resizing
             if (DeviceDisplay.MainDisplayInfo.Width <= 480)
             {
-                //lblTitulo.FontSize = App.FontSizeMicro;
-                //lblEtiqUsuario.FontSize = App.FontSizeMicro;
-                //lblUsuario.FontSize = App.FontSizeMicro;
-                //lblNoFlujo.FontSize = App.FontSizeMicro;
-                //lblCliente.FontSize = App.FontSizeMicro;
-                //lblPlaca.FontSize = App.FontSizeMicro;
-                //lblTipoDocumento.FontSize = App.FontSizeMicro;
-                //lblNumero.FontSize = App.FontSizeMicro;
-
-                //pckTipoDocumental.FontSize = App.FontSizeMicro;
-
-                //txtNroFlujo.FontSize = App.FontSizeMicro;
-                //txtCliente.FontSize = App.FontSizeMicro;
-                //txtPlaca.FontSize = App.FontSizeMicro;
-                //txtNumero.FontSize = App.FontSizeMicro;
-
                 btnBuscarFlujo.FontSize = App.FontSizeMicro;
                 btnFotosGaleria.FontSize = App.FontSizeMicro;
                 btnTomarFoto.FontSize = App.FontSizeMicro;
