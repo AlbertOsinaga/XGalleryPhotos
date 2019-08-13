@@ -23,7 +23,7 @@ namespace XGaleryPhotos.ViewModels
             {
                 MediaFile = App.RepositoryService.GetMediaFile();
 
-                var media = Globals.FlujoViewModel.Media;
+                var media = Globals.FlujoViewModelInstance.Media;
                 int i;
                 for (i = 0; i < media.Count; i++)
                 {

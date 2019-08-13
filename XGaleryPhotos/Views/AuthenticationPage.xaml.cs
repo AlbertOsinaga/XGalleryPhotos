@@ -9,27 +9,33 @@ namespace XGaleryPhotos.Views
 {
     public partial class AuthenticationPage : ContentPage
     {
-        public AuthenticationPage()
+        public AuthenticationPage(AuthenticationViewModel authenticationViewModel)
         {
             InitializeComponent();
 
-            BindingContext = App.AuthenticationViewModel;
-            lblSize.Text = DeviceDisplay.MainDisplayInfo.Width.ToString() +
-                                " X " + DeviceDisplay.MainDisplayInfo.Height.ToString();
+            BindingContext = authenticationViewModel;
+
             lblSize.IsVisible = Globals.DimensionesDeviceVisible;
+            if (lblSize.IsVisible)
+            {
+                lblSize.Text = DeviceDisplay.MainDisplayInfo.Width.ToString() +
+                                " X " + DeviceDisplay.MainDisplayInfo.Height.ToString();
+            }
+            txtUsuario.Text = string.Empty;
+            txtClave.Text = string.Empty;
         }
 
         void btnLogin_Clicked(object sender, System.EventArgs e)
         {
             if (string.IsNullOrEmpty(txtUsuario.Text))
             {
-                DisplayAlert("AUTENTICACION", "Por favor ingrese su usuario", "OK");
+                DisplayAlert("AUTENTICACION", "Por favor ingrese Usuario", "OK");
                 return;
             }
 
             if (string.IsNullOrEmpty(txtClave.Text))
             {
-                DisplayAlert("AUTENTICACION", "Por favor ingrese su clave", "OK");
+                DisplayAlert("AUTENTICACION", "Por favor ingrese su Clave", "OK");
                 return;
             }
 
@@ -50,6 +56,8 @@ namespace XGaleryPhotos.Views
                     return;
                 }
 
+                txtUsuario.Text = string.Empty;
+                txtClave.Text = string.Empty;
                 App.NavegacionPage.PopAsync();
                 App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(App.AuthenticateService.AuthenticatedUser)));
             }

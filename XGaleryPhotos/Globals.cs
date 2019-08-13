@@ -20,7 +20,7 @@ namespace XGaleryPhotos
 
         #region Objetos
 
-        public static FlujoViewModel FlujoViewModel { get; set; }
+        public static FlujoViewModel FlujoViewModelInstance { get; set; }
 
         #endregion
     }

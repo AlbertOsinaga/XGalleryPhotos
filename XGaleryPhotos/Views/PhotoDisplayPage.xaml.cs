@@ -3,16 +3,17 @@ using Xamarin.Forms;
 using XGaleryPhotos.Helpers;
 using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
+using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos.Views
 {
     public partial class PhotoDisplayPage : ContentPage
     {
-        public PhotoDisplayPage()
+        public PhotoDisplayPage(PhotoDisplayViewModel photoDisplayViewModel)
         {
             InitializeComponent();
 
-            BindingContext = App.PhotoDisplayViewModel;
+            BindingContext = photoDisplayViewModel;
             ResetSource();
         }
 
@@ -37,7 +38,8 @@ namespace XGaleryPhotos.Views
                 var ok = await DisplayAlert("Confirmación!", "Quiere eliminar esta foto?", "Si", "No");
                 if (ok)
                 {
-                    App.PhotoDisplayViewModel.EliminarFotoCommand.Execute(null);
+                    PhotoDisplayViewModel photoDisplayViewModel = BindingContext as PhotoDisplayViewModel;
+                    photoDisplayViewModel?.EliminarFotoCommand.Execute(null);
                 }
             }
             catch (Exception ex)

@@ -14,6 +14,7 @@ namespace XGaleryPhotos
     public partial class FlujoPage : ContentPage
     {
         private FlujoViewModel FlujoViewModel { get; set; }
+        public Action CustomBackButtonAction { get; set; }
 
         public FlujoPage(FlujoViewModel flujoViewModel)
         {

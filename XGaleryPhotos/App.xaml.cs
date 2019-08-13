@@ -20,13 +20,8 @@ namespace XGaleryPhotos
         public static IRepositoryService RepositoryService { get; set; }
 
         // Views
-        public static AuthenticationPage AuthenticationPage { get; set; }
         public static NavigationPage NavegacionPage { get; set; }
         public static PhotoDisplayPage PhotoDisplayPage { get; set; }
-
-        // ViewModels
-        public static AuthenticationViewModel AuthenticationViewModel { get; set; }
-        public static PhotoDisplayViewModel PhotoDisplayViewModel { get; set; }
 
         static App()
         {
@@ -41,24 +36,19 @@ namespace XGaleryPhotos
         {
             InitializeComponent();
 
-            // ViewModels
-            AuthenticationViewModel = new AuthenticationViewModel();
-            PhotoDisplayViewModel = new PhotoDisplayViewModel();
-
             // Views
-            AuthenticationPage = new AuthenticationPage();
             NavegacionPage = new NavigationPage();
-            PhotoDisplayPage = new PhotoDisplayPage();
+            PhotoDisplayPage = new PhotoDisplayPage(new PhotoDisplayViewModel());
 
             FlowListView.Init();
 
-            if (AuthenticateService.IsUserAuthenticated())
+            if (!AuthenticateService.IsUserAuthenticated())
             {
-                App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(AuthenticateService.AuthenticatedUser)));
+                App.NavegacionPage.PushAsync(new AuthenticationPage(new AuthenticationViewModel()));
             }
             else
             {
-                App.NavegacionPage.PushAsync(AuthenticationPage);
+                App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(AuthenticateService.AuthenticatedUser)));
             }
 
             this.MainPage = NavegacionPage;

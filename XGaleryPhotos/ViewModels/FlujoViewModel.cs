@@ -61,7 +61,7 @@ namespace XGaleryPhotos.ViewModels
 
         public FlujoViewModel(User usuario)
         {
-            Globals.FlujoViewModel = this;
+            Globals.FlujoViewModelInstance = this;
             Usuario = usuario;
             MultiMediaPickerService = App.MultiMediaPickerService;
             RepositoryService = App.RepositoryService;
