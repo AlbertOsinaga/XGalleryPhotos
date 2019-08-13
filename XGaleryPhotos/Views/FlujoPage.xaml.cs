@@ -152,7 +152,7 @@ namespace XGaleryPhotos
                 if (respuesta != "OK")
                 {
                     await DisplayAlert("VALIDACION", respuesta, "OK");
-                    return;
+                      return;
                 }
 
                 bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
@@ -175,12 +175,13 @@ namespace XGaleryPhotos
                     if (FlujoViewModel.Flujo.CodigoEstado == 1)
                     {
                         if (FlujoViewModel.Flujo.EsValido)
+                        {
                             await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
+                            Resetear();
+                        }
                         else
                             await DisplayAlert("ONBASE", FlujoViewModel.Flujo.Mensaje, "OK");
                     }
-
-                    Resetear();
                 }
             }
             catch (Exception ex)
