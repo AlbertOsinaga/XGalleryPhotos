@@ -8,8 +8,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XGaleryPhotos", "XGaleryPho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XWebServices", "XWebServices\XWebServices.csproj", "{41D063EB-8459-4327-8081-451606C81421}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZTests", "ZTests\ZTests.csproj", "{F4CB002D-7A3A-4E20-BCD4-68A11148D616}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,18 +55,6 @@ Global
 		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhone.Build.0 = Release|Any CPU
 		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{41D063EB-8459-4327-8081-451606C81421}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Release|iPhone.Build.0 = Release|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{F4CB002D-7A3A-4E20-BCD4-68A11148D616}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

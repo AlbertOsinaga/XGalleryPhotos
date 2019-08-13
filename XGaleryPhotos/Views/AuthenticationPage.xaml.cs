@@ -16,7 +16,7 @@ namespace XGaleryPhotos.Views
             BindingContext = App.AuthenticationViewModel;
             lblSize.Text = DeviceDisplay.MainDisplayInfo.Width.ToString() +
                                 " X " + DeviceDisplay.MainDisplayInfo.Height.ToString();
-            lblSize.IsVisible = App.DimensionesDeviceVisible;
+            lblSize.IsVisible = Globals.DimensionesDeviceVisible;
         }
 
         void btnLogin_Clicked(object sender, System.EventArgs e)

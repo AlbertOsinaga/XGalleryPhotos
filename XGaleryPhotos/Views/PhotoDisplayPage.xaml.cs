@@ -21,7 +21,7 @@ namespace XGaleryPhotos.Views
             MediaFile mediaFile = App.RepositoryService.GetMediaFile();
             if (mediaFile != null && mediaFile.Path != null && mediaFile.OnBasePath == null)
             {
-                string watermark = App.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;
+                string watermark = Globals.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;
                 IHelperImageService helperImageService = DependencyService.Get<IHelperImageService>();
                 mediaFile.Path = helperImageService.StretchImage(mediaFile.Path, 1, 90, string.Empty, watermark);
             }

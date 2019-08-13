@@ -6,11 +6,11 @@ namespace XGaleryPhotos.Helpers
         public static string ArmaWatermark()
         {
             string watermark = string.Empty;
-            if(App.IncluirPrefijoEnWatermark)
-                watermark += App.PrefijoWatermark;
-            if (App.IncluirFechaEnWatermark)
+            if(Globals.IncluirPrefijoEnWatermark)
+                watermark += Globals.PrefijoWatermark;
+            if (Globals.IncluirFechaEnWatermark)
                 watermark += DateTime.Now.ToShortDateString();
-            if (App.IncluirHoraEnWatermark)
+            if (Globals.IncluirHoraEnWatermark)
                 watermark += $" {DateTime.Now.ToString("HH:mm:ss")}";
             return watermark;
         }

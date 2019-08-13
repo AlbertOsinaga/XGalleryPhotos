@@ -27,10 +27,10 @@ namespace XGaleryPhotos
             // Resizing
             if (DeviceDisplay.MainDisplayInfo.Width <= 480)
             {
-                btnBuscarFlujo.FontSize = App.FontSizeMicro;
-                btnFotosGaleria.FontSize = App.FontSizeMicro;
-                btnTomarFoto.FontSize = App.FontSizeMicro;
-                btnEnviarOnBase.FontSize = App.FontSizeMicro;
+                btnBuscarFlujo.FontSize = Globals.FontSizeMicro;
+                btnFotosGaleria.FontSize = Globals.FontSizeMicro;
+                btnTomarFoto.FontSize = Globals.FontSizeMicro;
+                btnEnviarOnBase.FontSize = Globals.FontSizeMicro;
                 lblEtiqUsuario.Text = string.Empty;
             }
         }

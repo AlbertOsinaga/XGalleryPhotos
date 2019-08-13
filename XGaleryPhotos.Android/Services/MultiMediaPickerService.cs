@@ -97,10 +97,10 @@ namespace XGaleryPhotos.Droid.Services
 
                 if (type.StartsWith(Enum.GetName(typeof(MediaFileType), MediaFileType.Image), StringComparison.CurrentCultureIgnoreCase))
                 {
-                    string watermark = App.IncluirWatermarkEnFotosGalería ? WatermarkHelper.ArmaWatermark() : null;
+                    string watermark = Globals.IncluirWatermarkEnFotosGalería ? WatermarkHelper.ArmaWatermark() : null;
                     var fullImage = ImageHelpers.RotateImage(path, 1, 90, watermark);
                     var thumbImage = ImageHelpers.RotateImage(path, 0.25f, 90);
-                    var onbaseImage = ImageHelpers.RotateImage(path, 1, App.PorcentajeCompresion, watermark);
+                    var onbaseImage = ImageHelpers.RotateImage(path, 1, Globals.PorcentajeCompresion, watermark);
 
                     fullPath = FileHelper.GetOutputPath(MediaFileType.Image, TemporalDirectoryName, $"{fileName}{ext}");
                     File.WriteAllBytes(fullPath, fullImage);

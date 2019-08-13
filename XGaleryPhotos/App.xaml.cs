@@ -13,17 +13,6 @@ namespace XGaleryPhotos
     {
         #region Static Members
 
-        // Constants
-        public const int PorcentajeCompresion = 30;
-        public const string PrefijoWatermark = "LBC ";
-        public const bool IncluirWatermarkEnFotosGalería = false;
-        public const bool IncluirWatermarkEnFotosTomadas = true;
-        public const bool IncluirFechaEnWatermark = true;
-        public const bool IncluirHoraEnWatermark = true;
-        public const bool IncluirPrefijoEnWatermark = true;
-        public const bool DimensionesDeviceVisible = false;
-        public const int FontSizeMicro = 10;
-
         // Services
         public static IAuthenticateService AuthenticateService { get; set; }
         public static IMultiMediaPickerService MultiMediaPickerService { get; set; }
@@ -32,22 +21,18 @@ namespace XGaleryPhotos
 
         // Views
         public static AuthenticationPage AuthenticationPage { get; set; }
-        //public static FlujoPage FlujoPage { get; set; }                 // MainPage
-        public static NavigationPage NavegacionPage { get; set; }       // Navigation
+        public static NavigationPage NavegacionPage { get; set; }
         public static PhotoDisplayPage PhotoDisplayPage { get; set; }
 
         // ViewModels
         public static AuthenticationViewModel AuthenticationViewModel { get; set; }
-        public static FlujoViewModel FlujoViewModel { get; set; }
         public static PhotoDisplayViewModel PhotoDisplayViewModel { get; set; }
 
         static App()
         {
-            // Services
             AuthenticateService = new AuthenticateService();
             NavigationService = new NavigationService();
             RepositoryService = new RepositoryService();
-
         }
 
         #endregion
@@ -58,16 +43,15 @@ namespace XGaleryPhotos
 
             // ViewModels
             AuthenticationViewModel = new AuthenticationViewModel();
-            //FlujoViewModel = new FlujoViewModel(AuthenticateService.AuthenticatedUser);
             PhotoDisplayViewModel = new PhotoDisplayViewModel();
 
             // Views
             AuthenticationPage = new AuthenticationPage();
-            //FlujoPage = new FlujoPage();
             NavegacionPage = new NavigationPage();
             PhotoDisplayPage = new PhotoDisplayPage();
 
             FlowListView.Init();
+
             if (AuthenticateService.IsUserAuthenticated())
             {
                 App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(AuthenticateService.AuthenticatedUser)));

@@ -61,7 +61,7 @@ namespace XGaleryPhotos.ViewModels
 
         public FlujoViewModel(User usuario)
         {
-            App.FlujoViewModel = this;
+            Globals.FlujoViewModel = this;
             Usuario = usuario;
             MultiMediaPickerService = App.MultiMediaPickerService;
             RepositoryService = App.RepositoryService;
@@ -173,10 +173,10 @@ namespace XGaleryPhotos.ViewModels
                 {
                     if (mediaFile.OnBasePath == null)
                     {
-                        string watermark = App.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;
+                        string watermark = Globals.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;
                         var helperImageService = DependencyService.Get<IHelperImageService>();
                         mediaFile.OnBasePath = helperImageService.StretchImage(mediaFile.Path, 1,
-                                                                        App.PorcentajeCompresion,
+                                                                        Globals.PorcentajeCompresion,
                                                                         "-ONBASE", watermark);
                     }
                     var foto = new Foto
