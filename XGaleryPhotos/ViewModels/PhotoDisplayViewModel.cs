@@ -16,12 +16,12 @@ namespace XGaleryPhotos.ViewModels
         {
             RegresarCommand = new Command(() =>
             {
-                App.NavegacionPage.PopAsync();
+                Globals.NavegacionPage.PopAsync();
             });
 
             EliminarFotoCommand = new Command(() =>
             {
-                MediaFile = App.RepositoryService.GetMediaFile();
+                MediaFile = Globals.RepositoryService.GetMediaFile();
 
                 var media = Globals.FlujoViewModelInstance.Media;
                 int i;
@@ -32,7 +32,7 @@ namespace XGaleryPhotos.ViewModels
                 }
                 media.RemoveAt(i);
 
-                App.NavegacionPage.PopAsync();
+                Globals.NavegacionPage.PopAsync();
             });
 
         }

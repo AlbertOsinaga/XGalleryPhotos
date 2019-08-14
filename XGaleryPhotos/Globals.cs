@@ -1,4 +1,9 @@
-﻿using XGaleryPhotos.ViewModels;
+﻿using Xamarin.Forms;
+using XGaleryPhotos.Interfaces;
+using XGaleryPhotos.Models;
+using XGaleryPhotos.Services;
+using XGaleryPhotos.Views;
+using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos
 {
@@ -20,8 +25,27 @@ namespace XGaleryPhotos
 
         #region Objetos
 
+        // Services
+        public static IAuthenticateService AuthenticateService { get; set; }
+        public static IMultiMediaPickerService MultiMediaPickerService { get; set; }
+        public static IRepositoryService RepositoryService { get; set; }
+
+        // Views
+        public static NavigationPage NavegacionPage { get; set; }
+        public static PhotoDisplayPage PhotoDisplayPage { get; set; }
+
+        // ViewModels
         public static FlujoViewModel FlujoViewModelInstance { get; set; }
 
+        // MediaFile para info de foto
+        public static MediaFile MediaFile { get; set; }
+
         #endregion
+
+        static Globals()
+        {
+            AuthenticateService = new AuthenticateService();
+            RepositoryService = new RepositoryService();
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace XGaleryPhotos.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            App.MultiMediaPickerService = MultiMediaPickerService.SharedInstance;
+            Globals.MultiMediaPickerService = MultiMediaPickerService.SharedInstance;
             LoadApplication(new App());
         }
 

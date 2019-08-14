@@ -19,7 +19,7 @@ namespace XGaleryPhotos.Views
 
         public void ResetSource()
         {
-            MediaFile mediaFile = App.RepositoryService.GetMediaFile();
+            MediaFile mediaFile = Globals.RepositoryService.GetMediaFile();
             if (mediaFile != null && mediaFile.Path != null && mediaFile.OnBasePath == null)
             {
                 string watermark = Globals.IncluirWatermarkEnFotosTomadas ? WatermarkHelper.ArmaWatermark() : null;

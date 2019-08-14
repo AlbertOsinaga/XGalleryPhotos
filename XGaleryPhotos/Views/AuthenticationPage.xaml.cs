@@ -42,10 +42,10 @@ namespace XGaleryPhotos.Views
             try
             {
                 //  App.AuthenticationViewModel.LoginCommand.Execute(null);
-                App.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
-                User userAuth = App.AuthenticateService.AuthenticatedUser;
+                Globals.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
+                User userAuth = Globals.AuthenticateService.AuthenticatedUser;
 
-                if (!App.AuthenticateService.IsUserAuthenticated())
+                if (!Globals.AuthenticateService.IsUserAuthenticated())
                 {
                     if (userAuth == null)
                         DisplayAlert("ERROR EN AUTENTICACION", "(userAuth null)", "OK");
@@ -58,8 +58,9 @@ namespace XGaleryPhotos.Views
 
                 txtUsuario.Text = string.Empty;
                 txtClave.Text = string.Empty;
-                App.NavegacionPage.PopAsync();
-                App.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(App.AuthenticateService.AuthenticatedUser)));
+                Globals.NavegacionPage.PopAsync();
+                Globals.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(
+                                                    Globals.AuthenticateService.AuthenticatedUser)));
             }
             catch (WebException)
             {

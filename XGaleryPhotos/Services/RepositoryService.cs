@@ -12,17 +12,8 @@ namespace XGaleryPhotos.Services
 {
     public class RepositoryService : IRepositoryService
     {
-        public static User User { get; set; }
-        public static MediaFile MediaFile { get; set; }
-        public static List<User> Users { get; set; }
-
         public RepositoryService()
         {
-            Users = new List<User>();
-            Users.Add(new User { Id = 1, UserName = "juan", Password = "1234" });
-            Users.Add(new User { Id = 2, UserName = "maria", Password = "4321" });
-            Users.Add(new User { Id = 3, UserName = "felipe", Password = "5678" });
-
             AddMediaFile(new MediaFile());
         }
 
@@ -43,45 +34,21 @@ namespace XGaleryPhotos.Services
             return flujo;
         }
 
-        public void AddUser(string username, string password)
-        {
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-                return;
-            Users.Add(new User { Id = Users.Count + 1, UserName = "felipe", Password = "5678" });
-        }
-
-        public void DeleteUser(int userId)
-        {
-            User userDel = Users.Find((u) => u.Id == userId);
-            if (userDel != null)
-                Users.Remove(userDel);
-        }
-
-        public User GetUser(string username, string password = null)
-        {
-            User userLog = null;
-            if (password == null)
-                userLog = Users.Find((u) => u.UserName == username);
-            else
-                userLog = Users.Find((u) => u.UserName == username && u.Password == password);
-            return userLog;
-        }
-
         public void AddMediaFile(MediaFile mediaFile)
         {
             DeleteMediaFile();
-            MockRepositoryService.MediaFile = mediaFile;
+            Globals.MediaFile = mediaFile;
         }
 
         public void DeleteMediaFile()
         {
-            MockRepositoryService.MediaFile = null;
+            Globals.MediaFile = null;
             GC.Collect();
         }
 
         public MediaFile GetMediaFile()
         {
-            return MockRepositoryService.MediaFile;
+            return Globals.MediaFile;
         }
 
         public void UpdateFotos(Flujo flujo, string usuarioSistema)

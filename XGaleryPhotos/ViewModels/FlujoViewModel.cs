@@ -63,8 +63,8 @@ namespace XGaleryPhotos.ViewModels
         {
             Globals.FlujoViewModelInstance = this;
             Usuario = usuario;
-            MultiMediaPickerService = App.MultiMediaPickerService;
-            RepositoryService = App.RepositoryService;
+            MultiMediaPickerService = Globals.MultiMediaPickerService;
+            RepositoryService = Globals.RepositoryService;
 
             AddPhotoCommand = new Command((obj) =>
             {
@@ -93,16 +93,15 @@ namespace XGaleryPhotos.ViewModels
 
             EnviarOnBaseCommand = new Command((obj) =>
             {
-                App.RepositoryService.UpdateFotos(Flujo, Usuario.UserName);
-                //Flujo.EsValido = respuesta.EsValido;
+                Globals.RepositoryService.UpdateFotos(Flujo, Usuario.UserName);
             });
 
             PhotoTappedCommand = new Command((obj) =>
             {
                 var mediaSelected = obj as XGaleryPhotos.Models.MediaFile ;
-                App.RepositoryService.AddMediaFile(mediaSelected);
-                App.PhotoDisplayPage.ResetSource();
-                App.NavegacionPage.PushAsync(App.PhotoDisplayPage);
+                Globals.RepositoryService.AddMediaFile(mediaSelected);
+                Globals.PhotoDisplayPage.ResetSource();
+                Globals.NavegacionPage.PushAsync(Globals.PhotoDisplayPage);
             });
 
             SelectImagesCommand = new Command(async (obj) =>
