@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Xml;
-
 using XWebServices.Interfaces;
 using XWebServices.Models;
 
@@ -24,10 +23,10 @@ namespace XWebServices
 
             SolicitudOnBase solicitud = new SolicitudOnBase();
 
-            WebService.RequestUri = @"http://desanilus.lbc.bo/Nilus/WsOnbase/OnBaseWS.asmx";
-            WebService.SoapAction = "http://tempuri.org/ObtenerInformacionSolicitudOnBase";
-            WebService.WebMethod = "ObtenerInformacionSolicitudOnBase";
-            WebService.WebNamespace = "http://tempuri.org/";
+            WebService.RequestUri = WbsGlobals.WbsFlujosRequestUri;
+            WebService.SoapAction = WbsGlobals.WbsFlujosSoapAction;
+            WebService.WebMethod = WbsGlobals.WbsFlujosWebMethod;
+            WebService.WebNamespace = WbsGlobals.WbsFlujosWebNamespace;
 
             try
             {

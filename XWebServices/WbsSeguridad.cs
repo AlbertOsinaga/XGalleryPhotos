@@ -25,10 +25,10 @@ namespace XWebServices
                 if (WebService == null)
                     return usuario;
 
-                WebService.RequestUri = @"http://desarrollo.lbc.bo/Servicios/generales/ConsultaUsuarioSistema.asmx";
-                WebService.SoapAction = "http://tempuri.org/ConsultarUsuarioSistema";
-                WebService.WebMethod = "ConsultarUsuarioSistema";
-                WebService.WebNamespace = "http://tempuri.org/";
+                WebService.RequestUri = WbsGlobals.WbsSeguridadRequestUri;
+                WebService.SoapAction = WbsGlobals.WbsSeguridadSoapAction;
+                WebService.WebMethod = WbsGlobals.WbsSeguridadWebMethod;
+                WebService.WebNamespace = WbsGlobals.WbsSeguridadWebNamespace;
 
                 Dictionary<string, object> fields = WebService.Invoke($"usuario:{user}", $"sistema:{sistema}", $"password:{password}");
                 if (fields == null || fields.Count == 0)

@@ -29,10 +29,10 @@ namespace XWebServices
                 return respuestaUpdate;
             }
 
-            WebService.RequestUri = @"http://desanilus.lbc.bo/Nilus/WsOnbase/OnBaseWS.asmx";
-            WebService.SoapAction = "http://tempuri.org/ImportarDocumento";
-            WebService.WebMethod = "ImportarDocumento";
-            WebService.WebNamespace = "http://tempuri.org/";
+            WebService.RequestUri = WbsGlobals.WbsFotosUpdateRequestUri;
+            WebService.SoapAction = WbsGlobals.WbsFotosUpdateSoapAction;
+            WebService.WebMethod = WbsGlobals.WbsFotosUpdateWebMethod;
+            WebService.WebNamespace = WbsGlobals.WbsFotosUpdateWebNamespace;
 
             List<string> parametros = new List<string>()
             {
