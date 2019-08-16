@@ -6,7 +6,7 @@
     <ScrollView>
     <StackLayout Orientation="Vertical" Padding="5" Spacing="5" >  
         <Image Source="LBC_LOGO.jpg"/>
-        <Label Text="APP CAPTURA DE FOTOS" FontSize="Large" HorizontalOptions="Center" />
+        <Label x:Name="lblAppTitulo" FontSize="Large" HorizontalOptions="Center" />
         <Label x:Name="lblVersionName" FontSize="Small" HorizontalOptions="Center" />
         <Frame BackgroundColor="#BF043055" HasShadow="False">  
             <StackLayout Orientation="Vertical" Spacing="10">

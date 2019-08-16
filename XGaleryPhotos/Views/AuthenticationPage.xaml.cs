@@ -21,6 +21,7 @@ namespace XGaleryPhotos.Views
                 lblSize.Text = DeviceDisplay.MainDisplayInfo.Width.ToString() +
                                 " X " + DeviceDisplay.MainDisplayInfo.Height.ToString();
             }
+            lblAppTitulo.Text = Globals.AppTitulo;
             lblVersionName.Text = $"Versión: {Globals.AppVersionName}";
             txtUsuario.Text = string.Empty;
             txtClave.Text = string.Empty;

@@ -11,15 +11,16 @@ namespace XGaleryPhotos
     {
         #region Constantes
 
-        public const int PorcentajeCompresion = 30;
-        public const string PrefijoWatermark = "LBC ";
+        public const string AppTitulo = "LBC APP CAPTURA DE FOTOS"; 
+        public const bool DimensionesDeviceVisible = false;
+        public const int FontSizeMicro = 10;
         public const bool IncluirWatermarkEnFotosGalería = false;
         public const bool IncluirWatermarkEnFotosTomadas = true;
         public const bool IncluirFechaEnWatermark = true;
         public const bool IncluirHoraEnWatermark = true;
         public const bool IncluirPrefijoEnWatermark = true;
-        public const bool DimensionesDeviceVisible = false;
-        public const int FontSizeMicro = 10;
+        public const int PorcentajeCompresion = 30;
+        public const string PrefijoWatermark = "LBC ";
 
         #endregion
 
