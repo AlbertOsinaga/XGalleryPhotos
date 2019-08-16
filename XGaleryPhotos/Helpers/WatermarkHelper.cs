@@ -9,7 +9,7 @@ namespace XGaleryPhotos.Helpers
             if(Globals.IncluirPrefijoEnWatermark)
                 watermark += Globals.PrefijoWatermark;
             if (Globals.IncluirFechaEnWatermark)
-                watermark += DateTime.Now.ToShortDateString();
+                watermark += DateTime.Now.ToString("dd/MM/yy");
             if (Globals.IncluirHoraEnWatermark)
                 watermark += $" {DateTime.Now.ToString("HH:mm:ss")}";
             return watermark;
