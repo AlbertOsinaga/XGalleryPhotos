@@ -28,6 +28,10 @@ namespace XGaleryPhotos.Droid
 
             base.OnCreate(savedInstanceState);
 
+            var packageName = Application.Context.PackageName;
+            var pinfo = Application.Context.PackageManager.GetPackageInfo(packageName, 0);
+            Globals.AppVersionName = pinfo.VersionName;
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 

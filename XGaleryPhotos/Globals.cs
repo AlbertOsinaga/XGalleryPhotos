@@ -23,6 +23,12 @@ namespace XGaleryPhotos
 
         #endregion
 
+        #region Propiedades
+
+        public static string AppVersionName { get; set; }
+
+        #endregion
+
         #region Objetos
 
         // Services
@@ -46,6 +52,7 @@ namespace XGaleryPhotos
         {
             AuthenticateService = new AuthenticateService();
             RepositoryService = new RepositoryService();
+            AppVersionName = "0";
         }
     }
 }
