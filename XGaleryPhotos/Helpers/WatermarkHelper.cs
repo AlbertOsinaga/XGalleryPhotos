@@ -6,12 +6,29 @@ namespace XGaleryPhotos.Helpers
         public static string ArmaWatermark()
         {
             string watermark = string.Empty;
-            if(Globals.IncluirPrefijoEnWatermark)
-                watermark += Globals.PrefijoWatermark;
+            if (Globals.IncluirPrefijoEnWatermark)
+            {
+                if(!string.IsNullOrEmpty(Globals.PrefijoWatermark))
+                    watermark += Globals.PrefijoWatermark;
+            }
+            if (Globals.IncluirNombreUsuarioEnWatermark)
+            {
+                if (!string.IsNullOrEmpty(watermark))
+                    watermark += " ";
+                watermark += Globals.AuthenticateService.AuthenticatedUser.UserName;
+            }
             if (Globals.IncluirFechaEnWatermark)
+            {
+                if (!string.IsNullOrEmpty(watermark))
+                    watermark += " ";
                 watermark += DateTime.Now.ToString("dd/MM/yy");
+            }
             if (Globals.IncluirHoraEnWatermark)
+            {
+                if (!string.IsNullOrEmpty(watermark))
+                    watermark += " ";
                 watermark += $" {DateTime.Now.ToString("HH:mm:ss")}";
+            }
             return watermark;
         }
     }

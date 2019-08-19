@@ -18,9 +18,10 @@ namespace XGaleryPhotos
         public const bool IncluirWatermarkEnFotosTomadas = true;
         public const bool IncluirFechaEnWatermark = true;
         public const bool IncluirHoraEnWatermark = true;
+        public const bool IncluirNombreUsuarioEnWatermark = true;
         public const bool IncluirPrefijoEnWatermark = true;
         public const int PorcentajeCompresion = 30;
-        public const string PrefijoWatermark = "LBC ";
+        public const string PrefijoWatermark = "LBC";
 
         #endregion
 
