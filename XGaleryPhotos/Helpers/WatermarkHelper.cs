@@ -11,12 +11,6 @@ namespace XGaleryPhotos.Helpers
                 if(!string.IsNullOrEmpty(Globals.PrefijoWatermark))
                     watermark += Globals.PrefijoWatermark;
             }
-            if (Globals.IncluirNombreUsuarioEnWatermark)
-            {
-                if (!string.IsNullOrEmpty(watermark))
-                    watermark += " ";
-                watermark += Globals.AuthenticateService.AuthenticatedUser.UserName;
-            }
             if (Globals.IncluirFechaEnWatermark)
             {
                 if (!string.IsNullOrEmpty(watermark))
@@ -28,6 +22,12 @@ namespace XGaleryPhotos.Helpers
                 if (!string.IsNullOrEmpty(watermark))
                     watermark += " ";
                 watermark += $" {DateTime.Now.ToString("HH:mm:ss")}";
+            }
+            if (Globals.IncluirNombreUsuarioEnWatermark)
+            {
+                if (!string.IsNullOrEmpty(watermark))
+                    watermark += " ";
+                watermark += Globals.AuthenticateService.AuthenticatedUser.UserName;
             }
             return watermark;
         }
