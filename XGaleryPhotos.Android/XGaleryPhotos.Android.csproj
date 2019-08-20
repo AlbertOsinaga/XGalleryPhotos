@@ -78,6 +78,7 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Services\CloseApplication.cs" />
     <Compile Include="Services\HelperImageService.cs" />
+    <Compile Include="Services\NetworkConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

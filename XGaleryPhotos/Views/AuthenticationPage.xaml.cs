@@ -3,6 +3,7 @@ using XGaleryPhotos.Interfaces;
 using XGaleryPhotos.Models;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using XGaleryPhotos.Helpers;
 using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos.Views
@@ -43,7 +44,12 @@ namespace XGaleryPhotos.Views
 
             try
             {
-                //  App.AuthenticationViewModel.LoginCommand.Execute(null);
+                if(!NetworkConnectivityHelper.IsNetworkConnected)
+                {
+                    DisplayAlert("AUTENTICACION", "Conexión a Wifi o a red de datos no disponible...", "OK");
+                    return;
+                }
+
                 Globals.AuthenticateService.Authenticate(txtUsuario.Text, txtClave.Text);
                 User userAuth = Globals.AuthenticateService.AuthenticatedUser;
 

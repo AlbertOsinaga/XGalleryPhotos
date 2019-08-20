@@ -4,6 +4,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using XGaleryPhotos.Helpers;
 using XGaleryPhotos.ViewModels;
 
 namespace XGaleryPhotos
@@ -77,6 +78,13 @@ namespace XGaleryPhotos
                 if (string.IsNullOrWhiteSpace(txtNroFlujo.Text))
                 {
                     DisplayAlert("PROCESAMIENTO DE FLUJOS", "Por favor introduzca No. de Flujo!", "OK");
+                    return;
+                }
+
+                // Conexion a la red
+                if (!NetworkConnectivityHelper.IsNetworkConnected)
+                {
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Conexión a Wifi o a red de datos no disponible...", "OK");
                     return;
                 }
 
@@ -159,6 +167,13 @@ namespace XGaleryPhotos
                 bool Ok = await DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
                 if (Ok)
                 {
+                    // Conexión a la red de datos
+                    if (!NetworkConnectivityHelper.IsNetworkConnected)
+                    {
+                        await DisplayAlert("ONBASE", "Conexión a Wifi o a red de datos no disponible...", "OK");
+                        return;
+                    }
+
                     FlujoViewModel.SavePhotos();
                     FlujoViewModel.EnviarOnBaseCommand.Execute(null);
                     if (FlujoViewModel.Flujo == null)
