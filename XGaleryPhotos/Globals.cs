@@ -39,8 +39,9 @@ namespace XGaleryPhotos
         public static IRepositoryService RepositoryService { get; set; }
 
         // Views
-        public static NavigationPage NavegacionPage { get; set; }
-        public static PhotoDisplayPage PhotoDisplayPage { get; set; }
+        public static FlujoPage FlujoPageInstance { get; set; }
+        public static NavigationPage NavegacionPageInstance { get; set; }
+        public static PhotoDisplayPage PhotoDisplayPageInstance { get; set; }
 
         // ViewModels
         public static FlujoViewModel FlujoViewModelInstance { get; set; }

@@ -14,22 +14,22 @@ namespace XGaleryPhotos
             InitializeComponent();
 
             // Views
-            Globals.NavegacionPage = new NavigationPage();
-            Globals.PhotoDisplayPage = new PhotoDisplayPage(new PhotoDisplayViewModel());
+            Globals.NavegacionPageInstance = new NavigationPage();
+            Globals.PhotoDisplayPageInstance = new PhotoDisplayPage(new PhotoDisplayViewModel());
 
             FlowListView.Init();
 
             if (!Globals.AuthenticateService.IsUserAuthenticated())
             {
-                Globals.NavegacionPage.PushAsync(new AuthenticationPage(new AuthenticationViewModel()));
+                Globals.NavegacionPageInstance.PushAsync(new AuthenticationPage(new AuthenticationViewModel()));
             }
             else
             {
-                Globals.NavegacionPage.PushAsync(new FlujoPage(
+                Globals.NavegacionPageInstance.PushAsync(new FlujoPage(
                     new FlujoViewModel(Globals.AuthenticateService.AuthenticatedUser)));
             }
 
-            this.MainPage = Globals.NavegacionPage;
+            this.MainPage = Globals.NavegacionPageInstance;
         }
 
         protected override void OnStart()

@@ -66,8 +66,8 @@ namespace XGaleryPhotos.Views
 
                 txtUsuario.Text = string.Empty;
                 txtClave.Text = string.Empty;
-                Globals.NavegacionPage.PopAsync();
-                Globals.NavegacionPage.PushAsync(new FlujoPage(new FlujoViewModel(
+                Globals.NavegacionPageInstance.PopAsync();
+                Globals.NavegacionPageInstance.PushAsync(new FlujoPage(new FlujoViewModel(
                                                     Globals.AuthenticateService.AuthenticatedUser)));
             }
             catch (WebException)

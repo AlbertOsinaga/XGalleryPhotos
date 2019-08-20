@@ -28,6 +28,10 @@ namespace XGaleryPhotos.Droid
 
             base.OnCreate(savedInstanceState);
 
+            // Rg.Plugins.Popup
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+
+            // Get Version Name
             var packageName = Application.Context.PackageName;
             var pinfo = Application.Context.PackageManager.GetPackageInfo(packageName, 0);
             Globals.AppVersionName = pinfo.VersionName;

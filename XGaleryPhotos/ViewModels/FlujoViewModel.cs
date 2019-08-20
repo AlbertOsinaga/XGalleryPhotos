@@ -100,8 +100,8 @@ namespace XGaleryPhotos.ViewModels
             {
                 var mediaSelected = obj as XGaleryPhotos.Models.MediaFile ;
                 Globals.RepositoryService.AddMediaFile(mediaSelected);
-                Globals.PhotoDisplayPage.ResetSource();
-                Globals.NavegacionPage.PushAsync(Globals.PhotoDisplayPage);
+                Globals.PhotoDisplayPageInstance.ResetSource();
+                Globals.NavegacionPageInstance.PushAsync(Globals.PhotoDisplayPageInstance);
             });
 
             SelectImagesCommand = new Command(async (obj) =>
