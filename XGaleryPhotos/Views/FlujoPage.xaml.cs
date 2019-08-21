@@ -176,68 +176,14 @@ namespace XGaleryPhotos
                     return;
                 }
 
-                    //bool Ok = DisplayAlert("CONFIRMACION", "Desea enviar estas fotos al Sistema OnBase?", "SI", "NO");
-                    //bool Ok = await EnviaAOnBase();
-
-                // Popup de espera
+                // Popup de envio a OnBase
                 await PopupNavigation.Instance.PushAsync(new EnvioOnBasePopup());
-
-                //    FlujoViewModel.SavePhotos();
-                //    FlujoViewModel.EnviarOnBaseCommand.Execute(null);
-
-                //if (FlujoViewModel.Flujo == null)
-                //{
-                //    await DisplayAlert("ONBASE", "FLUJO NULO!", "OK");
-                //    return;
-                //}
-
-                //if (FlujoViewModel.Flujo.CodigoEstado >= 90)
-                //{
-                //    await DisplayAlert("ONBASE",
-                //        $"{FlujoViewModel.Flujo.Mensaje} ({FlujoViewModel.Flujo.CodigoEstado})", "OK");
-                //    return;
-                //}
-
-                //if (FlujoViewModel.Flujo.CodigoEstado == 1)
-                //{
-                //    if (FlujoViewModel.Flujo.EsValido)
-                //    {
-                //        await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
-                //        Resetear();
-                //    }
-                //    else
-                //        await DisplayAlert("ONBASE", FlujoViewModel.Flujo.Mensaje, "OK");
-                //}
 
             }
             catch (Exception ex)
             {
                 await DisplayAlert("EXCEPCION", $"Excepción en 'Enviar Fotos'!\nEx({ex.GetType()}-{ex.Message})", "OK");
             }
-            //finally
-            //{
-            //    if (FlujoViewModel.Flujo == null)
-            //    {
-            //        await DisplayAlert("ONBASE", "FLUJO NULO!", "OK");
-            //    }
-
-            //    else if (FlujoViewModel.Flujo.CodigoEstado >= 90)
-            //    {
-            //        await DisplayAlert("ONBASE",
-            //            $"{FlujoViewModel.Flujo.Mensaje} ({FlujoViewModel.Flujo.CodigoEstado})", "OK");
-            //    }
-
-            //    else if (FlujoViewModel.Flujo.CodigoEstado == 1)
-            //    {
-            //        if (FlujoViewModel.Flujo.EsValido)
-            //        {
-            //            await DisplayAlert("ONBASE", "Fotos enviadas exitosamente!", "OK");
-            //            Resetear();
-            //        }
-            //        else
-            //            await DisplayAlert("ONBASE", FlujoViewModel.Flujo.Mensaje, "OK");
-            //    }
-            //}
         }
 
         public void Resetear()

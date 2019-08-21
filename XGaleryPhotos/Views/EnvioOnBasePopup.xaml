@@ -20,14 +20,14 @@
     </popup:PopupPage.Animation>
 
     <StackLayout VerticalOptions="Center"  Padding="20,0" HorizontalOptions="FillAndExpand" >  
-        <Frame CornerRadius="10" Padding="0" BackgroundColor="CadetBlue" >  
+        <Frame CornerRadius="10" Padding="0" BackgroundColor="LightGray" >  
             <StackLayout Padding="10">  
-                <Label Text="Enviar fotos a ONBASE" TextColor="Black" FontSize="20" HorizontalOptions="Center"></Label>  
+                <Label Text="Desea enviar las fotos a ONBASE?" TextColor="Black" FontSize="Small" HorizontalOptions="Center"></Label>  
                 <ScrollView>  
                     <StackLayout>  
-                        <Label x:Name="lblProgreso" Text="" TextColor="Red"/>  
+                        <Label x:Name="lblProgreso" Text="" TextColor="DarkBlue"/>  
                         <StackLayout Orientation="Horizontal">  
-                            <Label x:Name="lblWarning" Text="" TextColor="LightBlue"/>
+                            <Label x:Name="lblWarning" Text="" TextColor="Black"/>
                             <ActivityIndicator x:Name="actIndicator" IsRunning="False"
                                 IsVisible="False"
                                 HeightRequest="40"
@@ -38,11 +38,13 @@
                                 </ActivityIndicator.WidthRequest>
                                 <ActivityIndicator.Color>
                                     <OnPlatform x:TypeArguments="Color"
-                                        iOS="#2499CE" WinPhone="#2499CE" Android="#000000" />
+                                        iOS="#2499CE" WinPhone="#2499CE" Android="CadetBlue" />
                                 </ActivityIndicator.Color>
                             </ActivityIndicator>
-                           <Button x:Name="btnNo" Text="NO" TextColor="Black" Clicked="btnNo_Clicked" />
-                           <Button x:Name="btnOk" Text="SI" TextColor="Black" Clicked="btnOk_Clicked" />
+                        </StackLayout>  
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">  
+                           <Button x:Name="btnNo" Text="No" TextColor="Black" Clicked="btnNo_Clicked" />
+                           <Button x:Name="btnOk" Text="Si" TextColor="Red" Clicked="btnOk_Clicked" />
                         </StackLayout>  
                     </StackLayout>  
                 </ScrollView>  
