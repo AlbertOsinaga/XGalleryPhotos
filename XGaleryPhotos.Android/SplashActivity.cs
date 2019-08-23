@@ -5,7 +5,7 @@ using Android.OS;
 
 namespace XGaleryPhotos.Droid
 {
-    [Activity(Label = "LBC APP CAPTURA FOTOS",
+    [Activity(Label = "LBC FOTOS",
         Theme = "@style/SplashTheme",
         MainLauncher = true,
         NoHistory = true,
