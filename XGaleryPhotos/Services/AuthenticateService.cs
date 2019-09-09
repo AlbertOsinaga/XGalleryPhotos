@@ -18,7 +18,8 @@ namespace XGaleryPhotos.Services
             UserAuthenticated = new User();
             UserAuthenticated.CodigoEstado = "0";  // "0" entra a Autenticacion, "1" no entra
             Sistema = "EXT101";
-            wbsSeguridad = new WbsSeguridad(new XWebServiceSpecial());
+            wbsSeguridad = new WbsSeguridad(new XWebService());
+            //wbsSeguridad = new WbsSeguridad(new XWebServiceSpecial());
         }
 
         public User Authenticate(string userName, string password)

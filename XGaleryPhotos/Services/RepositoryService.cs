@@ -53,7 +53,8 @@ namespace XGaleryPhotos.Services
 
         public void UpdateFotos(Flujo flujo, string usuarioSistema)
         {
-            IXWebService wbs = new XWebServiceSpecial();
+            IXWebService wbs = new XWebService();
+            //IXWebService wbs = new XWebServiceSpecial();
             WbsFotosUpdate webFotosUpdate = new WbsFotosUpdate(wbs);
             string[] fotos = null;
             if(flujo.Fotos != null)

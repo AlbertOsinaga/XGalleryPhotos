@@ -6,19 +6,11 @@ using XWebServices.Interfaces;
 
 namespace XWebServices.Services
 {
-    public class XWebServiceKeywords : IXWebService
+    public class XWebServiceKeywords : XWebService
     {
         #region IXWebService
 
-        public string RequestUri { get; set; }
-        public string SoapAction { get; set; }
-        public string WebMethod { get; set; }
-        public string WebNamespace { get; set; }
-        public string XmlnsXsi { get; set; }
-        public string XmlnsXsd { get; set; }
-        public string XmlnsSoap { get; set; }
-
-        public Dictionary<string, object> Invoke(params string[] args)
+        public override Dictionary<string, object> Invoke(params string[] args)
         {
             Dictionary<string, object> dicResult = new Dictionary<string, object>();
 
@@ -70,59 +62,5 @@ namespace XWebServices.Services
         }
 
         #endregion
-
-        public XWebServiceKeywords()
-        {
-            XmlnsXsi = "http://www.w3.org/2001/XMLSchema-instance";
-            XmlnsXsd = "http://www.w3.org/2001/XMLSchema";
-            XmlnsSoap = "http://schemas.xmlsoap.org/soap/envelope/";
-        }
-
-        private HttpWebRequest CreateSOAPWebRequest()
-        {
-            //Making Web Request    
-            HttpWebRequest Req = (HttpWebRequest)WebRequest.Create(RequestUri);
-            //SOAPAction    
-            Req.Headers.Add($@"SOAPAction:{SoapAction}");
-            //Content_type    
-            Req.ContentType = "text/xml;charset=\"utf-8\"";
-            Req.Accept = "text/xml";
-            //HTTP method    
-            Req.Method = "POST";
-            //return HttpWebRequest    
-            return Req;
-        }
-        private string CreateSoapEnvelope(params string[] args)
-        {
-            string soapEnvelope =
-                $@"<soap:Envelope xmlns:xsi = ""{XmlnsXsi}"" xmlns:xsd = ""{XmlnsXsd}"" xmlns:soap = ""{XmlnsSoap}""><soap:Body><{WebMethod} xmlns = ""{WebNamespace}"">";
-
-            foreach (var arg in args)
-            {
-                string[] partes = arg.Split('=', ':');
-                if (partes.Length == 1)
-                    soapEnvelope += $"<{arg}></{arg}>";
-                else if (partes.Length == 2)
-                    soapEnvelope += $"<{partes[0]}>{partes[1]}</{partes[0]}>";
-            }
-
-            soapEnvelope += $@"</{WebMethod}></soap:Body></soap:Envelope>";
-
-            return soapEnvelope;
-        }
-        private WebResponse InvokeWebService(params string[] args)
-        {
-            HttpWebRequest request = CreateSOAPWebRequest();
-            XmlDocument soapReq = new XmlDocument();
-            string strSoapReq = CreateSoapEnvelope(args);
-            soapReq.LoadXml(strSoapReq);
-
-            using (Stream stream = request.GetRequestStream())
-            {
-                soapReq.Save(stream);
-            }
-
-            return request.GetResponse();
-        }
     }
 }
