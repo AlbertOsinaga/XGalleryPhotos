@@ -103,7 +103,7 @@ namespace XGaleryPhotos
 
                 if(FlujoViewModel.Flujo.CodigoEstado == 1 && !FlujoViewModel.Flujo.EsValido)
                 {
-                    DisplayAlert("PROCESAMIENTO DE FLUJOS", "Nro. de Flujo no encontrado!", "OK");
+                    DisplayAlert("PROCESAMIENTO DE FLUJOS", FlujoViewModel.Flujo.Mensaje, "OK");
                     return;
                 }
 

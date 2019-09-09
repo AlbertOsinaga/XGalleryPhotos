@@ -73,8 +73,15 @@ namespace XWebServices.Services
         }
         protected virtual string CreateSoapEnvelope(params string[] args)
         {
+            string usuario = WbsGlobals.WbsUsuario;
+            string password = WbsGlobals.WbsPassword;
+
             string soapEnvelope =
-                $@"<soap:Envelope xmlns:xsi = ""{XmlnsXsi}"" xmlns:xsd = ""{XmlnsXsd}"" xmlns:soap = ""{XmlnsSoap}""><soap:Body><{WebMethod} xmlns = ""{WebNamespace}"">";
+                $@"<soap:Envelope xmlns:xsi = ""{XmlnsXsi}"" xmlns:xsd = ""{XmlnsXsd}"" xmlns:soap = ""{XmlnsSoap}"">" +
+                $@"<soap:Header><UsuarioAuth xmlns=""{WebNamespace}"">" +
+                $@"<Usuario>{usuario}</Usuario><Password>{password}</Password>" +
+                $@"</UsuarioAuth></soap:Header>" +
+                $@"<soap:Body><{WebMethod} xmlns = ""{WebNamespace}"">";
 
             foreach (var arg in args)
             {
