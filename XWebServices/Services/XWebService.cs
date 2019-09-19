@@ -68,6 +68,8 @@ namespace XWebServices.Services
             Req.Accept = "text/xml";
             //HTTP method    
             Req.Method = "POST";
+            if(RequestUri.Contains("https"))
+                Req.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
             //return HttpWebRequest    
             return Req;
         }
@@ -106,26 +108,8 @@ namespace XWebServices.Services
             soapEnvelope += $@"</{WebMethod}></soap:Body></soap:Envelope>";
 
             return soapEnvelope;
-
-
-
-
-            //string soapEnvelope =
-            //    $@"<soap:Envelope xmlns:xsi = ""{XmlnsXsi}"" xmlns:xsd = ""{XmlnsXsd}"" xmlns:soap = ""{XmlnsSoap}""><soap:Body><{WebMethod} xmlns = ""{WebNamespace}"">";
-
-            //foreach (var arg in args)
-            //{
-            //    string[] partes = arg.Split('=', ':');
-            //    if(partes.Length == 1)
-            //        soapEnvelope += $"<{arg}></{arg}>";
-            //    else if(partes.Length == 2)
-            //        soapEnvelope += $"<{partes[0]}>{partes[1]}</{partes[0]}>";
-            //}
-
-            //soapEnvelope += $@"</{WebMethod}></soap:Body></soap:Envelope>";
-
-            //return soapEnvelope;
         }
+
         protected WebResponse InvokeWebService(params string[] args)
         {
             HttpWebRequest request = CreateSOAPWebRequest();

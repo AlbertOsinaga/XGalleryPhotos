@@ -70,8 +70,9 @@ namespace XGaleryPhotos.Views
                 Globals.NavegacionPageInstance.PushAsync(new FlujoPage(new FlujoViewModel(
                                                     Globals.AuthenticateService.AuthenticatedUser)));
             }
-            catch (WebException)
+            catch (WebException wex)
             {
+                if(wex == null) { }
                 DisplayAlert("USUARIO NO PUDO SER AUTENTICADO", "No hay conexión con el servidor, por favor intente más tarde!", "OK");
             }
             catch (System.Exception ex)

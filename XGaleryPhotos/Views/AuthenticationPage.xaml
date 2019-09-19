@@ -22,12 +22,12 @@
         </Frame>  
         <Button x:Name="btnLogin" Text="Login" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="Blue"
+                    BackgroundColor="Green"
                     Clicked="btnLogin_Clicked"
                     />  
         <Button x:Name="btnCerrarApp" Text="Cerrar Aplicación" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
-                    BackgroundColor="Blue"
+                    BackgroundColor="Green"
                     Clicked="btnCerrarApp_Clicked"
                     />  
      </StackLayout> 

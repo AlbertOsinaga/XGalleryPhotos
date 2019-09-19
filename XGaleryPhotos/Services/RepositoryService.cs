@@ -23,7 +23,7 @@ namespace XGaleryPhotos.Services
 
             IXWebService wbs = new XWebServiceKeywords();
             WbsFlujos webFlujos = new WbsFlujos(wbs);
-            SolicitudOnBase solicitud = webFlujos.ConsultarFlujo(flujoNro, "ICRL");
+            SolicitudOnBase solicitud = webFlujos.ConsultarFlujo(flujoNro, WbsGlobals.WbsFotosUpdateSistemaOrigen);
             flujo.EsValido = solicitud.EsValido;
             flujo.Mensaje = solicitud.Mensaje;
             flujo.Cliente = solicitud.Nombre;
@@ -60,7 +60,7 @@ namespace XGaleryPhotos.Services
             if(flujo.Fotos != null)
                 fotos = (from f in flujo.Fotos select f.ImgString).ToArray();
             RespuestaUpdate respuestaUpdate = webFotosUpdate.UpdateFotos(flujo.FlujoNro, flujo.TipoDocumento, flujo.DocumentoNro,
-                                                    usuarioSistema, "jpg", "ICRL", fotos);
+                                                    usuarioSistema, "jpg", WbsGlobals.WbsFlujoSistemaOrigen, fotos);
             flujo.EsValido = respuestaUpdate.EsValido;
             flujo.Mensaje = respuestaUpdate.Mensaje;
             flujo.CodigoEstado = respuestaUpdate.CodigoEstado;
